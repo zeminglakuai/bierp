@@ -24,7 +24,8 @@
         "yiisoft/yii2-queue": "~2.0.0",
         "mpdf/mpdf": "^7.0",
         "2amigos/yii2-qrcode-helper": "~1.1",
-        "hscstudio/yii2-export": "1.2.2"
+        "hscstudio/yii2-export": "1.2.2",
+        "daixianceng/yii2-echarts": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

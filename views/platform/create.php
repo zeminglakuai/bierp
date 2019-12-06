@@ -255,8 +255,10 @@ use app\common\config\sys_config;
 									<td><?=$value['start_time']?></td>
 									<td><?=$value['end_time']?></td>
 									<td>
-			<a class="btn btn-xs btn-primary edit_theme" href="javascript:void();" origin-id="<?=$platform->id?>" data-id="<?=$value['id']?>"><span class="glyphicon glyphicon-edit"></span> 编辑</a>
-            <a class="btn btn-xs btn-danger delete_theme" href="javascript:void();" origin-id="<?=$platform->id?>" data-id="<?=$value['id']?>"><span class="glyphicon glyphicon-trash"></span> 删除</a>
+
+									
+			<a class="btn btn-xs btn-primary edit_theme" href="javascript:void();" origin-id="<?=$platform->id?>" data-id="<?=$value['theme_id']?>"><span class="glyphicon glyphicon-edit"></span> 编辑</a>
+            <a class="btn btn-xs btn-danger delete_theme" href="javascript:void();" origin-id="<?=$platform->id?>" data-id="<?=$value['theme_id']?>"><span class="glyphicon glyphicon-trash"></span> 删除</a>
 		</td>
 								</tr>
 							<?php			}

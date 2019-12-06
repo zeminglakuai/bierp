@@ -329,8 +329,8 @@ public function actionCreateTheme($id){
     $theme= new Theme();
     
     $data=Yii::$app->request->post(); 
-    if (isset($data['id'])) {
-      $contract = contract::findone($data['id']);
+    if (isset($data['theme_id'])) {
+      $theme = theme::findone($data['theme_id']);
     }  
     if (empty($data['theme_name'])) {
       message::result_json(2,'主题名称不为空');
@@ -353,7 +353,7 @@ public function actionCreateTheme($id){
         if (count($upload_result['file']) > 0) {
           foreach ($upload_result['file'] as $key => $value) {
             $FileInfo = new FileInfo();
-            $FileInfo->belong_id = $theme->id;
+            $FileInfo->belong_id = $theme->theme_id;
             $FileInfo->file_path = $value['file_name'];
             $FileInfo->file_desc = $value['file_desc'];
             $FileInfo->model = 'theme';              
@@ -365,9 +365,10 @@ public function actionCreateTheme($id){
   }
     //编辑
     public function actionEditTheme($id){
+      
       $this->layout = 'empty';
       $theme_id = Yii::$app->request->get('theme_id',0);
-      $theme = Theme::find()->where(['belong_id'=>$id,'id'=>$theme_id])->one();
-      return $this->render('create-theme', ['theme'=>$theme,'id'=>$theme->id]);
+      $theme = Theme::find()->where(['belong_id'=>$id,'theme_id'=>$theme_id])->one();
+      return $this->render('create-theme', ['theme'=>$theme,'id'=>$id]);
     }
 }

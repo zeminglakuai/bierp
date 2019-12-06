@@ -31,7 +31,7 @@ use app\common\config\lang_value_config;
         <div class="col-sm-9">
             <div class="input-group date " data-link-field="dtp_input2" >
                 <input class="form-control" name="theme_name" size="16" value="<?=$theme->theme_name?>" type="text" placeholder="主题名称">
-                <input  name="id" size="16" value="<?=$contract->id?>" type="hidden" >
+                <input  name="theme_id" size="16" value="<?=$theme->theme_id?>" type="hidden" >
             </div>
         </div>
     </div>
@@ -91,7 +91,7 @@ use app\common\config\lang_value_config;
                                     </div>
                                 </div>
                             </div>
-    <?= app\common\widgets\FileList::widget(['model' => 'theme', 'file_list' => $goods->goodsFile]); ?>
+    <?= app\common\widgets\FileList::widget(['model' => 'theme', 'file_list' => $theme->themetFile]); ?>
    
     </form>
   </div>
@@ -101,6 +101,7 @@ use app\common\config\lang_value_config;
 <script type="text/javascript">
 
 $("#add_platform_contact").click(function(){
+    var index = parent.layer.getFrameIndex(window.name);
     var formData = new FormData($( "#data_form" )[0]);
      $.ajax({  
           url: '<?= Url::to(["platform/insert-theme","id"=>$id])?>' ,  
@@ -114,7 +115,8 @@ $("#add_platform_contact").click(function(){
           
           success: function (result) {  
             if(result.error == 1){
-               parent.location.href= '<?= Url::to(["platform/edit","id"=>$id,"present_panel"=>"contact"])?>';
+            //    parent.location.href= '<?= Url::to(["platform/edit","id"=>$id,"present_panel"=>"theme"])?>';
+            parent.layer.close(index);
             }else{
                
               layer.msg(result.message);
@@ -127,6 +129,7 @@ $("#add_platform_contact").click(function(){
 });
 
 $("#edit_platform_contact").click(function(){
+    var index = parent.layer.getFrameIndex(window.name);
     var formData = new FormData($( "#data_form" )[0]);
      $.ajax({  
           url: '<?= Url::to(["platform/update-platform","id"=>$id,"platform_id"=>$platform->id])?>',
@@ -139,7 +142,8 @@ $("#edit_platform_contact").click(function(){
           processData: false,  
           success: function (result) {  
             if(result.error == 1){
-               parent.location.href= '<?= Url::to(["platform/edit","id"=>$id,"present_panel"=>"platform"])?>';
+            
+            parent.layer.close(index);
             }else{
               layer.msg(result.message);
             } 

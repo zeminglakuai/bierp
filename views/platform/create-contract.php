@@ -92,6 +92,7 @@ use app\common\config\lang_value_config;
 <script type="text/javascript">
 
 $("#add_platform_contact").click(function(){
+    var index = parent.layer.getFrameIndex(window.name);
     var formData = new FormData($( "#data_form" )[0]);
     console.log(formData);
      $.ajax({  
@@ -106,7 +107,8 @@ $("#add_platform_contact").click(function(){
           
           success: function (result) {  
             if(result.error == 1){
-               parent.location.href= '<?= Url::to(["platform/edit","id"=>$id,"present_panel"=>"contact"])?>';
+            //    parent.location.href= '<?= Url::to(["platform/edit","id"=>$id,"present_panel"=>"contact"])?>';
+            parent.layer.close(index);
             }else{
                
               layer.msg(result.message);
@@ -119,6 +121,7 @@ $("#add_platform_contact").click(function(){
 });
 
 $("#edit_platform_contact").click(function(){
+    var index = parent.layer.getFrameIndex(window.name);
     var formData = new FormData($( "#data_form" )[0]);
      $.ajax({  
           url: '<?= Url::to(["platform/update-platform","id"=>$id,"platform_id"=>$platform->id])?>',
@@ -131,7 +134,8 @@ $("#edit_platform_contact").click(function(){
           processData: false,  
           success: function (result) {  
             if(result.error == 1){
-               parent.location.href= '<?= Url::to(["platform/edit","id"=>$id,"present_panel"=>"platform"])?>';
+            //    parent.location.href= '<?= Url::to(["platform/edit","id"=>$id,"present_panel"=>"platform"])?>';
+            parent.layer.close(index);
             }else{
               layer.msg(result.message);
             } 

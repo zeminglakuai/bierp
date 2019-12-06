@@ -27,7 +27,7 @@ class Theme extends BaseModel
     {
         return [
             [['order_sn', 'order_id', 'add_time', 'add_user_id', 'add_user_name', 'depart_id', 'depart_name', 'remark', 'admit_user_id', 'admit_user_name', 'admit_time', 'custom_id', 'custom_name'], 'required'],
-            [['id','belong_id'], 'integer'],
+            [['theme_id','belong_id'], 'integer'],
             [['theme_name','start_time','end_time', 'remark'], 'string'],
             [['theme_name','add_time', 'add_user_name', 'remark', 'admit_user_name', 'admit_time', 'custom_name', 'contract_name','end_time', 'start_time'], 'string', 'max' => 255],
         ];
@@ -39,7 +39,7 @@ class Theme extends BaseModel
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'theme_id' => 'ID',
             'theme_name' => '主题名称',      
             'add_time' => 'Add Time',
             'add_user_id' => 'Add User ID',
@@ -53,6 +53,10 @@ class Theme extends BaseModel
             'end_time' => '结束时间',
             'start_time' => '开始时间',
         ];
+    }
+    public function getThemetFile()
+    {
+        return $this->hasMany(FileInfo::classname(),['belong_id'=>'theme_id'])->where(['model'=>'theme']);
     }
 
 }
