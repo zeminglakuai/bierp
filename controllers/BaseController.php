@@ -124,7 +124,9 @@ class BaseController extends Controller
         'create-goods' => [
             'class' => 'app\common\actions\SearchGoodsAction',
         ],
-
+        'create-goods-platform' => [
+          'class' => 'app\common\actions\SearchPlatGoodsAction',
+      ],
         'create-goods-store' => [
             'class' => 'app\common\actions\GoodStoreAction',
         ],

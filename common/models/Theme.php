@@ -58,5 +58,9 @@ class Theme extends BaseModel
     {
         return $this->hasMany(FileInfo::classname(),['belong_id'=>'theme_id'])->where(['model'=>'theme']);
     }
+    public function getPlat_name(){
 
+        return $this->hasOne(Platform::className(), ['id' => 'belong_id']);
+
+    }
 }

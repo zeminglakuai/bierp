@@ -20,7 +20,7 @@
         "yiisoft/yii2-swiftmailer": "*",
         "yiisoft/yii2-imagine": "~2.0.0",
         "phpoffice/phpexcel": "dev-develop",
-        "phpoffice/phppresentation": "dev-master",
+        "phpoffice/phppresentation": "^0.9.0",
         "yiisoft/yii2-queue": "~2.0.0",
         "mpdf/mpdf": "^7.0",
         "2amigos/yii2-qrcode-helper": "~1.1",

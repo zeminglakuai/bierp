@@ -78,9 +78,11 @@ class PurchaseController extends BaseController
         $Purchase = new Purchase();
         $Purchase->load(Yii::$app->request->post());
     if ($Purchase->purchase_type==6) {
-          $Purchase->order_sn = Common_fun::create_sn('app\common\models\Purchase',5);
-          $sql="insert into purchase(order_sn,consignee,consignee_tel,address,fid,purchase_type) value ('". $Purchase->order_sn."','". $Purchase->consignee."','". $Purchase->consignee_tel."','". $Purchase->address."',". $Purchase->fid.",6) ";
-         Yii::$app->db->createCommand($sql)->execute();
+        $fpurchase=Purchase::find()->where(['id'=>$Purchase->fid])->one();
+
+        $Purchase->order_sn = Common_fun::create_sn('app\common\models\Purchase',5);
+        $sql="insert into purchase(order_sn,consignee,consignee_tel,address,fid,purchase_type,supplier_id) value ('". $Purchase->order_sn."','". $Purchase->consignee."','". $Purchase->consignee_tel."','". $Purchase->address."',". $Purchase->fid.",6,".$fpurchase['supplier_id'].") ";
+        Yii::$app->db->createCommand($sql)->execute();
          
           Message::result_json(1,'添加成功');
     }
@@ -481,7 +483,7 @@ class PurchaseController extends BaseController
     public function actionInsertGoods(){
       $goods_id = Yii::$app->request->get('goods_id',0);
         $order_type = Yii::$app->request->get('order_type',0);
-
+// 供应商id
         $order_id = Yii::$app->request->get('order_id',0);
       $search_data = Yii::$app->request->get('search_data',0);
 

@@ -18,7 +18,7 @@ use app\common\models\Store;
 use app\common\models\SupplierGoods;
 use app\common\models\ImportOrder;
 use app\common\models\ImportOrderGoods;
-
+use app\common\models\Platform;
 use yii\helpers\Url;
 use app\includes\Message;
 
@@ -34,38 +34,39 @@ class ImportOrderController extends BaseController
 
     public function beforeAction($action)
     {
-      parent::beforeAction($action);
+        parent::beforeAction($action);
 
-      //检查当前单据用户是不是有操作权限
-      $need_privi_arr = ['delete','edit','admit','update','insert-goods','delete-goods','update-goods-label'];
-      $admit_allow_arr = ['edit','view'];
+        //检查当前单据用户是不是有操作权限
+        $need_privi_arr = ['delete','edit','admit','update','insert-goods','delete-goods','update-goods-label'];
+        $admit_allow_arr = ['edit','view'];
 
-      $scope_model = 'app\common\models\ImportOrder';
-      $status_label = 'import_order_status';
+        $scope_model = 'app\common\models\ImportOrder';
+        $status_label = 'import_order_status';
 
-      if ($this->user_scope($action,$need_privi_arr,$admit_allow_arr,$scope_model,$status_label)) {
-        return true;
-      }else{
-        return false;
-      }
+        if ($this->user_scope($action,$need_privi_arr,$admit_allow_arr,$scope_model,$status_label)) {
+            return true;
+        }else{
+            return false;
+        }
     }
-    
+
     public function actionIndex(){
-      if (isset(Yii::$app->session['manage_user']['store_id']) && Yii::$app->session['manage_user']['store_id'] > 0) {
-        $init_condition = [['store_id'=>Yii::$app->session['manage_user']['store_id']]];
-      }
-      return $this->render('index',['init_condition'=>$init_condition]);
+        if (isset(Yii::$app->session['manage_user']['store_id']) && Yii::$app->session['manage_user']['store_id'] > 0) {
+            $init_condition = [['store_id'=>Yii::$app->session['manage_user']['store_id']]];
+        }
+        $platform=Platform::find()->all();
+        return $this->render('index',['init_condition'=>$init_condition,'platform'=>$platform]);
     }
-    
+
     //删除
     public function actionDelete($id){
-      $ImportOrder = ImportOrder::findone($id);
-      if ($ImportOrder) {
-        $ImportOrder->delete();
-        message::result_json(1,'删除成功');
-      }else{
-        message::result_json(1,'数据错误');
-      }
+        $ImportOrder = ImportOrder::findone($id);
+        if ($ImportOrder) {
+            $ImportOrder->delete();
+            message::result_json(1,'删除成功');
+        }else{
+            message::result_json(1,'数据错误');
+        }
     }
 
     //添加
@@ -74,34 +75,34 @@ class ImportOrderController extends BaseController
         $ImportOrder->load(Yii::$app->request->post());
 
         if (!$ImportOrder->supplier_id) {
-          Message::result_json(2,'供货商不能为空');
+            Message::result_json(2,'供货商不能为空');
         }
 
         $supplier = Supplier::findone($ImportOrder->supplier_id);
         if (!$supplier) {
-          Message::result_json(2,'供货商不存在，请重新选择');
+            Message::result_json(2,'供货商不存在，请重新选择');
         }else{
-          $ImportOrder->supplier_name = $supplier->supplier_name;
+            $ImportOrder->supplier_name = $supplier->supplier_name;
         }
 
         if (!$ImportOrder->store_id) {
-          Message::result_json(2,'仓库不能为空');
+            Message::result_json(2,'仓库不能为空');
         }
 
         $store = Store::findone($ImportOrder->store_id);
         if (!$store) {
-          Message::result_json(2,'仓库不存在，请重新选择');
+            Message::result_json(2,'仓库不存在，请重新选择');
         }else{
-          $ImportOrder->store_name = $store->store_name;
+            $ImportOrder->store_name = $store->store_name;
         }
 
         $ImportOrder->order_sn = Common_fun::create_sn('app\common\models\ImportOrder',5);
-        
+
         $ImportOrder->save(false);
         Message::result_json(1,'添加成功');
     }
 
-   public function actionView($id){
+    public function actionView($id){
         $ImportOrder = ImportOrder::findone($id);
         return $this->render('view', ['import_order'=>$ImportOrder,'id'=>$id]);
     }
@@ -143,25 +144,25 @@ class ImportOrderController extends BaseController
         $ImportOrder->load(Yii::$app->request->post());
 
         if (!$ImportOrder->supplier_id) {
-          Message::result_json(2,'供货商不能为空');
+            Message::result_json(2,'供货商不能为空');
         }
 
         $supplier = Supplier::findone($ImportOrder->supplier_id);
         if (!$supplier) {
-          Message::result_json(2,'供货商不存在，请重新选择');
+            Message::result_json(2,'供货商不存在，请重新选择');
         }else{
-          $ImportOrder->supplier_name = $supplier->supplier_name;
+            $ImportOrder->supplier_name = $supplier->supplier_name;
         }
 
         if (!$ImportOrder->store_id) {
-          Message::result_json(2,'仓库不能为空');
+            Message::result_json(2,'仓库不能为空');
         }
 
         $store = Store::findone($ImportOrder->store_id);
         if (!$store) {
-          Message::result_json(2,'仓库不存在，请重新选择');
+            Message::result_json(2,'仓库不存在，请重新选择');
         }else{
-          $ImportOrder->store_name = $store->store_name;
+            $ImportOrder->store_name = $store->store_name;
         }
 
         $ImportOrder->save(false);
@@ -226,60 +227,60 @@ class ImportOrderController extends BaseController
         }
     }
     public function actionInsertGoods(){
-      $goods_id = Yii::$app->request->get('goods_id',0);
-      $order_id = Yii::$app->request->get('order_id',0);
-      $search_data = Yii::$app->request->get('search_data',0);
+        $goods_id = Yii::$app->request->get('goods_id',0);
+        $order_id = Yii::$app->request->get('order_id',0);
+        $search_data = Yii::$app->request->get('search_data',0);
 
-      if (!$order_id) {
-        message::result_json(2,'数据错误');
-      }else{
-        $order = ImportOrder::findone($order_id);
-      }
+        if (!$order_id) {
+            message::result_json(2,'数据错误');
+        }else{
+            $order = ImportOrder::findone($order_id);
+        }
 
-      $add_goods_error = [];
-      if ($goods_id) {
-          if (is_array($goods_id)) {
+        $add_goods_error = [];
+        if ($goods_id) {
+            if (is_array($goods_id)) {
 
-            foreach ($goods_id as $key => $value) {
-              $goods = Goods::findone($value);
-              if ($goods) {
+                foreach ($goods_id as $key => $value) {
+                    $goods = Goods::findone($value);
+                    if ($goods) {
+                        //插入数据
+                        $ImportOrderGoods = new ImportOrderGoods();
+                        $add_goods_result = $ImportOrderGoods->AddGoods($order_id,$goods);
+                        if (!$add_goods_result) {
+                            $add_goods_error[] = $ImportOrderGoods->add_goods_error;
+                        }
+                    }
+                }
+                if (count($add_goods_error) > 0) {
+                    message::result_json(1,$add_goods_error);
+                }else{
+                    message::result_json(1,'添加成功');
+                }
+
+            }else{
+                $goods = Goods::findone($goods_id);
                 //插入数据
                 $ImportOrderGoods = new ImportOrderGoods();
                 $add_goods_result = $ImportOrderGoods->AddGoods($order_id,$goods);
+
                 if (!$add_goods_result) {
-                    $add_goods_error[] = $ImportOrderGoods->add_goods_error;
+                    $add_goods_error = $ImportOrderGoods->add_goods_error;
                 }
-              }
+
+                if (count($add_goods_error) > 0) {
+                    message::result_json(2,$add_goods_error);
+                }else{
+                    message::result_json(1,'添加成功');
+                }
             }
-            if (count($add_goods_error) > 0) {
-              message::result_json(1,$add_goods_error);
-            }else{
-              message::result_json(1,'添加成功');
-            }
+        }
 
-          }else{
-            $goods = Goods::findone($goods_id);
-            //插入数据
-            $ImportOrderGoods = new ImportOrderGoods();
-            $add_goods_result = $ImportOrderGoods->AddGoods($order_id,$goods);
+        if ($search_data) {
 
-            if (!$add_goods_result) {
-                $add_goods_error = $ImportOrderGoods->add_goods_error;
-            }
+        }
 
-            if (count($add_goods_error) > 0) {
-              message::result_json(2,$add_goods_error);
-            }else{
-              message::result_json(1,'添加成功');
-            }
-          }
-      }
-
-      if ($search_data) {
-
-      }
-
-      message::result_json(2,'数据错误');
+        message::result_json(2,'数据错误');
     }
     /*添加到库存*/
     public function actionInsertGoodStore(){
@@ -303,11 +304,11 @@ class ImportOrderController extends BaseController
 
         $ImportOrderGoods = ImportOrderGoods::find()->where(['order_id'=>$id,'id'=>$data_id])->one();
         if($ImportOrderGoods){
-          $ImportOrderGoods->$data_type = $value;
-          $ImportOrderGoods->save(false);
-          message::result_json(1,'chengg',$value);
+            $ImportOrderGoods->$data_type = $value;
+            $ImportOrderGoods->save(false);
+            message::result_json(1,'chengg',$value);
         }else{
-          message::result_json(2,'没有此记录');
+            message::result_json(2,'没有此记录');
         }
     }
     /*创建入库单*/

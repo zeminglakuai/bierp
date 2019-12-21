@@ -5,6 +5,7 @@ namespace app\common\models;
 use Yii;
 use app\common\models\BaseModel;
 use app\common\models\Custom;
+use app\common\models\Platform;
 class ExportOrder extends BaseModel
 {
     /**
@@ -25,12 +26,11 @@ class ExportOrder extends BaseModel
     public function rules()
     {
         return [
-            [['add_user_id', 'admit_user_id', 'depart_id', 'sell_order_id','export_order_status','store_id'], 'integer'],
-            [['materiel_fee', 'shipping_fee'], 'number'],
-            [['order_name', 'add_time', 'admit_time','store_name', 'shipping_code','order_sn', 'add_user_name','shipping_method', 'admit_user_name', 'remark', 'depart_name', 'consignee', 'tel', 'address', 'sell_order_sn', 'custom_id', 'custom_name'], 'string', 'max' => 255],
+            [['add_user_id', 'admit_user_id', 'depart_id', 'sell_order_id','export_order_status','store_id','platform_id'], 'integer'],
+            [['materiel_fee', 'shipping_fee', 'platform_id'], 'number'],
+            [['order_name', 'add_time', 'admit_time','store_name', 'shipping_code','order_sn', 'add_user_name','shipping_method', 'admit_user_name', 'remark', 'depart_name', 'consignee', 'tel', 'address', 'sell_order_sn', 'custom_id', 'custom_name', 'platform_id', 'platform_name'], 'string', 'max' => 255],
         ];
     }
-
     /**
      * @inheritdoc
      */
@@ -56,6 +56,8 @@ class ExportOrder extends BaseModel
             'sell_order_sn' => 'Sell Order Sn',
             'custom_id' => 'Custom ID',
             'custom_name' => 'Custom Name',
+            'platform_id' => '平台ID',
+            'platform_name' => '平台名称',
             'materiel_fee' => '物料费用',
             'shipping_fee' => '运输费用',
             'shipping_code' => '发货单号',
@@ -68,6 +70,9 @@ class ExportOrder extends BaseModel
 
     public function getCustom(){
         return $this->hasone(Custom::classname(),['id'=>'custom_id']);
+    }
+    public function getPlatform(){
+        return $this->hasone(Platform::classname(),['id'=>'platform_id']);
     }
 
     public function getContract(){

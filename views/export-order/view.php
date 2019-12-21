@@ -49,7 +49,7 @@
                     客户名称 :
                     <span>
                                       <a href="javascript:void();" id="custom" data-id="24">
-                                  <?= $export_order['custom_name'] ?>                                         </a>
+                                 <?= $export_order['platform_name'] ?>                           </a>
                                   </span>
                 </div>
 

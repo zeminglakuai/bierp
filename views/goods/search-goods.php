@@ -186,7 +186,7 @@ use app\common\models\Brand;
       </tbody>
       </table>
     </form>
-  </div>
+  </div>   
 </div>
 
 <div class="row" style="margin-bottom:5em;">
