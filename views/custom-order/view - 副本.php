@@ -15,7 +15,6 @@ $this->params['breadcrumbs'][] = ['label' => 'B2B方案列表', 'url' => ['index
 $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order->order_sn;
 ?>
 <?= Html::cssFile('@web/css/token_input/token-input-facebook.css') ?>
-<?= Html::cssFile('@web/css/plugins/switchery/switchery.css') ?>
 <?= Html::jsFile('@web/js/jquery.tokeninput.min.js') ?>
 
 <?= app\common\widgets\OrderTitle::widget([
@@ -196,9 +195,9 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
                             <span class="table_th_tips" data-toggle="tooltip" data-placement="top"
                                   data-original-title="填写比率，根据(售价*反点比率)得出结果">					物流反点										</span>
                         </th>
-                      <!--   <th align="center" class="" data-type="other_cost" width="60px" style="width:60px">
-                            --其他成本
-                        </th> -->
+                        <th align="center" class="" data-type="other_cost" width="60px" style="width:60px">
+                            其他成本
+                        </th>
                         <th align="center" class="" data-type="shipping_place" width="60px" style="width:60px">
                             发货地
                         </th>
@@ -219,18 +218,6 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
                         <th align="center" class="" data-type="remark" width="100px" style="width:100px">
                             备注
                         </th>
-                        <?php
-                        if (isset($vallist)) {
-                            foreach ($vallist as $key => $value) {
-                               ?>
-<th align="center" class="" data-type="<?=$value['val_name_en']?>" width="100px" style="width:100px">
-                            <?=$value['val_name']?>
-                        </th>
-                               
-                               <?php
-                            }
-                        }
-                        ?>
                         <th align="center">操作</th>
                     </tr>
                     </thead>
@@ -292,7 +279,7 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
                                     </div>
                                 </td>-->
                                 <td>
-                                    <div  class="lable_edit" data-type="ppt_price" id="ppt_price_<?=$val['goods_id']?>" title="">
+                                    <div id="ppt_price_<?=$val['goods_id']?>" title="">
                                         <?=$val['ppt_price']?>
                                     </div>
                                 </td>
@@ -309,27 +296,27 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
                                 </td>
                     <td>
                            <div id="supplier_number_<?=$val['goods_id']?>"" title="">	
-                                        <div class="lable_edit" data-id="<?=$val['goods_id']?>"" data-type="supplier_number"><?=$val['supplier_number']?></div>				 </div>
+                                        <div class="lable_edit" data-id="<?=$val['goods_id']?>"" data-type="supplier_number">0</div>				 </div>
                                     </td>
                                     <td>
                                 <div id="limit_price_<?=$val['goods_id']?>" title="">	
-                                    <div class="lable_edit" data-id="<?=$val['goods_id']?>" data-type="limit_price"><?=$val['limit_price']?></div>				 </div>
+                                    <div class="lable_edit" data-id="<?=$val['goods_id']?>" data-type="limit_price">0.00</div>				 </div>
                                 </td>
                                  <td>
                                 <div id="jd_price_<?=$val['goods_id']?>" title="">	
-                                    <div class="lable_edit" data-id="<?=$val['goods_id']?>" data-type="jd_price"><?=$val['jd_price']?></div>				 </div>
+                                    <div class="lable_edit" data-id="<?=$val['goods_id']?>" data-type="jd_price">0.00</div>				 </div>
                                 </td>
                                                 <td>
                                 <div id="dangdang_price_<?=$val['goods_id']?>" title="">	
-                                    <div class="lable_edit" data-id="<?=$val['goods_id']?>" data-type="dangdang_price"><?=$val['dangdang_price']?></div>				 </div>
+                                    <div class="lable_edit" data-id="<?=$val['goods_id']?>" data-type="dangdang_price">0.00</div>				 </div>
                                 </td>
                                                 <td>
                                 <div id="tmall_price_<?=$val['goods_id']?>" title="">	
-                                    <div class="lable_edit" data-id="<?=$val['goods_id']?>" data-type="tmall_price"><?=$val['tmall_price']?></div>				 </div>
+                                    <div class="lable_edit" data-id="<?=$val['goods_id']?>" data-type="tmall_price">0.00</div>				 </div>
                                 </td>
                                                 <td>
                                 <div id="taobao_price_<?=$val['goods_id']?>" title="">	
-                                    <div class="lable_edit" data-id="<?=$val['goods_id']?>" data-type="taobao_price"><?=$val['taobao_price']?></div>				 </div>
+                                    <div class="lable_edit" data-id="<?=$val['goods_id']?>" data-type="taobao_price">0.00</div>				 </div>
                                 </td>
 
                                 <td>
@@ -397,11 +384,11 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
                                         <div class="lable_edit" data-id="<?=$val['goods_id']?>" data-type="tranform_rate"><?=$val['tranformFee']?></div>
                                     </div>
                                 </td>
-                              <!--   <td>
+                                <td>
                                     <div id="other_cost_<?=$val['goods_id']?>" title="">
                                         <div class="lable_edit" data-id="<?=$val['goods_id']?>" data-type="other_cost"><?=$val['other_cost']?></div>
                                     </div>
-                                </td> -->
+                                </td>
                                 <td>
                                     <div id="shipping_place_<?=$val['goods_id']?>" title="">
                                         <div class="lable_edit" data-id="<?=$val['goods_id']?>" data-type="shipping_place"><?=$val['shipping_place']?></div>
@@ -445,20 +432,6 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
                                         <div class="lable_edit" data-id="<?=$val['goods_id']?>" data-type="remark"><?=$val['remark']?></div>
                                     </div>
                                 </td>
-<?php
-                        if (isset($vallist)) {
-                            foreach ($vallist as $key => $value) {
-                               ?>
-                               <td>
-                                    <div id="<?=$value['val_name_en']?>_<?=$val['goods_id']?>" title="">
-                                        <div class="lable_edit" data-id="<?=$val['goods_id']?>" data-type="remark"><?=$value[$val['goods_id']]['val']?></div>
-                                    </div>
-                                </td>                               
-                               <?php
-                            }
-                        }
-                        ?>
-                                 
 
                                 <td>
                                     <a class="delete_goods" data-id="<?=$val['goods_id']?>" action="delete-goods"
@@ -508,228 +481,6 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
 ?>
 
 <script type="text/javascript">
-	$("#check_all").on('ifChecked',function(event){
-	  $(".goods_ids").iCheck('check');
-	});
-
-	$("#check_all").on('ifUnchecked',function(event){
-	  $(".goods_ids").iCheck('uncheck');
-	});
-
-	$('.goods_ids').on('ifChecked', function(event){
-	  	$(this).parent().parent().parent().parent().parent().css('background-color','#f5f5f5')
-	});
-	$('.goods_ids').on('ifUnchecked', function(event){
-	  	$(this).parent().parent().parent().parent().parent().css('background-color','')
-	});
-
-	$(".data_sort").click(function(){
-		var sortby = $(this).attr('data-type');
-		var order = $(this).attr("class") == 'sorting_desc data_sort'?'SORT_ASC':'SORT_DESC';
-				var to_url = '/custom-order/view?id=83';
-		to_url = create_url(to_url);
-		window.location.href= to_url+'sortby='+sortby+'&order='+order;
-	});
-
-	$(".delete_goods").click(function(){
-		if(confirm('要删除该记录吗？')){
-			var id = '83';
-			var data_id = $(this).attr('data-id');
-			var action = $(this).attr('action');
-			$.get("/custom-order/"+action,{id:id, data_id:data_id},function(result){
-				if(result.error == 1){
-					$("#goods_row_"+data_id).remove();
-				}else{
-					layer.msg(result.message);
-				}
-			},'json');
-		}
-	});
-
-	$(".lable_edit").hover(
-		function(){
-			$(this).addClass('lable_edit_over');
-		},function(){
-			$(this).removeClass('lable_edit_over');
-		}
-	);
-
-	$(".goods_list_change").change(function(){
-		var id = '83';
-		var value = $(this).val();
-		var data_id = $(this).attr("data-id");		
-		var data_type = $(this).attr("data-type");
-		var target = $(this);
-		$.get('/custom-order/update-goods-label',{value: value, id:id, data_id: data_id, data_type:data_type},function(result){
-							if(result.error == 1){
-								layer.msg(result.message);
-							}else{
-								layer.msg(result.message,function(){});
-							}
-						},'json');
-	})
-
-
-	$(".lable_edit").click(
-		function(){
-			var id = '83';
-			var data_id = $(this).attr("data-id");
-			var data_type = $(this).attr("data-type");
-			var target = $(this);
-			if($(this).children("input").length > 0){
-			}else{
-				var ima_code = $(this).text();
-				var input_html = '<input type="text" value="'+ima_code+'" style="width:100%;" class="edit_input" />'; 
-				$(this).html(input_html);
-				$('.edit_input').focus();
-				$('.edit_input').select();
-			}
-
-			function calculate_value(calculate_value){
-				for(var i in calculate_value){
-					var inner_div = $("#"+calculate_value[i].label_name+'_'+data_id).children();
-					console.log(inner_div);
-					if (inner_div.length > 0) {
-						inner_div.html(calculate_value[i].new_value);
-					}else{
-						$("#"+calculate_value[i].label_name+'_'+data_id).html(calculate_value[i].new_value);
-					}
-			    }
-			}
-			
-			$('.edit_input').blur(function(){
-				var value = $(this).val();
-				if(value == ima_code){
-			  		target.html(ima_code);
-			  		return false;
-			  	}
-				$.get('/custom-order/update-goods-label',{value: value, id:id, data_id: data_id, data_type:data_type},function(result){
-					if(result.error == 1){
-						target.html(result.content);
-						if (result.calculate_value) {
-							calculate_value(result.calculate_value);
-						};
-					}else if(result.error == 3){
-						target.html(ima_code);
-					}else{
-						target.html(ima_code);
-						layer.msg(result.message,function(){});
-					}
-				},'json');
-			});
-
-			$('.edit_input').keydown(function(event){
-			  if(event.keyCode == 13) {
-			  	event.stopPropagation();
-			  	event.preventDefault();
-			  	var value = $(this).val();
-			  	if(value == ima_code){
-			  		target.html(ima_code);
-			  		return false;
-			  	}
-				$.get('/custom-order/update-goods-label',{value: value, id:id, data_id: data_id, data_type:data_type},function(result){
-					if(result.error == 1){
-						target.html(result.content);
-						if (result.calculate_value) {
-							calculate_value(result.calculate_value);
-						};
-					}else if(result.error == 3){
-						target.html(ima_code);
-					}else{
-						target.html(ima_code);
-						layer.msg(result.message,function(){});
-					}
-				},'json');
-			  }
-			});
-	 
-		}
-	);
-	
-	$(".view_label_content").click(function(){
-		var view_url = $(this).attr('data-url');
-		var view_id = $(this).attr('data-id');		
-	    layer.open({
-	      type: 2,
-	      title:'查看',
-	      area: ['90%', '90%'], //宽高
-	      maxmin: true,
-	      content: view_url+'?id='+view_id
-	    });
-	})
-
-  	$(function () { $("[data-toggle='tooltip']").tooltip(); });
-
-	$(document).ready(function(){
-
-		$(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",})
-	}
-	);
-</script>
-
-<script type="text/javascript">
-var ori_xx = 0
-var ori_yy = 0
-var move_goods_list = function(e){
-	var new_xx = e.originalEvent.x || e.originalEvent.layerX || 0;
-    var new_yy = e.originalEvent.y || e.originalEvent.layerY || 0;
-
-	var move_px_x = (new_xx - ori_xx)*2;
-	var move_px_y = (new_yy - ori_yy)*2;
-	if (ori_xx > 0 && e.data.type == 'x') {
-		$("#goods_list_block").scrollLeft($("#goods_list_block").scrollLeft() + move_px_x)
-		//$("body").scrollTop($("body").scrollTop() + move_px_y)
-	}
-
-	if (ori_yy > 0 && e.data.type == 'y') {
-		$("body").scrollTop($("body").scrollTop() + move_px_y)
-	}
-
-	ori_xx = new_xx;
-    ori_yy = new_yy;
- 
-	console.log(new_xx +'-------'+ new_yy);
-};
-
-document.onkeydown = function(event){
- 	if (event.target.nodeName == 'TEXTAREA' || event.target.nodeName == 'INPUT') {
-        return;
-    };
- 
-    if (event.keyCode == 32) {
-        event.preventDefault();
-        $("body").css('cursor','move');
-		var ori_xx = 0;
-        var ori_yy = 0;
-		$('#goods_list_block').on('mousemove',{type:'x'},move_goods_list);
-    };
-
-    if (event.keyCode == 16) {
-        event.preventDefault();
-        $("body").css('cursor','move');
-		var ori_xx = 0;
-        var ori_yy = 0;
-		$('#goods_list_block').on('mousemove',{type:'y'},move_goods_list);
-    };
-
-
-
-}
-
-document.onkeyup = function(event){
- 	if (event.target.nodeName == 'TEXTAREA' || event.target.nodeName == 'INPUT') {
-        return;
-    };
-    /* Act on the event */
-    if (event.keyCode == 32 || event.keyCode == 16) {
-        event.preventDefault();
-        $("body").css('cursor','auto');
-        $('#goods_list_block').off()
-        ori_xx = 0
-		ori_yy = 0
-    };
-
-}
 
     //检查选择的商品
     function get_checked_goods() {
@@ -833,7 +584,7 @@ document.onkeyup = function(event){
             content: view_url
         });
     });
-  
+    $(".fixed-table-box").fixedTable();
 
     // 创建主题
     $("#create_val").click(function() {
@@ -844,7 +595,7 @@ document.onkeyup = function(event){
             //skin: 'layui-layer-rim', //加上边框
             area: ['80%', '80%'], //宽高
             maxmin: true,
-            content: '/custom-order/create-val?id=<?= $custom_order->id; ?>',
+            content: 'custom-order/create-val?id=<?= $custom_order->id; ?>',
             end: function() {
                 // location.reload();
             }

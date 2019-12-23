@@ -17,6 +17,7 @@ use app\common\models\SupplierGoods;
 use app\common\models\Supplier;
 use app\common\models\AskPriceOrder;
 use app\common\models\AskPriceOrderGoods;
+use app\common\models\Val;
 
 use app\common\models\SellOrder;
 use app\common\models\SellOrderGoods;
@@ -127,10 +128,11 @@ class CustomOrderController extends BaseController
         $custom_order_goods=Yii::$app->db->createCommand("select cog.*,g.goods_img from custom_order_goods as cog left join goods as g on g.goods_id=cog.goods_id where cog.order_id=".$custom_order->id)->queryAll();
         if (isset($custom_order_goods)) {
             foreach ($custom_order_goods as $k => $val) {
-                $custom_order_goods['k'][$k]['supplier']=Yii::$app->db->createCommand("select * from goods_supplier where goods_id=".$val['goods_id'])->queryAll();
+                $custom_order_goods[$k]['supplier']=Yii::$app->db->createCommand("select * from goods_supplier where goods_id=".$val['goods_id'])->queryAll();
             }
         }
-        return $this->render('view', ['custom_order'=>$custom_order,'id'=>$id,'custom_order_goods'=>$custom_order_goods]);
+        $vallist= Yii::$app->db->createCommand("select * from val where order_id=".$id)->queryAll();
+        return $this->render('view', ['custom_order'=>$custom_order,'id'=>$id,'custom_order_goods'=> $custom_order_goods, 'vallist' => $vallist]);
     }
 
     public function actionAdmit($id,$process_status){
@@ -468,5 +470,34 @@ class CustomOrderController extends BaseController
         $order_log = OrderLog::find()->where(['model'=>'CustomOrder','order_id'=>$id])->all();
         return $this->render('remend-history', ['order_log'=>$order_log]);
     }
+    // 字段模块
+    public function actionCreateVal($id)
+    {
+        $this->layout = 'empty';
+        return $this->render('create-val', ['id' => $id]);
+    }
+    // 添加字段
+    public function actionInsertVal($id)
+    {
+
+        $val = new Val();
+
+        $data = Yii::$app->request->post();
+        if ($data['id'] != '') {
+            $val = Val::findone($data['id']);
+        }
+        if (empty($data['val_name'])||empty($data['val_name_en'])) {
+            message::result_json(2, '内容不能为空');
+        }
+        $val->val_name = $data['val_name'];
+        $val->val_name_en = $data['val_name_en'];
+        $val->order_id = ($id);
+        $val->add_user_id = Yii::$app->session['manage_user']['id'];
+        $val->add_user_name = Yii::$app->session['manage_user']['admin_name'];
+        $val->add_time = time();
+        $val->save(false);
+        Message::result_json(1, '添加成功');
+    }
+    
 
 }

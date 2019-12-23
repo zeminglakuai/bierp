@@ -11,6 +11,7 @@ class CustomOrderGoods extends \yii\db\ActiveRecord
      * @inheritdoc
      */
     public $add_goods_error;
+    public $goods_img;
     public static function tableName()
     {
         return 'custom_order_goods';
@@ -24,7 +25,7 @@ class CustomOrderGoods extends \yii\db\ActiveRecord
         return [
             [['goods_id', 'number', 'supplier_id', 'is_self_sell', 'supplier_number','is_priced','is_need_temp'], 'integer'],
             [['market_price','other_cost','ppt_price','other_cost_fee', 'sale_price', 'supplier_price', 'limit_price', 'taobao_price', 'dangdang_price', 'jd_price', 'tmall_price', 'final_cost', 'gross_profit', 'fax', 'shipping_fee', 'materiel_cost', 'platform_rate', 'tranform_rate'], 'number'],
-            [['order_id', 'goods_name', 'goods_sn', 'isbn', 'supplier_name','shipping_place','huoqi','shipping_to_place','remark'], 'string', 'max' => 255],
+            [['order_id', 'goods_name', 'goods_sn', 'isbn', 'supplier_name','shipping_place','huoqi','shipping_to_place','remark','goods_img'], 'string', 'max' => 255],
         ];
     }
 
@@ -36,6 +37,7 @@ class CustomOrderGoods extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'order_id' => 'ID',
+            'goods_img'=>'商品图片',
             'goods_id' => '商品ID',
             'goods_name' => '商品名称',
             'goods_sn' => '型号',
