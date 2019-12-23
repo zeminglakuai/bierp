@@ -265,63 +265,70 @@ class CustomOrderController extends BaseController
         $value  = trim(Yii::$app->request->get('value'));
         $id  = Yii::$app->request->get('id');
         $data_id  = Yii::$app->request->get('data_id');
+        if (is_array($data_type)) {
+            // 保存到值里面
+        }else {
+            $CustomOrderGoods = CustomOrderGoods::find()->where(['order_id' => $id, 'id' => $data_id])->one();
+            if ($CustomOrderGoods) {
+                $origin_value = $CustomOrderGoods->$data_type;
 
-        $CustomOrderGoods = CustomOrderGoods::find()->where(['order_id'=>$id,'id'=>$data_id])->one();
-        if($CustomOrderGoods){
-            $origin_value = $CustomOrderGoods->$data_type;
+                if ($origin_value == $value) {
+                    message::result_json(3, '没有变化');
+                }
 
-            if ($origin_value == $value) {
-                message::result_json(3,'没有变化');
+                $CustomOrderGoods->$data_type = $value;
+                $CustomOrderGoods->save(false);
+
+                //如果当局已经复核  则记录修改记录
+                $custom_order = CustomOrder::findone($id);
+
+                if ($custom_order && $custom_order->custom_order_status >= 1) {
+
+                    $order_log = new OrderLog();
+                    $order_log->model = 'CustomOrder';
+                    $order_log->order_id = $id;
+                    $order_log->lable_name = $data_type;
+                    $order_log->origin_value = $origin_value;
+                    $order_log->new_value = $value;
+                    $order_log->goods_id = $CustomOrderGoods->goods_id;
+                    $order_log->goods_name = $CustomOrderGoods->goods_name;
+                    $order_log->goods_sn = $CustomOrderGoods->goods_sn;
+                    $order_log->save(false);
+                }
+
+                $supplier_price_arr = ['consult'];
+                $sale_price_arr = ['platform_rate', 'tranform_rate'];
+                if (in_array($data_type, $supplier_price_arr)) {
+                    $value = $CustomOrderGoods->supplier_price * $value;
+                }
+
+                if (in_array($data_type, $sale_price_arr)) {
+                    $value = $CustomOrderGoods->sale_price * $value;
+                }
+
+                //根据公式计算产生变化的值
+                //当前只计算当前列的值的变化
+                $calculate_value = [];
+                $calculate_value[] = ['label_name' => 'saleTotal', 'new_value' => $CustomOrderGoods->saleTotal];
+                $calculate_value[] = ['label_name' => 'supplierTotal', 'new_value' => $CustomOrderGoods->supplierTotal];
+                $calculate_value[] = ['label_name' => 'profit', 'new_value' => $CustomOrderGoods->profit];
+                $calculate_value[] = ['label_name' => 'profitTotal', 'new_value' => $CustomOrderGoods->profitTotal];
+                $calculate_value[] = ['label_name' => 'profitRate', 'new_value' => $CustomOrderGoods->profitRate];
+                $calculate_value[] = ['label_name' => 'finalCost', 'new_value' => $CustomOrderGoods->finalCost];
+                $calculate_value[] = ['label_name' => 'finalCostTotal', 'new_value' => $CustomOrderGoods->finalCostTotal];
+                $calculate_value[] = ['label_name' => 'faxPoint', 'new_value' => $CustomOrderGoods->faxPoint];
+                $calculate_value[] = ['label_name' => 'consultFee', 'new_value' => $CustomOrderGoods->consultFee];
+
+
+                message::result_json(1, 'success', $value, $calculate_value);
+            } else {
+                message::result_json(2, '没有此记录');
             }
-
-            $CustomOrderGoods->$data_type = $value;
-            $CustomOrderGoods->save(false);
-
-            //如果当局已经复核  则记录修改记录
-            $custom_order = CustomOrder::findone($id);
-
-            if ($custom_order && $custom_order->custom_order_status >= 1) {
-
-                $order_log = new OrderLog();
-                $order_log->model = 'CustomOrder';
-                $order_log->order_id = $id;
-                $order_log->lable_name = $data_type;
-                $order_log->origin_value = $origin_value;
-                $order_log->new_value = $value;
-                $order_log->goods_id = $CustomOrderGoods->goods_id;
-                $order_log->goods_name = $CustomOrderGoods->goods_name;
-                $order_log->goods_sn = $CustomOrderGoods->goods_sn;
-                $order_log->save(false);
-            }
-
-            $supplier_price_arr = ['consult'];
-            $sale_price_arr = ['platform_rate','tranform_rate'];
-            if (in_array($data_type, $supplier_price_arr)) {
-                $value = $CustomOrderGoods->supplier_price * $value;
-            }
-
-            if (in_array($data_type, $sale_price_arr)) {
-                $value = $CustomOrderGoods->sale_price * $value;
-            }
-
-            //根据公式计算产生变化的值
-            //当前只计算当前列的值的变化
-            $calculate_value = [];
-            $calculate_value[] = ['label_name'=>'saleTotal','new_value'=>$CustomOrderGoods->saleTotal];
-            $calculate_value[] = ['label_name'=>'supplierTotal','new_value'=>$CustomOrderGoods->supplierTotal];
-            $calculate_value[] = ['label_name'=>'profit','new_value'=>$CustomOrderGoods->profit];
-            $calculate_value[] = ['label_name'=>'profitTotal','new_value'=>$CustomOrderGoods->profitTotal];
-            $calculate_value[] = ['label_name'=>'profitRate','new_value'=>$CustomOrderGoods->profitRate];
-            $calculate_value[] = ['label_name'=>'finalCost','new_value'=>$CustomOrderGoods->finalCost];
-            $calculate_value[] = ['label_name'=>'finalCostTotal','new_value'=>$CustomOrderGoods->finalCostTotal];
-            $calculate_value[] = ['label_name'=>'faxPoint','new_value'=>$CustomOrderGoods->faxPoint];
-            $calculate_value[] = ['label_name'=>'consultFee','new_value'=>$CustomOrderGoods->consultFee];
-
-
-            message::result_json(1,'success',$value,$calculate_value);
-        }else{
-            message::result_json(2,'没有此记录');
         }
+        
+
+        
+        
     }
 
     //生成 询价单
