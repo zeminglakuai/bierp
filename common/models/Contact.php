@@ -81,8 +81,15 @@ class Contact extends \yii\db\ActiveRecord
             'qy_open_id' => 'Qy Open ID',
         ];
     }
-    
-    public function getExtendInfo(){
+
+    public function getExtendInfo()
+    {
         return   $this->hasMany(UserExtendInfo::className(), ['contact_id' => 'id']);
+    }
+    public function getInfo($id)
+    {
+        // $data = Yii::$app->db->createCommand("select * from contact where id=" . $id)->queryOne();
+
+        // return $data['belong_name'] . '：' . $data['name'];
     }
 }

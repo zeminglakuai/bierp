@@ -1,4 +1,5 @@
 <?php
+
 namespace app\controllers;
 
 use Yii;
@@ -18,7 +19,10 @@ use app\common\models\Supplier;
 use app\common\models\AskPriceOrder;
 use app\common\models\AskPriceOrderGoods;
 use app\common\models\Val;
+use app\common\models\Contact;
 
+
+use app\common\models\Platform;
 use app\common\models\SellOrder;
 use app\common\models\SellOrderGoods;
 
@@ -31,9 +35,9 @@ use app\includes\Common_fun;
 class CustomOrderController extends BaseController
 {
     public $page_title = 'B2B方案';
-    public $title_arr = ['id'=>1,'order_sn'=>0,'order_name'=>0,'custom_name'=>0,'goodsNumber'=>0 ,'saleTotal'=>0,'add_user_name'=>0,'depart_name'=>0,'add_time'=>0,'custom_order_status'=>0];
+    public $title_arr = ['id' => 1, 'order_sn' => 0, 'order_name' => 0, 'platform_name' => 0, 'contact_name' => 0, 'goodsNumber' => 0, 'saleTotal' => 0, 'add_user_name' => 0, 'depart_name' => 0, 'add_time' => 0, 'custom_order_status' => 0];
     public $scope = true;
-    public $search_allowed = ['order_sn'=>2,'order_name'=>2,'custom_name'=>2,'custom_order_status'=>1];
+    public $search_allowed = ['order_sn' => 2, 'order_name' => 2, 'custom_name' => 2, 'custom_order_status' => 1];
     public $title_model = 'app\common\models\CustomOrder';
     public $detail_model = 'app\common\models\CustomOrderGoods';
     public $status_label = 'custom_order_status';
@@ -43,126 +47,142 @@ class CustomOrderController extends BaseController
         parent::beforeAction($action);
 
         //检查当前单据用户是不是有操作权限
-        $need_privi_arr = ['remend_history','delete','edit','admit','insert-goods','delete-goods','update-goods-label'];
-        $admit_allow_arr = ['create-ask-price','create-sell-order','view','export','export-ppt','remend-history'];
+        $need_privi_arr = ['remend_history', 'delete', 'edit', 'admit', 'insert-goods', 'delete-goods', 'update-goods-label'];
+        $admit_allow_arr = ['create-ask-price', 'create-sell-order', 'view', 'export', 'export-ppt', 'remend-history'];
         $scope_model = 'app\common\models\CustomOrder';
         $status_label = 'custom_order_status';
 
-        if ($this->user_scope($action,$need_privi_arr,$admit_allow_arr,$scope_model,$status_label)) {
+        if ($this->user_scope($action, $need_privi_arr, $admit_allow_arr, $scope_model, $status_label)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
+    public function index()
+    {
+        $this->layout = 'empty';
+
+        return $this->render('index', []);
+    }
 
     //添加客户方案
-    public function actionCreate(){
+    public function actionCreate()
+    {
         $this->layout = 'empty';
-        return $this->render('create', []);
+
+        $platform = Platform::find()->where('status_done=0')->all();
+
+        return $this->render('create', ['platform' => $platform]);
     }
 
     //删除客户方案
-    public function actionDelete($id){
+    public function actionDelete($id)
+    {
         $custom_order = CustomOrder::findone($id);
         $custom_order->delete();
-        message::result_json(1,'删除成功');
+        message::result_json(1, '删除成功');
     }
 
     //添加客户方案
-    public function actionInsert(){
+    public function actionInsert()
+    {
         $CustomOrder = new CustomOrder();
         $CustomOrder->load(Yii::$app->request->post());
-
-        if (!$CustomOrder->custom_id) {
-            Message::result_json(2,'客户不能为空');
+        if (empty($CustomOrder->platform_id)) {
+            Message::result_json(2, '项目不能为空');
+        }
+        if (empty($CustomOrder->contact_id)) {
+            Message::result_json(2, '客户不能为空');
         }
 
-        $custom = Custom::findone($CustomOrder->custom_id);
-        if (!$custom) {
-            Message::result_json(2,'客户不存在，请重新选择');
-        }else{
-            $CustomOrder->custom_name = $custom->custom_name;
+        if (empty($CustomOrder->order_name)) {
+            Message::result_json(2, '方案名不能为空');
         }
-        if (strlen($CustomOrder->order_name) < 2) {
-            Message::result_json(2,'单据名称不能为空');
-        }
+        $contact = Contact::findone($CustomOrder->contact_id);
 
-        $CustomOrder->order_sn = Common_fun::create_sn('app\common\models\CustomOrder',5);
+        $platform = Platform::findOne($CustomOrder->platform_id);
+        $CustomOrder->contact_name = $contact->name;
+        $CustomOrder->platform_name = $platform->plat_name;
+        $CustomOrder->order_sn = Common_fun::create_sn('app\common\models\CustomOrder', 5);
 
         $CustomOrder->save(false);
-        Message::result_json(1,'添加成功');
+        Message::result_json(1, '添加成功');
     }
 
-    public function actionEdit($id){
+    public function actionEdit($id)
+    {
         $this->layout = 'empty';
         $custom_order = CustomOrder::findone($id);
-        return $this->render('edit', ['custom_order'=>$custom_order,'id'=>$id]);
+        return $this->render('edit', ['custom_order' => $custom_order, 'id' => $id]);
     }
 
-    public function actionUpdate($id){
+    public function actionUpdate($id)
+    {
         $CustomOrder = CustomOrder::findone($id);
         $CustomOrder->load(Yii::$app->request->post());
 
         if (!$CustomOrder->custom_id) {
-            Message::result_json(2,'客户不能为空');
+            Message::result_json(2, '客户不能为空');
         }
 
         $custom = Custom::findone($CustomOrder->custom_id);
         if (!$custom) {
-            Message::result_json(2,'客户不存在，请重新选择');
-        }else{
+            Message::result_json(2, '客户不存在，请重新选择');
+        } else {
             $CustomOrder->custom_name = $custom->custom_name;
         }
         if (strlen($CustomOrder->order_name) < 2) {
-            Message::result_json(2,'单据名称不能为空');
+            Message::result_json(2, '单据名称不能为空');
         }
 
         $CustomOrder->save(false);
-        Message::result_json(1,'编辑成功');
+        Message::result_json(1, '编辑成功');
     }
 
-    public function actionView($id){
+    public function actionView($id)
+    {
         $custom_order = CustomOrder::findone($id);
-//        $custom_order_goods = CustomOrderGoods::find()->where(['order_id'=>$custom_order->id])->all();
+        //        $custom_order_goods = CustomOrderGoods::find()->where(['order_id'=>$custom_order->id])->all();
 
-        $custom_order_goods=Yii::$app->db->createCommand("select cog.*,g.goods_img from custom_order_goods as cog left join goods as g on g.goods_id=cog.goods_id where cog.order_id=".$custom_order->id)->queryAll();
+        $custom_order_goods = Yii::$app->db->createCommand("select cog.*,g.goods_img from custom_order_goods as cog left join goods as g on g.goods_id=cog.goods_id where cog.order_id=" . $custom_order->id)->queryAll();
         if (isset($custom_order_goods)) {
             foreach ($custom_order_goods as $k => $val) {
-                $custom_order_goods[$k]['supplier']=Yii::$app->db->createCommand("select * from goods_supplier where goods_id=".$val['goods_id'])->queryAll();
+                $custom_order_goods[$k]['supplier'] = Yii::$app->db->createCommand("select * from goods_supplier where goods_id=" . $val['goods_id'])->queryAll();
             }
         }
-        $vallist= Yii::$app->db->createCommand("select * from val where order_id=".$id)->queryAll();
-        return $this->render('view', ['custom_order'=>$custom_order,'id'=>$id,'custom_order_goods'=> $custom_order_goods, 'vallist' => $vallist]);
+        $vallist = Yii::$app->db->createCommand("select * from val where order_id=" . $id)->queryAll();
+        return $this->render('view', ['custom_order' => $custom_order, 'id' => $id, 'custom_order_goods' => $custom_order_goods, 'vallist' => $vallist]);
     }
 
-    public function actionAdmit($id,$process_status){
+    public function actionAdmit($id, $process_status)
+    {
         $CustomOrder = CustomOrder::findone($id);
 
         //检查是不是有商品
-        $custom_order_goods = CustomOrderGoods::findAll(['order_id'=>$id]);
+        $custom_order_goods = CustomOrderGoods::findAll(['order_id' => $id]);
         if (!$custom_order_goods) {
-            Message::result_json(2,'单据下没有商品!');
+            Message::result_json(2, '单据下没有商品!');
         }
 
-        $admit_result = $this->base_admit($CustomOrder,'custom_order_status',$process_status);
+        $admit_result = $this->base_admit($CustomOrder, 'custom_order_status', $process_status);
         if ($admit_result['error'] > 2) {
-            Message::result_json(2,$admit_result['message']);
+            Message::result_json(2, $admit_result['message']);
         }
 
-        Message::result_json(1,'复核成功');
-
+        Message::result_json(1, '复核成功');
     }
 
 
 
-    public function actionInsertGoods(){
-        $goods_id = Yii::$app->request->get('goods_id',0);
-        $order_id = Yii::$app->request->get('order_id',0);
-        $search_data = Yii::$app->request->get('search_data',0);
+    public function actionInsertGoods()
+    {
+        $goods_id = Yii::$app->request->get('goods_id', 0);
+        $order_id = Yii::$app->request->get('order_id', 0);
+        $search_data = Yii::$app->request->get('search_data', 0);
 
         if (!$order_id) {
-            message::result_json(2,'数据错误');
-        }else{
+            message::result_json(2, '数据错误');
+        } else {
             //检查用户对该单据的操作权限
             $order = CustomOrder::findone($order_id);
         }
@@ -176,7 +196,7 @@ class CustomOrderController extends BaseController
                     if ($goods) {
                         //插入数据
                         $CustomOrderGoods = new CustomOrderGoods();
-                        $add_goods_result = $CustomOrderGoods->AddGoods($order_id,$goods);
+                        $add_goods_result = $CustomOrderGoods->AddGoods($order_id, $goods);
                         if (!$add_goods_result) {
                             $add_goods_error[] = $CustomOrderGoods->add_goods_error;
                         }
@@ -195,16 +215,15 @@ class CustomOrderController extends BaseController
                     }
                 }
                 if (count($add_goods_error) > 0) {
-                    message::result_json(1,$add_goods_error);
-                }else{
-                    message::result_json(1,'添加成功');
+                    message::result_json(1, $add_goods_error);
+                } else {
+                    message::result_json(1, '添加成功');
                 }
-
-            }else{
+            } else {
                 $goods = Goods::findone($goods_id);
                 //插入数据
                 $CustomOrderGoods = new CustomOrderGoods();
-                $add_goods_result = $CustomOrderGoods->AddGoods($order_id,$goods);
+                $add_goods_result = $CustomOrderGoods->AddGoods($order_id, $goods);
 
                 if (!$add_goods_result) {
                     $add_goods_error = $CustomOrderGoods->add_goods_error;
@@ -224,22 +243,22 @@ class CustomOrderController extends BaseController
                 }
 
                 if (count($add_goods_error) > 0) {
-                    message::result_json(2,$add_goods_error);
-                }else{
-                    message::result_json(1,'添加成功');
+                    message::result_json(2, $add_goods_error);
+                } else {
+                    message::result_json(1, '添加成功');
                 }
             }
         }
 
         if ($search_data) {
-
         }
 
-        message::result_json(2,'数据错误');
+        message::result_json(2, '数据错误');
     }
-    public function actionDeleteGoods($id){
+    public function actionDeleteGoods($id)
+    {
         $data_id = Yii::$app->request->get('data_id');
-        $CustomOrderGoods = CustomOrderGoods::find()->where(['order_id'=>$id,'id'=>$data_id])->one();
+        $CustomOrderGoods = CustomOrderGoods::find()->where(['order_id' => $id, 'id' => $data_id])->one();
 
         //如果单据在复核中 则记录历史
         $custom_order = CustomOrder::findone($id);
@@ -256,10 +275,11 @@ class CustomOrderController extends BaseController
 
         $CustomOrderGoods->delete();
 
-        message::result_json(1,'删除成功');
+        message::result_json(1, '删除成功');
     }
 
-    public function actionUpdateGoodsLabel($id){
+    public function actionUpdateGoodsLabel($id)
+    {
 
         $data_type  = trim(Yii::$app->request->get('data_type'));
         $value  = trim(Yii::$app->request->get('value'));
@@ -267,7 +287,7 @@ class CustomOrderController extends BaseController
         $data_id  = Yii::$app->request->get('data_id');
         if (is_array($data_type)) {
             // 保存到值里面
-        }else {
+        } else {
             $CustomOrderGoods = CustomOrderGoods::find()->where(['order_id' => $id, 'id' => $data_id])->one();
             if ($CustomOrderGoods) {
                 $origin_value = $CustomOrderGoods->$data_type;
@@ -325,24 +345,21 @@ class CustomOrderController extends BaseController
                 message::result_json(2, '没有此记录');
             }
         }
-        
-
-        
-        
     }
 
     //生成 询价单
     //需要订单状态为已审核
-    public function actionCreateAskPrice($id){
+    public function actionCreateAskPrice($id)
+    {
 
         $custom_order = CustomOrder::findone($id);
         if ($custom_order->is_create_ask_price == 1) {
-            message::result_json(2,'单据已经生成对应询价单');
+            message::result_json(2, '单据已经生成对应询价单');
         }
 
         //检查是不是已经走完 审批流程
-        if (!$this->if_approval_done($custom_order,'custom_order_status')) {
-            message::result_json(2,'还未走完审批流程');
+        if (!$this->if_approval_done($custom_order, 'custom_order_status')) {
+            message::result_json(2, '还未走完审批流程');
         }
 
         //得到全部商品
@@ -353,7 +370,7 @@ class CustomOrderController extends BaseController
         //                               ->andwhere(['is_self_sell'=>0])
         //                               ->all();
 
-        $custom_order_goods_list = CustomOrderGoods::find()->where(['order_id'=>$id])->all();
+        $custom_order_goods_list = CustomOrderGoods::find()->where(['order_id' => $id])->all();
         //$goods_id_list = ArrayHelper::map($custom_order_goods_list, 'goods_id', 'goods_id');
         if ($custom_order_goods_list) {
             //按照不同的供货商 进行分组
@@ -371,37 +388,36 @@ class CustomOrderController extends BaseController
                     //新建询价单头
                     $AskPriceOrder = new AskPriceOrder();
                     $AskPriceOrder->custom_order_id = $id;
-                    $AskPriceOrder->order_sn = Common_fun::create_sn('app\common\models\AskPriceOrder',5);
+                    $AskPriceOrder->order_sn = Common_fun::create_sn('app\common\models\AskPriceOrder', 5);
                     $AskPriceOrder->supplier_id = $supplier_info->id;
                     $AskPriceOrder->supplier_name = $supplier_info->supplier_name;
                     $AskPriceOrder->ask_price_order_status = 0;
-                    $AskPriceOrder->access_secrect = substr(md5(uniqid(rand(), TRUE)),0,4);
+                    $AskPriceOrder->access_secrect = substr(md5(uniqid(rand(), TRUE)), 0, 4);
                     $AskPriceOrder->save(false);
 
                     //插入商品
                     $goods_id_list = ArrayHelper::map($value, 'goods_id', 'goods_id');
-                    $goods_title =['order_id','goods_id','goods_name','goods_sn','isbn','number','market_price','sale_price','return_ask_price','return_number'];//数据键
+                    $goods_title = ['order_id', 'goods_id', 'goods_name', 'goods_sn', 'isbn', 'number', 'market_price', 'sale_price', 'return_ask_price', 'return_number']; //数据键
                     $goods_list = (new \yii\db\Query())
-                        ->select([$AskPriceOrder->id.' as `order_id`','goods_id','goods_name','goods_sn','isbn','number','market_price','sale_price','supplier_price as return_ask_price','number as return_number'])
+                        ->select([$AskPriceOrder->id . ' as `order_id`', 'goods_id', 'goods_name', 'goods_sn', 'isbn', 'number', 'market_price', 'sale_price', 'supplier_price as return_ask_price', 'number as return_number'])
                         ->from('custom_order_goods')
-                        ->andwhere(['order_id'=>$id])
-                        ->andwhere(['in','goods_id',$goods_id_list])
+                        ->andwhere(['order_id' => $id])
+                        ->andwhere(['in', 'goods_id', $goods_id_list])
                         ->all();
 
-                    $res= Yii::$app->db->createCommand()->batchInsert(AskPriceOrderGoods::tableName(), $goods_title, $goods_list)->execute();
+                    $res = Yii::$app->db->createCommand()->batchInsert(AskPriceOrderGoods::tableName(), $goods_title, $goods_list)->execute();
                 }
 
                 //修改订单状态为 已生成询价单
                 $custom_order->is_create_ask_price = 1;
                 $custom_order->save(false);
 
-                message::result_json(1,'生成成功！');
-
-            }else{
-                message::result_json(2,'未生成任何询价单');
+                message::result_json(1, '生成成功！');
+            } else {
+                message::result_json(2, '未生成任何询价单');
             }
-        }else{
-            message::result_json(2,'未生成任何询价单');
+        } else {
+            message::result_json(2, '未生成任何询价单');
         }
     }
 
@@ -425,7 +441,8 @@ class CustomOrderController extends BaseController
 
     //生成 销售单
     //需要订单状态为已审核create_sell_order
-    public function actionCreateSellOrder($id){
+    public function actionCreateSellOrder($id)
+    {
         $goods_id_arr = Yii::$app->request->get('goods_id_arr');
         $custom_order = CustomOrder::findone($id);
 
@@ -434,24 +451,24 @@ class CustomOrderController extends BaseController
         // }
 
         //检查是不是已经走完 审批流程
-        if (!$this->if_approval_done($custom_order,'custom_order_status')) {
-            message::result_json(2,'还未走完审批流程');
+        if (!$this->if_approval_done($custom_order, 'custom_order_status')) {
+            message::result_json(2, '还未走完审批流程');
         }
 
         $SellOrder = new SellOrder();
         $SellOrder->custom_id = $custom_order->custom_id;
         $SellOrder->custom_order_id = $id;
         $SellOrder->custom_name = $custom_order->custom_name;
-        $SellOrder->order_sn = Common_fun::create_sn('app\common\models\SellOrder',5);
+        $SellOrder->order_sn = Common_fun::create_sn('app\common\models\SellOrder', 5);
         $SellOrder->sell_order_status = 0;
         $SellOrder->save(false);
 
         //得到全部商品
         $insert_goods_list = (new \yii\db\Query())
-            ->select([$SellOrder->id.' as `order_id`','goods_id','goods_name','goods_sn','isbn','number','market_price','sale_price','supplier_id','supplier_name','supplier_price','is_self_sell'])
+            ->select([$SellOrder->id . ' as `order_id`', 'goods_id', 'goods_name', 'goods_sn', 'isbn', 'number', 'market_price', 'sale_price', 'supplier_id', 'supplier_name', 'supplier_price', 'is_self_sell'])
             ->from('custom_order_goods')
-            ->where(['order_id'=>$id])
-            ->andwhere(['in','goods_id',$goods_id_arr])
+            ->where(['order_id' => $id])
+            ->andwhere(['in', 'goods_id', $goods_id_arr])
             ->all();
 
         // foreach ($goods_list as $key => $value) {
@@ -461,21 +478,22 @@ class CustomOrderController extends BaseController
         //   }
         // }
 
-        $goods_title =['order_id','goods_id','goods_name','goods_sn','isbn','number','market_price','sale_price','supplier_id','supplier_name','supplier_price','is_self_sell'];//测试数据键
-        $res= Yii::$app->db->createCommand()->batchInsert(SellOrderGoods::tableName(), $goods_title, $insert_goods_list)->execute();
+        $goods_title = ['order_id', 'goods_id', 'goods_name', 'goods_sn', 'isbn', 'number', 'market_price', 'sale_price', 'supplier_id', 'supplier_name', 'supplier_price', 'is_self_sell']; //测试数据键
+        $res = Yii::$app->db->createCommand()->batchInsert(SellOrderGoods::tableName(), $goods_title, $insert_goods_list)->execute();
 
         //修改订单状态为 已生成销售单
         $custom_order->is_create_sell_order = 1;
         $custom_order->save(false);
 
-        message::result_json(1,'生成销售单成功!');
+        message::result_json(1, '生成销售单成功!');
     }
 
     //单据修改历史
-    public function actionRemendHistory($id){
+    public function actionRemendHistory($id)
+    {
         $this->layout = 'empty';
-        $order_log = OrderLog::find()->where(['model'=>'CustomOrder','order_id'=>$id])->all();
-        return $this->render('remend-history', ['order_log'=>$order_log]);
+        $order_log = OrderLog::find()->where(['model' => 'CustomOrder', 'order_id' => $id])->all();
+        return $this->render('remend-history', ['order_log' => $order_log]);
     }
     // 字段模块
     public function actionCreateVal($id)
@@ -493,7 +511,7 @@ class CustomOrderController extends BaseController
         if ($data['id'] != '') {
             $val = Val::findone($data['id']);
         }
-        if (empty($data['val_name'])||empty($data['val_name_en'])) {
+        if (empty($data['val_name']) || empty($data['val_name_en'])) {
             message::result_json(2, '内容不能为空');
         }
         $val->val_name = $data['val_name'];
@@ -505,6 +523,24 @@ class CustomOrderController extends BaseController
         $val->save(false);
         Message::result_json(1, '添加成功');
     }
-    
+    // 获取联系人列表
+    public function actionGetcontact()
+    {
 
+        $id = is_numeric(Yii::$app->request->get('id')) ? Yii::$app->request->get('id') : 0;
+
+        if ($id != 0) {
+
+
+            $list = Yii::$app->DB->createCommand('select * from contact where belong_id =' . $id . ' and model= "platform" ')->queryAll();
+
+            $data = '';
+            foreach ($list as $key => $val) {
+                $data .= "<option value='" . $val["id"] . "'> " . $val['name'] . " </option>";
+            }
+            message::result_json(1, '修改成功', $data);
+        } else {
+            message::result_json(0, '参数有误');
+        }
+    }
 }

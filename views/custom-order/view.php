@@ -11,7 +11,7 @@ use app\common\config\lang_value_config;
 
 
 $this->title = '客户方案';
-$this->params['breadcrumbs'][] = ['label' => 'B2B方案列表', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '客户方案', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order->order_sn;
 ?>
 <?= Html::cssFile('@web/css/token_input/token-input-facebook.css') ?>

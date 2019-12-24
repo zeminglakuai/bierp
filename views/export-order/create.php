@@ -15,7 +15,7 @@ use app\common\config\sys_config;
   <div class="ibox-content" style="padding-bottom:10px;">
     <form id="order_form" class="form-horizontal m-t">
       <div class="form-group">
-        <label class="col-sm-2 control-label">客户：</label>
+        <label class="col-sm-2 control-label">项目：</label>
         <div class="col-sm-9">
           <input type="text" id="custom" name="ExportOrder[custom_id]" class="form-control" value="<?= $export_order->custom_id?>">
         </div>
