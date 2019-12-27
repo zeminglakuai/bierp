@@ -65,17 +65,19 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
                             </th>
                             <th align="center" class="sorting data_sort" data-type="number" width="60px" style="width:60px">
                                 数量 <span style="color:red;">*</span></th>
-                            <!--   <th align="center" class="" data-type="goods_store_info" width="90px" style="width:90px">
-                               库存状态
-                           </th>-->
+                            <th align="center" class="" data-type="goods_store_info" width="90px" style="width:90px">
+                                库存状态
+                            </th>
                             <th align="center" class="" data-type="ppt_price" width="70px" style="width:70px">
                                 PPT报价
                             </th>
                             <th align="center" class="" data-type="supplier_name" width="140px" style="width:140px">
-                                供货商名称
+                                供货商名称--价格
                             </th>
                             <th align="center" class="" data-type="supplier_price" width="90px" style="width:90px">
-                                供货商价格 <span style="color:red;">*</span></th>
+                                工厂最终报价 <span style="color:red;">*</span></th>
+                            <th align="center" class="" data-type="sale_price" width="70px" style="width:70px">
+                                客户供货价 <span style="color:red;">*</span></th>
                             <th align="center" class="<?
                                                         if ($vv['sort_able']) {
                                                             if ($search_data['sortby'] == $kk) {
@@ -166,8 +168,7 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
                             <th align="center" class="" data-type="consultFee" width="100px" style="width:100px">
                                 <span class="table_th_tips" data-toggle="tooltip" data-placement="top" data-original-title="填写比率，根据(供货商价格*利润系数)得出结果"> 利润系数参考值 </span>
                             </th>
-                            <th align="center" class="" data-type="sale_price" width="70px" style="width:70px">
-                                售价 <span style="color:red;">*</span></th>
+
                             <th align="center" class="" data-type="profit" width="60px" style="width:60px">
                                 毛利
                             </th>
@@ -231,8 +232,9 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
                         <?php
                         if (isset($custom_order_goods)) {
                             foreach ($custom_order_goods as $key => $val) {
+
                         ?>
-                                <tr id="goods_row_<?= $val['goods_id'] ?>">
+                                <tr id="goods_row_<?= $val['id'] ?>">
 
                                     <td>
                                         <div class="checkbox i-checks">
@@ -240,12 +242,12 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
                                                 <div class="icheckbox_square-green" style="position: relative;"><input type="checkbox" class="goods_ids" name="goods_id[]" value="7169" style="position: absolute; opacity: 0;">
                                                     <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
                                                 </div>
-                                                <?= $val['goods_id'] ?>
+                                                <?php $key + 1 ?>
                                             </label>
                                         </div>
                                     </td>
                                     <td>
-                                        <div id="goods_img_<?= $val['goods_id'] ?>" title="">
+                                        <div id="goods_img_<?= $val['id'] ?>" title="">
                                             <?php
                                             if (isset($val['goods_img'])) {
                                             ?>
@@ -258,166 +260,187 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
                                         </div>
                                     </td>
                                     <td>
-                                        <div id="goods_name_<?= $val['goods_id'] ?>" title="">
+                                        <div id="goods_name_<?= $val['id'] ?>" title="">
                                             <?= $val['goods_name'] ?>
                                         </div>
                                     </td>
                                     <td>
-                                        <div id="goods_sn_<?= $val['goods_id'] ?>" title="">
+                                        <div id="goods_sn_<?= $val['id'] ?>" title="">
                                             <?= $val['goods_sn'] ?>
                                         </div>
                                     </td>
                                     <td>
-                                        <div id="market_price_<?= $val['goods_id'] ?>" title="">
+                                        <div id="market_price_<?= $val['id'] ?>" title="">
                                             <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="market_price"><?= $val['market_price'] ?></div>
                                         </div>
                                     </td>
                                     <td>
-                                        <div id="number_<?= $val['goods_id'] ?>" title="">
+                                        <div id="number_<?= $val['id'] ?>" title="">
                                             <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="number"><?= $val['number'] ?></div>
                                         </div>
                                     </td>
-                                    <!--     <td>
-                                    <div id="goods_store_info_<?= $val['goods_id'] ?>" title="">
-
-                                    </div>
-                                </td>-->
                                     <td>
-                                        <div class="lable_edit" data-type="ppt_price" id="ppt_price_<?= $val['goods_id'] ?>" title="">
-                                            <?= $val['ppt_price'] ?>
+                                        <div id="goods_store_info_<?= $val['id'] ?>" title="">
+                                            <?= $val['store_num'] ?>
                                         </div>
+                                    </td>
+                                    <td>
+                                        <div class="lable_edit" data-type="ppt_price" data-id="<?= $val['id'] ?>" id="ppt_price_<?= $val['id'] ?>" title=""><?= $val['ppt_price'] ?></div>
                                     </td>
 
                                     <td>
-                                        <div id="supplier_name_<?= $val['goods_id'] ?>" title="">
-                                            <a data-id="2358" data-url="/supplier/edit" class="view_label_content"><?= $val['supplier_name'] ?></a>
+                                        <div id="supplier_name_<?= $val['id'] ?>" title="">
+                                            <select name="supplier_id" id=""><?php
+                                                                                $supplier_price = '';
+                                                                                if (isset($val['supplier'])) {
+                                                                                    foreach ($val['supplier'] as $key => $value) {
+                                                                                        if ($key == 0) {
+                                                                                            $supplier_price = $value['supplier_price'];
+                                                                                        }
+                                                                                        if (isset($val['supplier_id'])) {
+                                                                                            if ($val['supplier_id'] == $value['supplier_id']) { ?><option value="<?= $value['id'] ?>" selected><?= $value['supplier_name'] ?>--<?= $value['supplier_price'] ?></option>
+
+                                                        <?php
+                                                                                                # code...
+                                                                                            }
+                                                                                        }
+                                                        ?><option value="<?= $value['id'] ?>"><?= $value['supplier_name'] ?>--<?= $value['supplier_price'] ?></option><?php }
+                                                                                                                                                                }
+                                                                                                                                                                        ?>
+                                            </select>
                                         </div>
                                     </td>
                                     <td>
-                                        <div id="supplier_price_<?= $val['goods_id'] ?>" title="">
-                                            <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="supplier_price"><?= $val['supplier_price'] ?></div>
+                                        <div id="supplier_price_<?= $val['id'] ?>" title="">
+                                            <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="supplier_price"><?php
+                                                                                                                            if ($val['supplier_price'] == '') {
+                                                                                                                                echo $supplier_price;
+                                                                                                                            } else {
+                                                                                                                                echo $val['supplier_price'];
+                                                                                                                            } ?></div>
                                         </div>
                                     </td>
                                     <td>
-                                        <div id="supplier_number_<?= $val['goods_id'] ?>"" title="">	
+                                        <div id="sale_price_<?= $val['id'] ?>" title="">
+                                            <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="sale_price"><?= $val['sale_price'] ?></div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="supplier_number_<?= $val['id'] ?>"" title="">	
                                         <div class=" lable_edit" data-id="<?= $val['id'] ?>"" data-type=" supplier_number"><?= $val['supplier_number'] ?></div>
         </div>
         </td>
         <td>
-            <div id="limit_price_<?= $val['goods_id'] ?>" title="">
+            <div id="limit_price_<?= $val['id'] ?>" title="">
                 <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="limit_price"><?= $val['limit_price'] ?></div>
             </div>
         </td>
         <td>
-            <div id="jd_price_<?= $val['goods_id'] ?>" title="">
+            <div id="jd_price_<?= $val['id'] ?>" title="">
                 <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="jd_price"><?= $val['jd_price'] ?></div>
             </div>
         </td>
         <td>
-            <div id="dangdang_price_<?= $val['goods_id'] ?>" title="">
+            <div id="dangdang_price_<?= $val['id'] ?>" title="">
                 <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="dangdang_price"><?= $val['dangdang_price'] ?></div>
             </div>
         </td>
         <td>
-            <div id="tmall_price_<?= $val['goods_id'] ?>" title="">
+            <div id="tmall_price_<?= $val['id'] ?>" title="">
                 <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="tmall_price"><?= $val['tmall_price'] ?></div>
             </div>
         </td>
         <td>
-            <div id="taobao_price_<?= $val['goods_id'] ?>" title="">
+            <div id="taobao_price_<?= $val['id'] ?>" title="">
                 <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="taobao_price"><?= $val['taobao_price'] ?></div>
             </div>
         </td>
 
         <td>
-            <div id="finalCost_<?= $val['goods_id'] ?>" title="">
+            <div id="finalCost_<?= $val['id'] ?>" title="">
                 <?= $val['finalCost'] ?>
             </div>
         </td>
         <td>
-            <div id="finalCostTotal_<?= $val['goods_id'] ?>" title="">
+            <div id="finalCostTotal_<?= $val['id'] ?>" title="">
                 <?= $val['finalCostTotal'] ?>
             </div>
         </td>
         <td>
-            <div id="faxPoint_<?= $val['goods_id'] ?>" title="">
+            <div id="faxPoint_<?= $val['id'] ?>" title="">
                 <?= $val['faxPoint'] ?>
             </div>
         </td>
         <td>
-            <div id="consultFee_<?= $val['goods_id'] ?>" title="填写比率，根据(供货商价格*利润系数)得出结果">
+            <div id="consultFee_<?= $val['id'] ?>" title="填写比率，根据(供货商价格*利润系数)得出结果">
                 <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="consult"><?= $val['consultFee'] ?></div>
             </div>
         </td>
+
         <td>
-            <div id="sale_price_<?= $val['goods_id'] ?>" title="">
-                <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="sale_price"><?= $val['sale_price'] ?></div>
-            </div>
-        </td>
-        <td>
-            <div id="profit_<?= $val['goods_id'] ?>" title="">
+            <div id="profit_<?= $val['id'] ?>" title="">
                 <?= $val['profit'] ?>
             </div>
         </td>
         <td>
-            <div id="profitRate_<?= $val['goods_id'] ?>" title="">
+            <div id="profitRate_<?= $val['id'] ?>" title="">
                 <?= $val['profitRate'] ?>
             </div>
         </td>
         <td>
-            <div id="profitTotal_<?= $val['goods_id'] ?>" title="">
+            <div id="profitTotal_<?= $val['id'] ?>" title="">
                 <?= $val['profitTotal'] ?>
             </div>
         </td>
         <td>
-            <div id="saleTotal_<?= $val['goods_id'] ?>" title="">
+            <div id="saleTotal_<?= $val['id'] ?>" title="">
                 <?= $val['saleTotal'] ?>
             </div>
         </td>
         <td>
-            <div id="shipping_fee_<?= $val['goods_id'] ?>" title="">
+            <div id="shipping_fee_<?= $val['id'] ?>" title="">
                 <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="shipping_fee"><?= $val['shipping_fee'] ?></div>
             </div>
         </td>
         <td>
-            <div id="materiel_cost_<?= $val['goods_id'] ?>" title="">
+            <div id="materiel_cost_<?= $val['id'] ?>" title="">
                 <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="materiel_cost"><?= $val['materiel_cost'] ?></div>
             </div>
         </td>
         <td>
-            <div id="platformFee_<?= $val['goods_id'] ?>" title="填写比率，根据(售价*反点比率)得出结果">
+            <div id="platformFee_<?= $val['id'] ?>" title="填写比率，根据(售价*反点比率)得出结果">
                 <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="platform_rate"><?= $val['platformFee'] ?></div>
             </div>
         </td>
         <td>
-            <div id="tranformFee_<?= $val['goods_id'] ?>" title="填写比率，根据(售价*反点比率)得出结果">
+            <div id="tranformFee_<?= $val['id'] ?>" title="填写比率，根据(售价*反点比率)得出结果">
                 <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="tranform_rate"><?= $val['tranformFee'] ?></div>
             </div>
         </td>
         <!--   <td>
-                                    <div id="other_cost_<?= $val['goods_id'] ?>" title="">
+                                    <div id="other_cost_<?= $val['id'] ?>" title="">
                                         <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="other_cost"><?= $val['other_cost'] ?></div>
                                     </div>
                                 </td> -->
         <td>
-            <div id="shipping_place_<?= $val['goods_id'] ?>" title="">
+            <div id="shipping_place_<?= $val['id'] ?>" title="">
                 <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="shipping_place"><?= $val['shipping_place'] ?></div>
             </div>
         </td>
         <td>
-            <div id="huoqi_<?= $val['goods_id'] ?>" title="">
+            <div id="huoqi_<?= $val['id'] ?>" title="">
                 <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="huoqi"><?= $val['huoqi'] ?></div>
             </div>
         </td>
         <td>
-            <div id="is_priced_<?= $val['goods_id'] ?>" title="">
-                <input type="checkbox" class="js-switch" data-url="" data-type="is_priced" data-id="<?= $val['id'] ?>" id="is_priced_<?= $val['goods_id'] ?>" data-switchery="true" style="display: none;"><span class="switchery" id="is_priced_<?= $val['goods_id'] ?>" style="box-shadow: rgb(223, 223, 223) 0px 0px 0px 0px inset; border-color: rgb(223, 223, 223); transition: border 0.4s ease 0s, box-shadow 0.4s ease 0s;"><small style="left: 0px; transition: left 0.2s ease 0s;">
+            <div id="is_priced_<?= $val['id'] ?>" title="">
+                <input type="checkbox" class="js-switch" data-url="" data-type="is_priced" data-id="<?= $val['id'] ?>" id="is_priced_<?= $val['id'] ?>" data-switchery="true" style="display: none;"><span class="switchery" id="is_priced_<?= $val['id'] ?>" style="box-shadow: rgb(223, 223, 223) 0px 0px 0px 0px inset; border-color: rgb(223, 223, 223); transition: border 0.4s ease 0s, box-shadow 0.4s ease 0s;"><small style="left: 0px; transition: left 0.2s ease 0s;">
 
                     </small></span>
             </div>
         </td>
         <td>
-            <div id="shipping_to_place_<?= $val['goods_id'] ?>" title="">
+            <div id="shipping_to_place_<?= $val['id'] ?>" title="">
                 <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="shipping_to_place">
 
                     <?= $val['shipping_to_place'] ?>
@@ -425,22 +448,30 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
             </div>
         </td>
         <td>
-            <div id="is_need_temp_<?= $val['goods_id'] ?>" title="">
-                <input type="checkbox" class="js-switch" data-url="" data-type="is_need_temp" data-id="<?= $val['id'] ?>" id="is_need_temp_<?= $val['goods_id'] ?>" data-switchery="true" style="display: none;"><span class="switchery" id="is_need_temp_<?= $val['goods_id'] ?>" style="box-shadow: rgb(223, 223, 223) 0px 0px 0px 0px inset; border-color: rgb(223, 223, 223); transition: border 0.4s ease 0s, box-shadow 0.4s ease 0s;"><small style="left: 0px; transition: left 0.2s ease 0s;"></small></span>
+            <div id="is_need_temp_<?= $val['id'] ?>" title="">
+                <input type="checkbox" class="js-switch" data-url="" data-type="is_need_temp" data-id="<?= $val['id'] ?>" id="is_need_temp_<?= $val['id'] ?>" data-switchery="true" style="display: none;"><span class="switchery" id="is_need_temp_<?= $val['id'] ?>" style="box-shadow: rgb(223, 223, 223) 0px 0px 0px 0px inset; border-color: rgb(223, 223, 223); transition: border 0.4s ease 0s, box-shadow 0.4s ease 0s;"><small style="left: 0px; transition: left 0.2s ease 0s;"></small></span>
             </div>
         </td>
         <td>
-            <div id="remark_<?= $val['goods_id'] ?>" title="">
+            <div id="remark_<?= $val['id'] ?>" title="">
                 <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="remark"><?= $val['remark'] ?></div>
             </div>
         </td>
         <?php
+                                // 自定义字段
                                 if (isset($vallist)) {
                                     foreach ($vallist as $key => $value) {
         ?>
                 <td>
                     <div id="<?= $value['val_name_en'] ?>_<?= $val['goods_id'] ?>" title="">
-                        <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="val[<?= $value['val_name_en'] ?>]"><?= $value[$val['goods_id']]['val'] ?></div>
+                        <div class="lable_edit" data-id="<?= $val['id'] ?>" data-val-id="<?= $value['id'] ?>" data-val-type="<?= $value['val_name_en'] ?>"><?php
+                                                                                                                                                            if (isset($val['val'])) {
+                                                                                                                                                                foreach ($val['val'] as $ke => $v) {
+                                                                                                                                                                    if ($v['val_id'] == $value['id']) { ?><?= $v['val']; ?><?php }
+                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                }
+
+                                                                                                                                                                                                                            ?></div>
                     </div>
                 </td>
         <?php
@@ -455,7 +486,154 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
                 删除 </a>
         </td>
         </tr>
+        <tr>
+            <td>
+            </td>
 
+
+            <td>
+                <div class="goods_name_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="goods_sn_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="market_price_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="number_total">
+                    0 </div>
+            </td>
+
+            <td>
+                <div class="goods_store_info_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="ppt_price_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="supplier_price_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="supplier_name_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="finalCost_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="finalCostTotal_total">
+                    0</div>
+            </td>
+
+            <td>
+                <div class="faxPoint_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="consultFee_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="sale_price_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="profit_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="profitRate_total">
+                    0 </div>
+            </td>
+
+            <td>
+                <div class="profitTotal_total">
+                    0 </div>
+            </td>
+
+            <td>
+                <div class="saleTotal_total">
+                    0 </div>
+            </td>
+
+            <td>
+                <div class="shipping_fee_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="materiel_cost_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="platformFee_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="tranformFee_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="other_cost_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="shipping_place_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="huoqi_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="is_priced_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="shipping_to_place_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="is_need_temp_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="remark_total">
+                </div>
+            </td>
+
+            <td>
+            </td>
+        </tr>
 
     <?php
                             }
@@ -521,7 +699,7 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
 
     $(".delete_goods").click(function() {
         if (confirm('要删除该记录吗？')) {
-            var id = '83';
+            var id = <?= $id ?>;
             var data_id = $(this).attr('data-id');
             var action = $(this).attr('action');
             $.get("/custom-order/" + action, {
@@ -547,7 +725,7 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
     );
 
     $(".goods_list_change").change(function() {
-        var id = '83';
+        var id = <?= $id ?>;
         var value = $(this).val();
         var data_id = $(this).attr("data-id");
         var data_type = $(this).attr("data-type");
@@ -569,9 +747,11 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
 
     $(".lable_edit").click(
         function() {
-            var id = '83';
+            var id = <?= $id ?>;
             var data_id = $(this).attr("data-id");
             var data_type = $(this).attr("data-type");
+            var data_val_type = $(this).attr("data-val-type");
+            var data_val_id = $(this).attr("data-val-id");
             var target = $(this);
             if ($(this).children("input").length > 0) {} else {
                 var ima_code = $(this).text();
@@ -603,7 +783,10 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
                     value: value,
                     id: id,
                     data_id: data_id,
-                    data_type: data_type
+                    data_type: data_type,
+                    data_val_type: data_val_type,
+                    data_val_id: data_val_id
+
                 }, function(result) {
                     if (result.error == 1) {
                         target.html(result.content);
@@ -632,7 +815,10 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
                         value: value,
                         id: id,
                         data_id: data_id,
-                        data_type: data_type
+                        data_type: data_type,
+                        data_val_type: data_val_type,
+                        data_val_id: data_val_id
+
                     }, function(result) {
                         if (result.error == 1) {
                             target.html(result.content);
@@ -658,6 +844,9 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
             var id = $id;
             var data_id = $(this).attr("data-id");
             var data_type = $(this).attr("data-type");
+            var data_val_type = $(this).attr("data-val-type");
+            var data_val_id = $(this).attr("data-val-id");
+
             var target = $(this);
             if ($(this).children("input").length > 0) {} else {
                 var ima_code = $(this).text();
@@ -689,7 +878,9 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
                     value: value,
                     id: id,
                     data_id: data_id,
-                    data_type: data_type
+                    data_type: data_type,
+                    data_val_type: data_val_type,
+                    data_val_id: data_val_id
                 }, function(result) {
                     if (result.error == 1) {
                         target.html(result.content);
@@ -718,7 +909,10 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
                         value: value,
                         id: id,
                         data_id: data_id,
-                        data_type: data_type
+                        data_type: data_type,
+                        data_val_type: data_val_type,
+                        data_val_id: data_val_id
+
                     }, function(result) {
                         if (result.error == 1) {
                             target.html(result.content);

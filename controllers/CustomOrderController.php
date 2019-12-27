@@ -19,6 +19,7 @@ use app\common\models\Supplier;
 use app\common\models\AskPriceOrder;
 use app\common\models\AskPriceOrderGoods;
 use app\common\models\Val;
+use app\common\models\ValGoods;
 use app\common\models\Contact;
 
 
@@ -145,12 +146,20 @@ class CustomOrderController extends BaseController
         //        $custom_order_goods = CustomOrderGoods::find()->where(['order_id'=>$custom_order->id])->all();
 
         $custom_order_goods = Yii::$app->db->createCommand("select cog.*,g.goods_img from custom_order_goods as cog left join goods as g on g.goods_id=cog.goods_id where cog.order_id=" . $custom_order->id)->queryAll();
+        $vallist = Yii::$app->db->createCommand("select * from val where order_id=" . $id)->queryAll();
         if (isset($custom_order_goods)) {
             foreach ($custom_order_goods as $k => $val) {
-                $custom_order_goods[$k]['supplier'] = Yii::$app->db->createCommand("select * from goods_supplier where goods_id=" . $val['goods_id'])->queryAll();
+                $data = Yii::$app->db->createCommand("select sum(number) from stock where goods_id=" . $val['goods_id'])->queryOne();
+                $custom_order_goods[$k]['store_num'] = $data['sum(number)'];
+                $custom_order_goods[$k]['supplier'] = Yii::$app->db->createCommand("select gs.*,s.* from goods_supplier as gs left join supplier as s ON gs.supplier_id=s.id where goods_id=" . $val['goods_id'] . " order by gs.supplier_price")->queryAll();
+                if (isset($vallist)) {
+                    foreach ($vallist as $key => $value) {
+                        $custom_order_goods[$k]['val'] = Yii::$app->db->createCommand("select * from val_goods where order_goods_id=" . $val['id'])->queryAll();
+                    }
+                }
             }
         }
-        $vallist = Yii::$app->db->createCommand("select * from val where order_id=" . $id)->queryAll();
+
         return $this->render('view', ['custom_order' => $custom_order, 'id' => $id, 'custom_order_goods' => $custom_order_goods, 'vallist' => $vallist]);
     }
 
@@ -277,19 +286,44 @@ class CustomOrderController extends BaseController
 
         message::result_json(1, '删除成功');
     }
-
+    /* $data_id custom_order_goods表的id  
+        $id 为custom_order的id
+        $data_type和 $data_val_type分别 是type值
+        $value 为值
+        $data_val_id 为val表的id
+        */
     public function actionUpdateGoodsLabel($id)
     {
 
         $data_type  = trim(Yii::$app->request->get('data_type'));
+        $data_val_type  = trim(Yii::$app->request->get('data_val_type'));
+        $data_val_id  = trim(Yii::$app->request->get('data_val_id'));
+
         $value  = trim(Yii::$app->request->get('value'));
         $id  = Yii::$app->request->get('id');
         $data_id  = Yii::$app->request->get('data_id');
-        if (is_array($data_type)) {
-            // 保存到值里面
-        } else {
-            $CustomOrderGoods = CustomOrderGoods::find()->where(['order_id' => $id, 'id' => $data_id])->one();
-            if ($CustomOrderGoods) {
+
+        $CustomOrderGoods = CustomOrderGoods::find()->where(['order_id' => $id, 'id' => $data_id])->one();
+        if ($CustomOrderGoods) {
+
+            if ($data_val_id != '') {
+                // 保存到值里面
+                $data = Yii::$app->DB->createCommand("select * from val_goods where order_goods_id=" . $data_id . " and val_id=" . $data_val_id)->queryOne();
+
+                if ($data) {
+                    if ($data['val'] == $value) {
+                        message::result_json(3, '没有变化');
+                    } else {
+                        Yii::$app->db->createCommand("UPDATE val_goods SET val='" . $value . "' where order_goods_id=" . $data_id . " and val_id=" . $data_val_id)->execute();
+                        message::result_json(1, 'success', $value);
+                    }
+                }
+
+                Yii::$app->db->createCommand("insert into val_goods(val,order_goods_id,val_id) value('" . $value . "'," . $data_id . "," . $data_val_id . ") ")->execute();
+                message::result_json(1, 'success', $value);
+
+                message::result_json(1, 'success', $value);
+            } else {
                 $origin_value = $CustomOrderGoods->$data_type;
 
                 if ($origin_value == $value) {
@@ -341,9 +375,9 @@ class CustomOrderController extends BaseController
 
 
                 message::result_json(1, 'success', $value, $calculate_value);
-            } else {
-                message::result_json(2, '没有此记录');
             }
+        } else {
+            message::result_json(2, '没有此记录');
         }
     }
 

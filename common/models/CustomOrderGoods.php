@@ -215,8 +215,9 @@ class CustomOrderGoods extends \yii\db\ActiveRecord
         return round($this->finalCost * $this->number,2);
     }
     //计算税点
-    public function getFaxPoint(){
-        return round(((($this->sale_price - $this->supplier_price)/1.17)*17/100*1.12)+($this->sale_price*0.05/100),2);
+    public function getFaxPoint($fax){
+        
+        return round(((($this->sale_price - $this->supplier_price)/1.13)*13/100*1.12)+($this->sale_price*0.05/100),2);
     }
 
     //计算平台费用
