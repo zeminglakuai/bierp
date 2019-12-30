@@ -3489,7 +3489,7 @@ body.mini-navbar.canvas-menu .footer.fixed
 }.ibox
 {
     clear: both;
-
+background-color: #fff;
     margin-top: 0;
     margin-bottom: 15px;
     padding: 0;

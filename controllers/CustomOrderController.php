@@ -144,13 +144,30 @@ class CustomOrderController extends BaseController
     {
         $custom_order = CustomOrder::findone($id);
         //        $custom_order_goods = CustomOrderGoods::find()->where(['order_id'=>$custom_order->id])->all();
-
+        $CustomOrderGoods = new CustomOrderGoods();
         $custom_order_goods = Yii::$app->db->createCommand("select cog.*,g.goods_img from custom_order_goods as cog left join goods as g on g.goods_id=cog.goods_id where cog.order_id=" . $custom_order->id)->queryAll();
         $vallist = Yii::$app->db->createCommand("select * from val where order_id=" . $id)->queryAll();
         if (isset($custom_order_goods)) {
+
             foreach ($custom_order_goods as $k => $val) {
+                $custom_order_goods[$k]['supplierTotal'] = round($val['supplier_price'] * $val['supplier_number'], 2);
+
+                $custom_order_goods[$k]['finalCost'] = round($val['supplier_price'] + $val['faxPoint'] + $val['shipping_fee'] + $val['materiel_cost'] + $val['platformFee'] + $val['tranformFee'] + $val['other_cost'], 2);
+                $custom_order_goods[$k]['finalCostTotal'] = round($val['finalCost'] * $val['number'], 2);
+                $custom_order_goods[$k]['faxPoint'] = round(((($val['sale_price'] - $val['supplier_price']) / 1.13) * 13 / 100 * 1.12) + ($val['sale_price'] * 0.05 / 100), 2);
+                $custom_order_goods[$k]['profit'] = round(($val['sale_price'] - $custom_order_goods[$k]['finalCost']), 2);
+                // 毛利小计
+                $custom_order_goods[$k]['profitTotal'] = round(($custom_order_goods[$k]['profit'] * $val['number']), 2);
+                // 毛利率
+                $custom_order_goods[$k]['profitRate'] = (round($custom_order_goods[$k]['profit'] / $val['sale_price'], 2) * (100)) . '%';
+                $custom_order_goods[$k]['consultFee'] = round($val['consult'] * $val['supplier_price'], 2);
+                $custom_order_goods[$k]['supplierTotal'] = round($val['sale_price'] * $val['number'], 2);
                 $data = Yii::$app->db->createCommand("select sum(number) from stock where goods_id=" . $val['goods_id'])->queryOne();
                 $custom_order_goods[$k]['store_num'] = $data['sum(number)'];
+                $custom_order_goods[$k]['finalCostTotal'] = round($val['finalCost'] * $val['number'], 2);
+                $custom_order_goods[$k]['saleTotal'] = round($val['sale_price'] * $val['number'], 2);
+
+
                 $custom_order_goods[$k]['supplier'] = Yii::$app->db->createCommand("select gs.*,s.* from goods_supplier as gs left join supplier as s ON gs.supplier_id=s.id where goods_id=" . $val['goods_id'] . " order by gs.supplier_price")->queryAll();
                 if (isset($vallist)) {
                     foreach ($vallist as $key => $value) {
@@ -202,10 +219,11 @@ class CustomOrderController extends BaseController
             if (is_array($goods_id)) {
                 foreach ($goods_id as $key => $value) {
                     $goods = Goods::findone($value);
+                    $supplier = Yii::$app->db->createCommand("select gs.supplier_price,s.supplier_name,s.id from goods_supplier as gs left join supplier as s on gs.supplier_id=s.id where gs.goods_id=" . $goods_id . ' order by supplier_price limit 0,1')->queryOne();
                     if ($goods) {
                         //插入数据
                         $CustomOrderGoods = new CustomOrderGoods();
-                        $add_goods_result = $CustomOrderGoods->AddGoods($order_id, $goods);
+                        $add_goods_result = $CustomOrderGoods->AddGoods($order_id, $goods, $supplier);
                         if (!$add_goods_result) {
                             $add_goods_error[] = $CustomOrderGoods->add_goods_error;
                         }

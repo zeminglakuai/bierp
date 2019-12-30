@@ -23,9 +23,9 @@ class CustomOrderGoods extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['goods_id', 'number', 'supplier_id', 'is_self_sell', 'supplier_number','is_priced','is_need_temp'], 'integer'],
-            [['market_price','other_cost','ppt_price','other_cost_fee', 'sale_price', 'supplier_price', 'limit_price', 'taobao_price', 'dangdang_price', 'jd_price', 'tmall_price', 'final_cost', 'gross_profit', 'fax', 'shipping_fee', 'materiel_cost', 'platform_rate', 'tranform_rate'], 'number'],
-            [['order_id', 'goods_name', 'goods_sn', 'isbn', 'supplier_name','shipping_place','huoqi','shipping_to_place','remark','goods_img'], 'string', 'max' => 255],
+            [['goods_id', 'number', 'supplier_id', 'is_self_sell', 'supplier_number', 'is_priced', 'is_need_temp'], 'integer'],
+            [['market_price', 'other_cost', 'ppt_price', 'other_cost_fee', 'sale_price', 'supplier_price', 'limit_price', 'taobao_price', 'dangdang_price', 'jd_price', 'tmall_price', 'final_cost', 'gross_profit', 'fax', 'shipping_fee', 'materiel_cost', 'platform_rate', 'tranform_rate'], 'number'],
+            [['order_id', 'goods_name', 'goods_sn', 'isbn', 'supplier_name', 'shipping_place', 'huoqi', 'shipping_to_place', 'remark', 'goods_img'], 'string', 'max' => 255],
         ];
     }
 
@@ -37,7 +37,7 @@ class CustomOrderGoods extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'order_id' => 'ID',
-            'goods_img'=>'商品图片',
+            'goods_img' => '商品图片',
             'goods_id' => '商品ID',
             'goods_name' => '商品名称',
             'goods_sn' => '型号',
@@ -72,21 +72,21 @@ class CustomOrderGoods extends \yii\db\ActiveRecord
             'profitTotal' => '毛利小计',
             'other_cost' => '其他成本',
             'shipping_place' => '发货地',
-            'huoqi' => '货期', 
+            'huoqi' => '货期',
             'ppt_price' => 'PPT报价',
             'platformFee' => '平台扣点',
-            'tranformFee' => '物流反点',  
-            'finalCostTotal' => '成本小计', 
+            'tranformFee' => '物流反点',
+            'finalCostTotal' => '成本小计',
             'consultFee' => '利润系数参考值',
             'customOrder&add_time' => '添加时间',
             'customOrder&order_name' => '项目名称',
             'customOrder&add_user_name' => '添加人',
             'customOrder&depart_name' => '添加部门',
             'customOrder&status_name' => '项目状态',
-            'is_priced'=>'盖章报价',
-            'shipping_to_place'=>'配送地点',
-            'is_need_temp'=>'需要样板',
-            'remark'=>'备注',
+            'is_priced' => '盖章报价',
+            'shipping_to_place' => '配送地点',
+            'is_need_temp' => '需要样板',
+            'remark' => '备注',
         ];
     }
 
@@ -95,7 +95,7 @@ class CustomOrderGoods extends \yii\db\ActiveRecord
         return [
             'goods_id' => '商品ID',
             'goods_name' => '商品名称',
-            'goods&goods_img' => '商品图片',  
+            'goods&goods_img' => '商品图片',
             'goods_sn' => '型号',
             'isbn' => '条形码',
             'market_price' => '市场价',
@@ -113,7 +113,7 @@ class CustomOrderGoods extends \yii\db\ActiveRecord
             'dangdang_price' => '当当价格',
             'jd_price' => '京东价格',
             'tmall_price' => '天猫价格',
-            'finalCostTotal' => '成本小计', 
+            'finalCostTotal' => '成本小计',
             'fax' => '税点',
             'shipping_fee' => '运费',
             'materiel_cost' => '物料消耗',
@@ -127,19 +127,20 @@ class CustomOrderGoods extends \yii\db\ActiveRecord
             'profitTotal' => '毛利小计',
             'other_cost' => '其他成本',
             'shipping_place' => '发货地',
-            'huoqi' => '货期', 
+            'huoqi' => '货期',
             'platformFee' => '平台扣点',
-            'tranformFee' => '物流反点',  
+            'tranformFee' => '物流反点',
             'consultFee' => '利润系数参考值',
         ];
     }
 
 
-    public function AddGoods($order_id,$goods){
+    public function AddGoods($order_id, $goods, $supplier)
+    {
         //检查商品是不是已经存在
-        $if_exitd = $this::find()->where(['goods_id'=>$goods->goods_id,'order_id'=>$order_id])->one();
+        $if_exitd = $this::find()->where(['goods_id' => $goods->goods_id, 'order_id' => $order_id])->one();
         if ($if_exitd) {
-            $this->add_goods_error = $goods->goods_name.'已经存在';
+            $this->add_goods_error = $goods->goods_name . '已经存在';
             return false;
         }
 
@@ -151,15 +152,15 @@ class CustomOrderGoods extends \yii\db\ActiveRecord
             $this->market_price = $goods->market_price;
             $this->sale_price = $goods->shop_price;
             $this->isbn = $goods->isbn;
-            $this->is_self_sell = $goods->is_self_sell?$goods->is_self_sell:0;
-            $this->supplier_id = $goods->supplier_id?$goods->supplier_id:0;
-            $this->supplier_name = $goods->supplier_name?$goods->supplier_name:'';
-            $this->supplier_price = $goods->supplier_price?$goods->supplier_price:'';
-            $this->ppt_price = $goods->supplier_price?$goods->supplier_price:'';
+            $this->is_self_sell = $goods->is_self_sell ? $goods->is_self_sell : 0;
+            $this->supplier_id = $supplier['id'] ? $supplier['id'] : 0;
+            $this->supplier_name =  $supplier['supplier_name'] ? $supplier['supplier_name'] : '';
+            $this->supplier_price =  $supplier['supplier_price'] ? $supplier['supplier_price'] : '';
+            $this->ppt_price = $supplier['supplier_price'] ? $supplier['supplier_price'] : '';
             $this->save(false);
-            
+
             return true;
-        }else{
+        } else {
             $this->add_goods_error = '缺少参数已经存在';
             return false;
         }
@@ -181,58 +182,68 @@ class CustomOrderGoods extends \yii\db\ActiveRecord
     }
 
     //计算得到售价小计
-    public function getSaleTotal(){
-        return round($this->sale_price * $this->number,2);
+    public function getSaleTotal()
+    {
+        return round($this->sale_price * $this->number, 2);
     }
 
     //计算得到供货商价格小计
-    public function getSupplierTotal(){
-        return round($this->supplier_price * $this->supplier_number,2);
+    public function getSupplierTotal()
+    {
+        return round($this->supplier_price * $this->supplier_number, 2);
     }
 
     //计算得到毛利
-    public function getProfit(){
-        return round(($this->sale_price - $this->finalCost),2);
+    public function getProfit()
+    {
+        return round(($this->sale_price - $this->finalCost), 2);
     }
 
     //计算得到毛利小计
-    public function getProfitTotal(){
-        return round(($this->profit*$this->number),2);
+    public function getProfitTotal()
+    {
+        return round(($this->profit * $this->number), 2);
     }
 
     //计算得到毛利率
-    public function getProfitRate(){
-        return (round($this->profit/$this->sale_price,2)*(100)).'%';
+    public function getProfitRate()
+    {
+        return (round($this->profit / $this->sale_price, 2) * (100)) . '%';
     }
 
     //计算得到综合成本
-    public function getFinalCost(){
-        return round($this->supplier_price + $this->faxPoint + $this->shipping_fee + $this->materiel_cost+ $this->platformFee+ $this->tranformFee + $this->other_cost  ,2);
+    public function getFinalCost()
+    {
+        return round($this->supplier_price + $this->faxPoint + $this->shipping_fee + $this->materiel_cost + $this->platformFee + $this->tranformFee + $this->other_cost, 2);
     }
 
     //计算得到综合成本小计
-    public function getFinalCostTotal(){
-        return round($this->finalCost * $this->number,2);
+    public function getFinalCostTotal()
+    {
+        return round($this->finalCost * $this->number, 2);
     }
     //计算税点
-    public function getFaxPoint($fax){
-        
-        return round(((($this->sale_price - $this->supplier_price)/1.13)*13/100*1.12)+($this->sale_price*0.05/100),2);
+    public function getFaxPoint($fax)
+    {
+
+        return round(((($this->sale_price - $this->supplier_price) / 1.13) * 13 / 100 * 1.12) + ($this->sale_price * 0.05 / 100), 2);
     }
 
     //计算平台费用
-    public function getPlatformFee(){
-        return round($this->platform_rate * $this->sale_price,2);
+    public function getPlatformFee()
+    {
+        return round($this->platform_rate * $this->sale_price, 2);
     }
 
     //计算物流分成费用
-    public function getTranformFee(){
-        return round($this->tranform_rate * $this->sale_price,2);
+    public function getTranformFee()
+    {
+        return round($this->tranform_rate * $this->sale_price, 2);
     }
 
     //计算利润参考系数
-    public function getConsultFee(){
-        return round($this->consult * $this->supplier_price,2);
+    public function getConsultFee()
+    {
+        return round($this->consult * $this->supplier_price, 2);
     }
-
 }

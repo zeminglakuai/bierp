@@ -276,8 +276,7 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
                                     </td>
                                     <td>
                                         <div id="number_<?= $val['id'] ?>" title="">
-                                            <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="number"><?php echo $val['number'];
-                                                                                                                    $num += $val['number']; ?></div>
+                                            <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="number"><?= $val['number'] ?></div>
                                         </div>
                                     </td>
                                     <td>
@@ -328,8 +327,7 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
                                     </td>
                                     <td>
                                         <div id="supplier_number_<?= $val['id'] ?>"" title="">	
-                                        <div class=" lable_edit" data-id="<?= $val['id'] ?>"" data-type=" supplier_number"><?php $val['supplier_number'];
-                                                                                                                            $sn_total += $val['supplier_number']; ?></div>
+                                        <div class=" lable_edit" data-id="<?= $val['id'] ?>"" data-type=" supplier_number"><?= $val['supplier_number'] ?></div>
         </div>
         </td>
         <td>
@@ -365,14 +363,12 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
         </td>
         <td>
             <div id="finalCostTotal_<?= $val['id'] ?>" title="">
-                <?php echo $val['finalCostTotal'];
-                                $fc_total += $val['finalCostTotal']; ?>
+                <?= $val['finalCostTotal'] ?>
             </div>
         </td>
         <td>
             <div id="faxPoint_<?= $val['id'] ?>" title="">
-                <?php echo $val['faxPoint'];
-                                $fp_total += $val['faxPoint']; ?>
+                <?= $val['faxPoint'] ?>
             </div>
         </td>
         <td>
@@ -388,17 +384,17 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
         </td>
         <td>
             <div id="profitRate_<?= $val['id'] ?>" title="">
-                <?= $val['profitRate']; ?>
+                <?= $val['profitRate'] ?>
             </div>
         </td>
         <td>
             <div id="profitTotal_<?= $val['id'] ?>" title="">
-                <?= $val['profitTotal']; ?>
+                <?= $val['profitTotal'] ?>
             </div>
         </td>
         <td>
             <div id="saleTotal_<?= $val['id'] ?>" title="">
-                <?= $val['saleTotal']; ?>
+                <?= $val['saleTotal'] ?>
             </div>
         </td>
         <td>
@@ -490,7 +486,154 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
                 删除 </a>
         </td>
         </tr>
+        <tr>
+            <td>
+            </td>
 
+
+            <td>
+                <div class="goods_name_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="goods_sn_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="market_price_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="number_total">
+                    0 </div>
+            </td>
+
+            <td>
+                <div class="goods_store_info_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="ppt_price_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="supplier_price_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="supplier_name_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="finalCost_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="finalCostTotal_total">
+                    0</div>
+            </td>
+
+            <td>
+                <div class="faxPoint_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="consultFee_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="sale_price_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="profit_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="profitRate_total">
+                    0 </div>
+            </td>
+
+            <td>
+                <div class="profitTotal_total">
+                    0 </div>
+            </td>
+
+            <td>
+                <div class="saleTotal_total">
+                    0 </div>
+            </td>
+
+            <td>
+                <div class="shipping_fee_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="materiel_cost_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="platformFee_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="tranformFee_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="other_cost_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="shipping_place_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="huoqi_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="is_priced_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="shipping_to_place_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="is_need_temp_total">
+                </div>
+            </td>
+
+            <td>
+                <div class="remark_total">
+                </div>
+            </td>
+
+            <td>
+            </td>
+        </tr>
 
     <?php
                             }
@@ -503,164 +646,7 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
 <?php
                         }
 ?>
-<tr>
-    <td>
-    </td>
 
-    <td>
-        <div class="goods_img">
-        </div>
-    </td>
-
-    <td>
-        <div class="goods_name_total">
-        </div>
-    </td>
-
-    <td>
-        <div class="goods_sn_total">
-        </div>
-    </td>
-
-    <td>
-        <div class="market_price_total">
-        </div>
-    </td>
-
-    <td>
-        <div class="number_total">
-            <?= $num; ?></div>
-    </td>
-
-    <td>
-        <div class="goods_store_info_total">
-        </div>
-    </td>
-
-    <td>
-        <div class="ppt_price_total">
-        </div>
-    </td>
-
-    <td>
-        <div class="supplier_price_total">
-        </div>
-    </td>
-    <td>
-    </td>
-    <td>
-        <div class="supplier_name_total">
-
-        </div>
-    </td>
-
-    <td>
-        <div>
-
-        </div>
-    </td>
-
-    <td>
-        <div class="finalCostTotal_total">
-        </div>
-    </td>
-
-    <td>
-        <div>
-        </div>
-    </td>
-
-    <td>
-        <div class="consultFee_total">
-        </div>
-    </td>
-
-    <td>
-        <div class="sale_price_total">
-        </div>
-    </td>
-
-    <td>
-        <div class="profit_total">
-        </div>
-    </td>
-
-    <td>
-        <div>
-        </div>
-    </td>
-
-    <td>
-        <div class="finalCostTotal">
-            <?= $fc_total; ?> </div>
-    </td>
-
-    <td>
-        <div class="faxPoint_total">
-            <?= $fp_total; ?>
-        </div>
-    </td>
-
-    <td>
-        <div class="shipping_fee_total">
-        </div>
-    </td>
-
-    <td>
-        <div class="materiel_cost_total">
-        </div>
-    </td>
-
-    <td>
-        <div class="platformFee_total">
-        </div>
-    </td>
-
-    <td>
-        <div class="profitRate_total">
-            <?= $pr_total; ?>
-        </div>
-    </td>
-
-    <td>
-        <div class="saleTotal_total">
-            <?= $s_total; ?>
-        </div>
-    </td>
-
-    <td>
-        <div class="shipping_place_total">
-        </div>
-    </td>
-
-    <td>
-        <div class="huoqi_total">
-        </div>
-    </td>
-
-    <td>
-        <div class="is_priced_total">
-        </div>
-    </td>
-
-    <td>
-        <div class="shipping_to_place_total">
-        </div>
-    </td>
-
-    <td>
-        <div class="is_need_temp_total">
-        </div>
-    </td>
-
-    <td>
-        <div class="remark_total">
-        </div>
-    </td>
-
-    <td>
-    </td>
-</tr>
 
 </tbody>
 </table>
