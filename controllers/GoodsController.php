@@ -71,11 +71,13 @@ class GoodsController extends BaseController
         /*获取滞销时间*/
 
         if ($goods_id) {
-            $goods_list = $goods_list->andwhere(['goods_id' => $goods_id]);
+            $goods_list = $goods_list->andwhere(['g.goods_id' => $goods_id]);
+        }
+        if ($type != 5) {
+            $goods_list = $query->andwhere(['g.type' => $type]);
+            $sdata['type'] = $type;
         }
 
-        $goods_list = $query->andwhere(['g.type' => $type]);
-        $sdata['type'] = $type;
         if ($category) {
             //得到分类的子分类
             $children_cate_id = Category::cat_children_str($category);

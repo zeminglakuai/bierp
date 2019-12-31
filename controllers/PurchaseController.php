@@ -110,6 +110,11 @@ class PurchaseController extends BaseController
       $data = Yii::$app->db->createCommand("SELECT project_id FROM project order by project_id desc limit 1")->queryOne();
 
       $Purchase->project_id = $data['project_id'];
+    } elseif ($Purchase->project_id != '' && $Purchase->order_name != '') {
+      Message::result_json(2, '项目名只需要填写一个');
+    } elseif (empty($Purchase->order_name)) {
+      $order_name = Yii::$app->db->createCommand("select * from project where project_id=" . $Purchase->project_id)->queryOne();
+      $Purchase->order_name = $order_name['project_name'];
     }
 
 

@@ -48,7 +48,7 @@ class PurchaseGoods extends \yii\db\ActiveRecord
             'supplier_name' => 'Supplier Name',
             'is_self_sell' => 'Is Self Sell',
             'supplier_number' => 'Supplier Number',
-            'xiaoji' => '小计',            
+            'xiaoji' => '小计',
         ];
     }
 
@@ -74,15 +74,16 @@ class PurchaseGoods extends \yii\db\ActiveRecord
 
 
 
-    public function AddGoods($order_id,$goods,$order_type,$supplier_id){
+    public function AddGoods($order_id, $goods, $order_type, $supplier_id)
+    {
         //检查商品是不是已经存在
-        $if_exitd = $this::find()->where(['goods_id'=>$goods->goods_id,'order_id'=>$order_id])->one();
+        $if_exitd = $this::find()->where(['goods_id' => $goods->goods_id, 'order_id' => $order_id])->one();
         if ($if_exitd) {
-            $this->add_goods_error = $goods->goods_name.'已经存在';
+            $this->add_goods_error = $goods->goods_name . '已经存在';
             return false;
         }
-        $sql="SELECT * FROM goods_supplier where supplier_id=".$supplier_id." and goods_id= ".$goods->goods_id;
-         $data= Yii::$app->db->createCommand($sql)->queryOne();
+        $sql = "SELECT * FROM goods_supplier where supplier_id=" . $supplier_id . " and goods_id= " . $goods->goods_id;
+        $data = Yii::$app->db->createCommand($sql)->queryOne();
         if ($goods) {
             $this->order_id = $order_id;
             $this->goods_id = $goods->goods_id;
@@ -90,21 +91,21 @@ class PurchaseGoods extends \yii\db\ActiveRecord
             $this->goods_sn = $goods->goods_sn;
             $this->market_price = $goods->market_price;
             $this->sale_price = $goods->shop_price;
-            $this->purchase_price =$data['supplier_price'];
+            $this->purchase_price = $data['supplier_price'];
             $this->isbn = $goods->isbn;
             $this->order_type = $order_type;
-            $this->is_self_sell = $goods->is_self_sell?$goods->is_self_sell:0;
+            $this->is_self_sell = $goods->is_self_sell ? $goods->is_self_sell : 0;
             $this->save(false);
-            
+
             return true;
-        }else{
+        } else {
             $this->add_goods_error = '缺少参数已经存在';
             return false;
         }
     }
 
-    public function getXiaoji(){
+    public function getXiaoji()
+    {
         return $this->purchase_price * $this->number;
     }
-
 }

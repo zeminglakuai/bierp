@@ -186,10 +186,10 @@ use app\common\config\sys_config;
                                 </tbody>
                             </table>
                         </form>
-                        <!--<div class="row" style="margin-top:15px;">
+                        <div class="row" style="margin-top:15px;">
                             <div class="col-sm-10"></div>
                             <div class="col-sm-2"><a class="btn btn-primary" id="create_platform_goods">+添加商品</a></div>
-                        </div>-->
+                        </div>
                     </div>
                 </div>
                 <div id="contract_name" class="tab-pane">
@@ -455,6 +455,22 @@ use app\common\config\sys_config;
     // 	});
     // });
     $(".add_theme_goods").click(function() {
+        var id = $(this).attr('origin-id');
+        var data_id = $(this).attr("data-id");
+        //页面层
+        layer.open({
+            type: 2,
+            title: '添加商品',
+            //skin: 'layui-layer-rim', //加上边框
+            area: ['80%', '80%'], //宽高
+            maxmin: true,
+            content: '/platform/create-goods-platform?theme_id=' + data_id + '&platform_id=' + id,
+            end: function() {
+                // location.reload();
+            }
+        });
+    });
+    $(".create_platform_goods").click(function() {
         var id = $(this).attr('origin-id');
         var data_id = $(this).attr("data-id");
         //页面层

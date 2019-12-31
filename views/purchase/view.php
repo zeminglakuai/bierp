@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $purchase->order_sn;
         'address' => '',
         'remark' => '',
         'remark1' => '',
-        'platform_beizhu' => '',
+        // 'platform_beizhu' => '',
 
         'qcode' => '',
     ],
@@ -53,208 +53,203 @@ $this->params['breadcrumbs'][] = $purchase->order_sn;
             <form name="" id="goods_list_form">
                 <table class="table table-hover dataTable">
                     <thead id="goods_list_thead" style="">
-                    <tr>
-                        <th width="50px;">
-                            <div class="checkbox i-checks">
-                                <label>
-                                    <div class="icheckbox_square-green" style="position: relative;"><input
-                                                type="checkbox" id="check_all" value=""
-                                                style="position: absolute; opacity: 0;">
-                                        <ins class="iCheck-helper"
-                                             style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                                    </div>
-                                </label>
-                            </div>
-                        </th>
-                        <th align="center" class="<?
-                                                    if ($vv['sort_able']) {
-                                                        if ($search_data['sortby'] == $kk) {
-                                                            if ($search_data['order'] == 4) {
-                                                                echo 'sorting_asc data_sort';
+                        <tr>
+                            <th width="50px;">
+                                <div class="checkbox i-checks">
+                                    <label>
+                                        <div class="icheckbox_square-green" style="position: relative;"><input type="checkbox" id="check_all" value="" style="position: absolute; opacity: 0;">
+                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                                        </div>
+                                    </label>
+                                </div>
+                            </th>
+                            <th align="center" class="<?
+                                                        if ($vv['sort_able']) {
+                                                            if ($search_data['sortby'] == $kk) {
+                                                                if ($search_data['order'] == 4) {
+                                                                    echo 'sorting_asc data_sort';
+                                                                } else {
+                                                                    echo 'sorting_desc data_sort';
+                                                                }
                                                             } else {
-                                                                echo 'sorting_desc data_sort';
+                                                                echo 'sorting data_sort';
                                                             }
-                                                        } else {
-                                                            echo 'sorting data_sort';
-                                                        }
-                                                    } ?>" data-type="id" width="4%" style="width:4%">
-                            ID
-                        </th>
-                        <th align="center" class="<?
-                                                    if ($vv['sort_able']) {
-                                                        if ($search_data['sortby'] == $kk) {
-                                                            if ($search_data['order'] == 4) {
-                                                                echo 'sorting_asc data_sort';
+                                                        } ?>" data-type="id" width="4%" style="width:4%">
+                                ID
+                            </th>
+                            <th align="center" class="<?
+                                                        if ($vv['sort_able']) {
+                                                            if ($search_data['sortby'] == $kk) {
+                                                                if ($search_data['order'] == 4) {
+                                                                    echo 'sorting_asc data_sort';
+                                                                } else {
+                                                                    echo 'sorting_desc data_sort';
+                                                                }
                                                             } else {
-                                                                echo 'sorting_desc data_sort';
+                                                                echo 'sorting data_sort';
                                                             }
-                                                        } else {
-                                                            echo 'sorting data_sort';
-                                                        }
-                                                    } ?>" data-type="goods_name" width="15%" style="width:15%">
-                            商品名称
-                        </th>
-                        <th align="center" class="<?
-                                                    if ($vv['sort_able']) {
-                                                        if ($search_data['sortby'] == $kk) {
-                                                            if ($search_data['order'] == 4) {
-                                                                echo 'sorting_asc data_sort';
+                                                        } ?>" data-type="goods_name" width="15%" style="width:15%">
+                                商品名称
+                            </th>
+                            <th align="center" class="<?
+                                                        if ($vv['sort_able']) {
+                                                            if ($search_data['sortby'] == $kk) {
+                                                                if ($search_data['order'] == 4) {
+                                                                    echo 'sorting_asc data_sort';
+                                                                } else {
+                                                                    echo 'sorting_desc data_sort';
+                                                                }
                                                             } else {
-                                                                echo 'sorting_desc data_sort';
+                                                                echo 'sorting data_sort';
                                                             }
-                                                        } else {
-                                                            echo 'sorting data_sort';
-                                                        }
-                                                    } ?>" data-type="goods_sn" width="10%" style="width:10%">
-                            商品型号
-                        </th>
-                        <th align="center" class="<?
-                                                    if ($vv['sort_able']) {
-                                                        if ($search_data['sortby'] == $kk) {
-                                                            if ($search_data['order'] == 4) {
-                                                                echo 'sorting_asc data_sort';
+                                                        } ?>" data-type="goods_sn" width="10%" style="width:10%">
+                                商品型号
+                            </th>
+                            <th align="center" class="<?
+                                                        if ($vv['sort_able']) {
+                                                            if ($search_data['sortby'] == $kk) {
+                                                                if ($search_data['order'] == 4) {
+                                                                    echo 'sorting_asc data_sort';
+                                                                } else {
+                                                                    echo 'sorting_desc data_sort';
+                                                                }
                                                             } else {
-                                                                echo 'sorting_desc data_sort';
+                                                                echo 'sorting data_sort';
                                                             }
-                                                        } else {
-                                                            echo 'sorting data_sort';
-                                                        }
-                                                    } ?>" data-type="isbn" width="10%" style="width:10%">
-                            条形码
-                        </th>
-                        <th align="center" class="<?
-                                                    if ($vv['sort_able']) {
-                                                        if ($search_data['sortby'] == $kk) {
-                                                            if ($search_data['order'] == 4) {
-                                                                echo 'sorting_asc data_sort';
+                                                        } ?>" data-type="isbn" width="10%" style="width:10%">
+                                条形码
+                            </th>
+                            <th align="center" class="<?
+                                                        if ($vv['sort_able']) {
+                                                            if ($search_data['sortby'] == $kk) {
+                                                                if ($search_data['order'] == 4) {
+                                                                    echo 'sorting_asc data_sort';
+                                                                } else {
+                                                                    echo 'sorting_desc data_sort';
+                                                                }
                                                             } else {
-                                                                echo 'sorting_desc data_sort';
+                                                                echo 'sorting data_sort';
                                                             }
-                                                        } else {
-                                                            echo 'sorting data_sort';
-                                                        }
-                                                    } ?>" data-type="market_price" width="8%" style="width:8%">
-                            上线平台————平台有效期
-                        </th>
-                        <th align="center" class="<?
-                                                    if ($vv['sort_able']) {
-                                                        if ($search_data['sortby'] == $kk) {
-                                                            if ($search_data['order'] == 4) {
-                                                                echo 'sorting_asc data_sort';
+                                                        } ?>" data-type="market_price" width="8%" style="width:8%">
+                                上线平台————平台有效期
+                            </th>
+                            <th align="center" class="<?
+                                                        if ($vv['sort_able']) {
+                                                            if ($search_data['sortby'] == $kk) {
+                                                                if ($search_data['order'] == 4) {
+                                                                    echo 'sorting_asc data_sort';
+                                                                } else {
+                                                                    echo 'sorting_desc data_sort';
+                                                                }
                                                             } else {
-                                                                echo 'sorting_desc data_sort';
+                                                                echo 'sorting data_sort';
                                                             }
-                                                        } else {
-                                                            echo 'sorting data_sort';
-                                                        }
-                                                    } ?>" data-type="purchase_price" width="8%" style="width:8%">
-                            采购价
-                        </th>
-                        <th align="center" class="<?
-                                                    if ($vv['sort_able']) {
-                                                        if ($search_data['sortby'] == $kk) {
-                                                            if ($search_data['order'] == 4) {
-                                                                echo 'sorting_asc data_sort';
+                                                        } ?>" data-type="purchase_price" width="8%" style="width:8%">
+                                采购价
+                            </th>
+                            <th align="center" class="<?
+                                                        if ($vv['sort_able']) {
+                                                            if ($search_data['sortby'] == $kk) {
+                                                                if ($search_data['order'] == 4) {
+                                                                    echo 'sorting_asc data_sort';
+                                                                } else {
+                                                                    echo 'sorting_desc data_sort';
+                                                                }
                                                             } else {
-                                                                echo 'sorting_desc data_sort';
+                                                                echo 'sorting data_sort';
                                                             }
-                                                        } else {
-                                                            echo 'sorting data_sort';
-                                                        }
-                                                    } ?>" data-type="number" width="5%" style="width:5%">
-                            数量
-                        </th>
-                        <th align="center">操作</th>
-                    </tr>
+                                                        } ?>" data-type="number" width="5%" style="width:5%">
+                                数量
+                            </th>
+                            <th align="center">操作</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <?php
-                    if (isset($purchase_good)) {
-                        foreach ($purchase_good as $k => $purchase_goods) {
-                    ?>
-                            <tr id="goods_row_<?= $purchase_goods['id'] ?>">
-                                <td>
-                                    <div class="checkbox i-checks">
-                                        <label>
-                                            <div class="icheckbox_square-green" style="position: relative;"><input
-                                                        type="checkbox" class="goods_ids" name="goods_id[]" value="7235"
-                                                        style="position: absolute; opacity: 0;">
-                                                <ins class="iCheck-helper"
-                                                     style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                                            </div>
-                                            <?= $k + 1; ?> </label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div id="id_<?= $purchase_goods['id'] ?>" title="">
-                                        <?= $purchase_goods['goods_id'] ?>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div id="goods_name_<?= $purchase_goods['id'] ?>" title="">
-                                        <?= $purchase_goods['goods_name'] ?>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div id="goods_sn_<?= $purchase_goods['id'] ?>" title="">
-                                        <?= $purchase_goods['goods_sn'] ?>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div id="isbn_<?= $purchase_goods['id'] ?>" title="">
-                                        <?= $purchase_goods['isbn'] ?>
+                        <?php
+                        if (isset($purchase_good)) {
+                            foreach ($purchase_good as $k => $purchase_goods) {
+                        ?>
+                                <tr id="goods_row_<?= $purchase_goods['id'] ?>">
+                                    <td>
+                                        <div class="checkbox i-checks">
+                                            <label>
+                                                <div class="icheckbox_square-green" style="position: relative;"><input type="checkbox" class="goods_ids" name="goods_id[]" value="7235" style="position: absolute; opacity: 0;">
+                                                    <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                                                </div>
+                                                <?= $k + 1; ?>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="id_<?= $purchase_goods['id'] ?>" title="">
+                                            <?= $purchase_goods['goods_id'] ?>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="goods_name_<?= $purchase_goods['id'] ?>" title="">
+                                            <?= $purchase_goods['goods_name'] ?>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="goods_sn_<?= $purchase_goods['id'] ?>" title="">
+                                            <?= $purchase_goods['goods_sn'] ?>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="isbn_<?= $purchase_goods['id'] ?>" title="">
+                                            <?= $purchase_goods['isbn'] ?>
 
-                                    </div>
-                                </td>
-                                <td>
-                                    <div id="market_price_<?= $purchase_goods['id'] ?>" title="">
-                                        <select name="platform[][platform_id]" onchange="gradeChange(<?= $purchase_goods['goods_id'] ?>,this.options[this.options.selectedIndex].value,<?= $purchase->id ?>, <?= $purchase_goods['id'] ?>)">
-                                            <option selected >选择平台</option>
-                                            <?php
-                                            if (isset($purchase_goods['platform'])) {
-                                                foreach ($purchase_goods['platform'] as $key => $v) {
-                                            ?>
-                                                <option value ="<?= $v['id']; ?>" <?php if ($purchase_goods['platform_id'] == $v['id']) {
-                                                                                    echo "selected";
-                                                                                }; ?> ><?php echo $v['plat_name'] . '————' . $v['startdate'] . '—' . $v['enddate'] ?></option>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="market_price_<?= $purchase_goods['id'] ?>" title="">
+                                            <select name="platform[][platform_id]" onchange="gradeChange(<?= $purchase_goods['goods_id'] ?>,this.options[this.options.selectedIndex].value,<?= $purchase->id ?>, <?= $purchase_goods['id'] ?>)">
+                                                <option selected>选择平台</option>
+                                                <?php
+                                                if (isset($purchase_goods['platform'])) {
+                                                    foreach ($purchase_goods['platform'] as $key => $v) {
+                                                ?>
+                                                        <option value="<?= $v['id']; ?>" <?php if ($purchase_goods['platform_id'] == $v['id']) {
+                                                                                                echo "selected";
+                                                                                            }; ?>><?php echo $v['plat_name'] . '————' . $v['startdate'] . '—' . $v['enddate'] ?></option>
 
                                                 <?php
+                                                    }
                                                 }
-                                            }
                                                 ?>
-                                            <option value ="5"  <?php if ($purchase_goods['platform_id'] == 5) {
-                                                                    echo "selected";
-                                                                }; ?> >其他</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div id="purchase_price_<?= $purchase_goods['id'] ?>" title="">
-                                        <div class="lable_edit" data-id="<?= $purchase_goods['id'] ?>" data-type="purchase_price"><?= $purchase_goods['purchase_price'] ?></div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div id="number_<?= $purchase_goods['id'] ?>" title="">
+                                                <option value="5" <?php if ($purchase_goods['platform_id'] == 5) {
+                                                                        echo "selected";
+                                                                    }; ?>>其他</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="purchase_price_<?= $purchase_goods['id'] ?>" title="">
+                                            <div class="lable_edit" data-id="<?= $purchase_goods['id'] ?>" data-type="purchase_price"><?= $purchase_goods['purchase_price'] ?></div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                           <div id="number_<?= $purchase_goods['id'] ?>" title="">
                                         <div class="lable_edit" data-id="<?= $purchase_goods['id'] ?>" data-type="number"><?= $purchase_goods['number'] ?></div>
-                                    </div>
-                                </td>
+                                    </div>  
+</td>
 
 
-                                <td>
-                                    <a class="delete_goods" data-id="<?= $purchase_goods['id'] ?>" action="delete-goods" href="javascript:void();">
-                                        <span class="glyphicon glyphicon-trash"></span>
-                                        删除 </a>
-                                </td>
-                            </tr>
-                            <?php
+<td>
+    <a class="delete_goods" data-id="<?= $purchase_goods['id'] ?>" action="delete-goods" href="javascript:void();">
+        <span class="glyphicon glyphicon-trash"></span>
+        删除 </a>
+</td>
+</tr>
+<?php
+                            }
                         }
-                    }
-                            ?>
-                    </tbody>
-                </table>
-            </form>
-        </div>
-    </div>
+?>
+</tbody>
+</table>
+</form>
+</div>
+</div>
 </div>-->
 <?= app\common\widgets\GoodsList::widget([
     'model' => 'app\common\models\PurchaseGoods',
@@ -270,7 +265,7 @@ $this->params['breadcrumbs'][] = $purchase->order_sn;
         'purchase_price' => ['sort_able' => 1, 'edit_able' => 1, 'width' => '8%'],
         'number' => ['sort_able' => 1, 'edit_able' => 1, 'width' => '5%', 'total' => true],
         'xiaoji' => ['sort_able' => 0, 'edit_able' => 0, 'width' => '5%', 'total' => true],
-        'pack_num' => ['sort_able' => 1, 'edit_able' => 1, 'width' => '5%', 'total' => true],
+        'pack_num' => ['sort_able' => 1, 'edit_able' => 1, 'width' => '5%', 'total' => false],
     ],
     'update_label_url' => Url::to(['purchase/update-goods-label']),
     'opration' => [['lable_name' => '删除', 'type' => 'js', 'action' => 'delete-goods', 'icorn_name' => 'trash', 'confirm' => 1]],

@@ -181,13 +181,17 @@ $this->params['breadcrumbs'][] = $this->context->page_title;
                                                                 echo 'sorting';
                                                             } ?> user_sort" data-type="market_price">市场价</th>
                     <th width="10%" align="center">条码</th>
-                    <th width="10%" align="center">供货商</th>
-                    <th width="5%" align="center">采购价</th>
-                    <th width="5%" align="center">数量</th>
-                    <th width="7%" align="center">平台</th>
-                    <th width="5%" align="center">平台有效期</th>
-                    <th width="5%" align="center">仓库</th>
-                    <th width="5%" align="center">天数</th>
+                    <?php
+                    if ($type == 1) {
+                    ?>
+                        <th width="10%" align="center">供货商</th>
+                        <th width="5%" align="center">采购价</th>
+                        <th width="5%" align="center">数量</th>
+                        <th width="7%" align="center">平台</th>
+                        <th width="5%" align="center">平台有效期</th>
+                        <th width="5%" align="center">仓库</th>
+                        <th width="5%" align="center">天数</th>
+                    <?php } ?>
                     <th align="center">操作</th>
                 </tr>
             </thead>
@@ -207,70 +211,72 @@ $this->params['breadcrumbs'][] = $this->context->page_title;
                             <td><?= $vv['shop_price'] ?></td>
                             <td><?= $vv['market_price'] ?></td>
                             <td><?= $vv['isbn'] ?></td>
+                            <?php
+                            if ($type == 1) { ?>
+                                <td> <?php
 
-                            <td> <?php
+                                        if ($vv['goods_supplier']) {
+                                            foreach ($vv['goods_supplier'] as $k => $v) {
+                                                echo $v['supplier_name'] . '</br>';
+                                            }
+                                        }
+                                        ?>
+                                </td>
+                                <td>
+                                    <?php
                                     if ($vv['goods_supplier']) {
                                         foreach ($vv['goods_supplier'] as $k => $v) {
-                                            echo $v['supplier_name'] . '</br>';
+                                            echo $v['supplier_price'] . '</br>';
                                         }
                                     }
                                     ?>
-                            </td>
-                            <td>
-                                <?php
-                                if ($vv['goods_supplier']) {
-                                    foreach ($vv['goods_supplier'] as $k => $v) {
-                                        echo $v['supplier_price'] . '</br>';
-                                    }
-                                }
-                                ?>
-                            </td>
+                                </td>
 
 
-                            <td>
-                                <?php
-                                if ($vv['data']) {
-                                    foreach ($vv['data'] as $k => $v) {
-                                        echo $v['number'] . '</br>';
-                                    }
-                                }
-                                ?>
-                            </td>
-                            <td>
-                                <?php
-                                if ($vv['goods_platform']) {
-                                    foreach ($vv['goods_platform'] as $k => $v) {
-                                        echo '<span style="display: block;">' . $v['plat_name'] . '</span>' . '</br>';
-                                    }
-                                }
-                                ?>
-                            </td>
-                            <td>
-                                <?php
-                                if ($vv['goods_platform']) {
-                                    foreach ($vv['goods_platform'] as $k => $v) {
-                                        echo '<span style="display: block;">' . $v['startdate'] . '</br>' . $v['enddate'] . '</span>';
-                                    }
-                                }
-                                ?>
-                            </td>
-                            <td> <?php
+                                <td>
+                                    <?php
                                     if ($vv['data']) {
                                         foreach ($vv['data'] as $k => $v) {
-                                            echo $v['store_name'] . '</br>';
+                                            echo $v['number'] . '</br>';
                                         }
                                     }
-                                    ?></td>
-                            <td> <?php
-                                    if ($vv['data']) {
-                                        foreach ($vv['data'] as $k => $v) {
-                                            echo $v['time'] . '</br>';
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    if ($vv['goods_platform']) {
+                                        foreach ($vv['goods_platform'] as $k => $v) {
+                                            echo '<span style="display: block;">' . $v['plat_name'] . '</span>' . '</br>';
                                         }
                                     }
-                                    ?></td>
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    if ($vv['goods_platform']) {
+                                        foreach ($vv['goods_platform'] as $k => $v) {
+                                            echo '<span style="display: block;">' . $v['startdate'] . '</br>' . $v['enddate'] . '</span>';
+                                        }
+                                    }
+                                    ?>
+                                </td>
+                                <td> <?php
+                                        if ($vv['data']) {
+                                            foreach ($vv['data'] as $k => $v) {
+                                                echo $v['store_name'] . '</br>';
+                                            }
+                                        }
+                                        ?></td>
+                                <td> <?php
+                                        if ($vv['data']) {
+                                            foreach ($vv['data'] as $k => $v) {
+                                                echo $v['time'] . '</br>';
+                                            }
+                                        }
+                                        ?></td>
 
 
-
+                            <?php } ?>
                             <td>
                                 <A href="<?= Url::to(['/goods/view', 'goods_id' => $vv['goods_id'], 'type' => $type]) ?>"><span class="glyphicon glyphicon-cog"></span> 编辑</A>
                                 <?php
