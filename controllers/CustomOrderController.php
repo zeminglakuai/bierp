@@ -102,6 +102,11 @@ class CustomOrderController extends BaseController
         $contact = Contact::findone($CustomOrder->contact_id);
 
         $platform = Platform::findOne($CustomOrder->platform_id);
+        $CustomOrder->fuze_id = Yii::$app->session['manage_user']['id'];
+        $CustomOrder->add_user_id = Yii::$app->session['manage_user']['id'];
+        $CustomOrder->add_time = time();
+        $CustomOrder->depart_id = Yii::$app->session['manage_user']['depart_id'];
+
         $CustomOrder->contact_name = $contact->name;
         $CustomOrder->platform_name = $platform->plat_name;
         $CustomOrder->order_sn = Common_fun::create_sn('app\common\models\CustomOrder', 5);
@@ -152,8 +157,8 @@ class CustomOrderController extends BaseController
             foreach ($custom_order_goods as $k => $val) {
                 $custom_order_goods[$k]['supplierTotal'] = round($val['supplier_price'] * $val['supplier_number'], 2);
 
-                $custom_order_goods[$k]['finalCost'] = round($val['supplier_price'] + $val['faxPoint'] + $val['shipping_fee'] + $val['materiel_cost'] + $val['platformFee'] + $val['tranformFee'] + $val['other_cost'], 2);
-                $custom_order_goods[$k]['finalCostTotal'] = round($val['finalCost'] * $val['number'], 2);
+                $custom_order_goods[$k]['finalCost'] =  round($val['supplier_price'] + $val['faxPoint'] + $val['shipping_fee'] + $val['materiel_cost'], 2);
+
                 $custom_order_goods[$k]['faxPoint'] = round(((($val['sale_price'] - $val['supplier_price']) / 1.13) * 13 / 100 * 1.12) + ($val['sale_price'] * 0.05 / 100), 2);
                 $custom_order_goods[$k]['profit'] = round(($val['sale_price'] - $custom_order_goods[$k]['finalCost']), 2);
                 // 毛利小计
@@ -162,12 +167,11 @@ class CustomOrderController extends BaseController
                 $custom_order_goods[$k]['profitRate'] = (round($custom_order_goods[$k]['profit'] / $val['sale_price'], 2) * (100)) . '%';
                 $custom_order_goods[$k]['consultFee'] = round($val['consult'] * $val['supplier_price'], 2);
                 $custom_order_goods[$k]['supplierTotal'] = round($val['sale_price'] * $val['number'], 2);
-                $data = Yii::$app->db->createCommand("select sum(number) from stock where goods_id=" . $val['goods_id'])->queryOne();
-                $custom_order_goods[$k]['store_num'] = $data['sum(number)'];
-                $custom_order_goods[$k]['finalCostTotal'] = round($val['finalCost'] * $val['number'], 2);
+
+                $custom_order_goods[$k]['store_num'] = Yii::$app->db->createCommand("select s.number,sa.store_name from stock as s left join store as sa ON sa.id=s.store_id where goods_id=" . $val['goods_id'])->queryAll();
                 $custom_order_goods[$k]['saleTotal'] = round($val['sale_price'] * $val['number'], 2);
 
-
+                $custom_order_goods[$k]['finalCostTotal'] = round($custom_order_goods[$k]['finalCost'] * $val['number'], 2);
                 $custom_order_goods[$k]['supplier'] = Yii::$app->db->createCommand("select gs.*,s.* from goods_supplier as gs left join supplier as s ON gs.supplier_id=s.id where goods_id=" . $val['goods_id'] . " order by gs.supplier_price")->queryAll();
                 if (isset($vallist)) {
                     foreach ($vallist as $key => $value) {
@@ -553,6 +557,15 @@ class CustomOrderController extends BaseController
         $this->layout = 'empty';
         return $this->render('create-val', ['id' => $id]);
     }
+    // 转移
+    public function actionCreateFuze($id)
+    {
+        $this->layout = 'empty';
+        $data = Yii::$app->db->createCommand("select * from custom_order where id=" . $id)->queryOne();
+        $list = Yii::$app->db->createCommand("select *  from admin where depart_id=" . $data['depart_id'])->queryAll();
+
+        return $this->render('create-fuze', ['id' => $id, 'list' => $list, 'data' => $data]);
+    }
     // 添加字段
     public function actionInsertVal($id)
     {
@@ -585,14 +598,31 @@ class CustomOrderController extends BaseController
 
 
             $list = Yii::$app->DB->createCommand('select * from contact where belong_id =' . $id . ' and model= "platform" ')->queryAll();
-
             $data = '';
-            foreach ($list as $key => $val) {
-                $data .= "<option value='" . $val["id"] . "'> " . $val['name'] . " </option>";
+
+            if (!$list) {
+                $data = "<option >请选择项目</option>";
+            } else {
+                foreach ($list as $key => $val) {
+                    $data .= "<option value='" . $val["id"] . "'> " . $val['name'] . " </option>";
+                }
             }
             message::result_json(1, '修改成功', $data);
         } else {
             message::result_json(0, '参数有误');
         }
+    }
+
+    // 负责人转移
+    public function actionInsertFuze($id)
+    {
+
+        $data = Yii::$app->request->post();
+        if (empty($data['fuze_id'])) {
+            message::result_json(2, '负责人不能为空');
+        }
+        Yii::$app->db->createCommand("insert into fuze(fuze_id,add_user_id,remark,old_fuze_id,order_id,model,add_time) value(" . $data['fuze_id'] . "," . Yii::$app->session['manage_user']['id'] . ",'" . $data['remark'] . "'," . $data['old_fuze_id'] . "," . $id . ",'custom_order'," . time() . ") ")->execute();
+        Yii::$app->db->createCommand("UPDATE custom_order SET fuze_id=" . $data['fuze_id'] . " WHERE id=" . $id)->execute();
+        Message::result_json(1, '添加成功');
     }
 }

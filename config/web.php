@@ -6,8 +6,8 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'defaultRoute'=>'default',
-	'timeZone'=>'Asia/Chongqing',
+    'defaultRoute' => 'default',
+    'timeZone' => 'Asia/Chongqing',
     'components' => [
         //'session' => [
         //        'class' => 'system.web.CDbHttpSession',
@@ -18,12 +18,12 @@ $config = [
             'cookieValidationKey' => 'asdasdasdqwrvasdvasdfasdfsadfasdfasd',
         ],
         'assetManager' => [
-                        'bundles' => [
-                            'yii\web\JqueryAsset' => [
-                                'js' =>[]
-                            ],
-                        ] ,
-        ] ,
+            'bundles' => [
+                'yii\web\JqueryAsset' => [
+                    'js' => []
+                ],
+            ],
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
@@ -31,13 +31,12 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-            ],
+            'rules' => [],
         ],
     ],
     'modules' => [
-                'teamwork'=>['class'=>'app\teamwork\Teamwork'],
-                ],
+        'teamwork' => ['class' => 'app\teamwork\Teamwork'],
+    ],
     'params' => $params,
 ];
 
@@ -49,6 +48,13 @@ if (YII_ENV_DEV) {
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
         //'allowedIPs' => ['127.0.0.1', '::1'],
+
+    ];
+    $config['bootstrap'][] = 'debug';
+    $config['modules']['debug'] = [
+        'class' => 'yii\debug\Module',
+        //uncomment the following to add your IP if you are not connecting from localhost.
+        'allowedIPs' => ['127.0.0.1', '*'],
     ];
 }
 

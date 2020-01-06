@@ -30,18 +30,18 @@ use app\common\config\sys_config;
                 <li> <a data-toggle="tab" href="#contract_name">联系人列表</a></li>
 
             <?php } ?>
-            <li> <a data-toggle="tab" href="#billing_name">结算信息</a></li>
+            <!--   <li> <a data-toggle="tab" href="#billing_name">结算信息</a></li> -->
             <?php if (isset($platform->id)) { ?>
                 <li> <a data-toggle="tab" href="#plat_name">合同信息</a></li>
                 <li> <a data-toggle="tab" href="#theme_name">主题活动</a></li>
                 <!-- <li> <a data-toggle="tab" href="#period_name">数据分析</a></li> -->
             <?php } ?>
-            <li> <a data-toggle="tab" href="#activity_desc">平台摘要</a></li>
+            <li> <a data-toggle="tab" href="#activity_desc">项目摘要</a></li>
         </ul>
         <div class="tab-content">
             <div id="activity_name" class="tab-pane active">
                 <div class="panel-body">
-                    <?= app\common\widgets\Input::widget(['label_name' => '平台名称', 'name' => "Platform[plat_name]", 'value' => $platform->plat_name, 'tips' => '']); ?>
+                    <?= app\common\widgets\Input::widget(['label_name' => '项目名称', 'name' => "Platform[plat_name]", 'value' => $platform->plat_name, 'tips' => '']); ?>
 
                     <?= app\common\widgets\Radio::widget(
                         [
@@ -51,14 +51,79 @@ use app\common\config\sys_config;
                             'init_value' => [['label_name' => '积分', 'value' => '1'], ['label_name' => '现金', 'value' => '2'], ['label_name' => '积分+现金', 'value' => '3'], ['label_name' => '集采', 'value' => '4']]
                         ]
                     ); ?>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">结算周期</label>
+                        <div class="col-sm-9">
+                            <select name="Platform[period]" class="form-control">
+                                <option>选择结算周期</option>
+                                <option value="1" <?php if ($platform->period == 1) {
+                                                        echo 'selected';
+                                                    } ?>>预付款</option>
+                                <option value="2" <?php if ($platform->period == 2) {
+                                                        echo 'selected';
+                                                    } ?>>现结</option>
+                                <option value="3" <?php if ($platform->period == 3) {
+                                                        echo 'selected';
+                                                    } ?>>月结</option>
+                                <option value="4" <?php if ($platform->period == 4) {
+                                                        echo 'selected';
+                                                    } ?>>60天</option>
+                            </select>
+                        </div>
+                    </div>
 
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"> 开始时间</label>
+                        <div class="col-sm-9">
+                            <div class="input-group date form_date15" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input class="form-control" name="Platform[startdate]" size="16" value="<?= $platform->startdate ?>" type="text" readonly="" placeholder="开始时间">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        $('.form_date15').datetimepicker({
+                            language: 'zh-CN',
+                            weekStart: 1,
+                            todayBtn: 1,
+                            autoclose: 1,
+                            todayHighlight: 1,
+                            startView: 2,
+                            minView: 2,
+                            forceParse: 0
+                        });
+                    </script>
 
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">结束时间</label>
+                        <div class="col-sm-9">
+                            <div class="input-group date form_date16" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input class="form-control" name="Platform[enddate]" size="16" value="<?= $platform->enddate ?>" type="text" readonly="" placeholder="结束日期">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
 
-                    <?= app\common\widgets\Input::widget(['label_name' => '地址', 'name' => "Platform[address]", 'value' => $platform->address, 'tips' => '']); ?>
+                    <script>
+                        $('.form_date16').datetimepicker({
+                            language: 'zh-CN',
+                            weekStart: 1,
+                            todayBtn: 1,
+                            autoclose: 1,
+                            todayHighlight: 1,
+                            startView: 2,
+                            minView: 2,
+                            forceParse: 0
+                        });
+                    </script>
+
                     <?= app\common\widgets\Input::widget(['label_name' => '前端网站', 'name' => "Platform[website_front]", 'value' => $platform->website_front, 'tips' => '']); ?>
 
                     <?= app\common\widgets\Input::widget(['label_name' => '网站后台地址', 'name' => "Platform[login_user_name]", 'value' => $platform->login_user_name, 'tips' => '',]); ?>
-                    <?= app\common\widgets\Input::widget(['label_name' => '登录账号', 'name' => "Platform[login_pass]", 'value' => $platform->login_pass, 'tips' => '']); ?>
                     <?= app\common\widgets\Input::widget(['label_name' => '备注', 'name' => "Platform[remark]", 'value' => $platform->remark, 'tips' => '']); ?>
 
                 </div>
@@ -142,7 +207,7 @@ use app\common\config\sys_config;
                                                                             echo 'sorting data_sort';
                                                                         }
                                                                     } ?>" data-type="platform_price" width="8%" style="width:8%">
-                                            平台价 </th>
+                                            项目价 </th>
 
 
                                         <th align="center">操作</th>
@@ -186,10 +251,10 @@ use app\common\config\sys_config;
                                 </tbody>
                             </table>
                         </form>
-                        <div class="row" style="margin-top:15px;">
+                        <!-- <div class="row" style="margin-top:15px;">
                             <div class="col-sm-10"></div>
                             <div class="col-sm-2"><a class="btn btn-primary" id="create_platform_goods">+添加商品</a></div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div id="contract_name" class="tab-pane">
@@ -201,14 +266,6 @@ use app\common\config\sys_config;
                         </div>
                     </div>
                 </div><?php } ?>
-            <div id="billing_name" class="tab-pane">
-                <div class="panel-body">
-                    <?= app\common\widgets\Input::widget(['label_name' => '结算周期', 'name' => "Platform[period]", 'value' => $platform->period, 'tips' => '']); ?>
-                    <?= app\common\widgets\Input::widget(['label_name' => '结算金额', 'name' => "Platform[yongjin]", 'value' => $platform->yongjin, 'tips' => '', 'id' => '']); ?>
-                    <?= app\common\widgets\Input::widget(['label_name' => '结算说明', 'name' => "Platform[period_desc]", 'value' => $platform->period_desc, 'tips' => '']); ?>
-
-                </div>
-            </div>
             <?php if (isset($platform->id)) { ?>
                 <div id="plat_name" class="tab-pane">
                     <div class="panel-body">
@@ -302,7 +359,7 @@ use app\common\config\sys_config;
             <div id="activity_desc" class="tab-pane">
                 <div class="panel-body">
                     <Div class="row">
-                        <div class="col-xs-1">平台信息</div>
+                        <div class="col-xs-1">项目信息</div>
                         <div class="col-xs-11">
                             <script type="text/plain" id="editor" name="Platform[plat_info]" style="height:300px;"><?= $platform->plat_info ?></script>
                         </div>

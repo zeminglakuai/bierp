@@ -214,7 +214,8 @@ class CustomOrderGoods extends \yii\db\ActiveRecord
     //计算得到综合成本
     public function getFinalCost()
     {
-        return round($this->supplier_price + $this->faxPoint + $this->shipping_fee + $this->materiel_cost + $this->platformFee + $this->tranformFee + $this->other_cost, 2);
+        // return round($this->supplier_price + $this->faxPoint + $this->shipping_fee + $this->materiel_cost + $this->platformFee + $this->tranformFee + $this->other_cost, 2);
+        return round($this->supplier_price + $this->faxPoint + $this->shipping_fee + $this->materiel_cost, 2);
     }
 
     //计算得到综合成本小计
@@ -226,7 +227,7 @@ class CustomOrderGoods extends \yii\db\ActiveRecord
     public function getFaxPoint($fax)
     {
 
-        return round(((($this->sale_price - $this->supplier_price) / 1.13) * 13 / 100 * 1.12) + ($this->sale_price * 0.05 / 100), 2);
+        return round((($this->sale_price - $this->supplier_price) / 1.13 * 0.13 * 1.12) + ($this->sale_price * 0.0005), 2);
     }
 
     //计算平台费用

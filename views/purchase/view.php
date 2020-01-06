@@ -39,6 +39,7 @@ $this->params['breadcrumbs'][] = $purchase->order_sn;
         'address' => '',
         'remark' => '',
         'remark1' => '',
+
         // 'platform_beizhu' => '',
 
         'qcode' => '',
@@ -46,7 +47,7 @@ $this->params['breadcrumbs'][] = $purchase->order_sn;
     'status_label' => 'purchase_status',
 ])
 ?>
-<!--<a id="create_payment" class="btn btn-warning btn-sm">添加账单</a>
+<!--<a id="create_payment" class="btn btn-warning btn-sm">添加账单</a>-->
 <div style="overflow:auto;width:100%;margin-bottom:5em;" id="goods_list_block">
     <div class="ibox" style="">
         <div class="ibox-content" style="padding:10px 5px 5px 10px;">
@@ -161,6 +162,9 @@ $this->params['breadcrumbs'][] = $purchase->order_sn;
                                                         } ?>" data-type="number" width="5%" style="width:5%">
                                 数量
                             </th>
+                            <th align="center" data-type="number" width="5%" style="width:5%">
+                                小计
+                            </th>
                             <th align="center">操作</th>
                         </tr>
                     </thead>
@@ -211,7 +215,7 @@ $this->params['breadcrumbs'][] = $purchase->order_sn;
                                                 ?>
                                                         <option value="<?= $v['id']; ?>" <?php if ($purchase_goods['platform_id'] == $v['id']) {
                                                                                                 echo "selected";
-                                                                                            }; ?>><?php echo $v['plat_name'] . '————' . $v['startdate'] . '—' . $v['enddate'] ?></option>
+                                                                                            }; ?>><?php echo $v['plat_name'] . '————' . $purchase_goods['startdate'] . '—' . $purchase_goods['enddate'] ?></option>
 
                                                 <?php
                                                     }
@@ -229,49 +233,34 @@ $this->params['breadcrumbs'][] = $purchase->order_sn;
                                         </div>
                                     </td>
                                     <td>
-                                           <div id="number_<?= $purchase_goods['id'] ?>" title="">
-                                        <div class="lable_edit" data-id="<?= $purchase_goods['id'] ?>" data-type="number"><?= $purchase_goods['number'] ?></div>
-                                    </div>  
-</td>
+                                        <div id="number_<?= $purchase_goods['id'] ?>" title="">
+                                            <div class="lable_edit" data-id="<?= $purchase_goods['id'] ?>" data-type="number"><?= $purchase_goods['number'] ?></div>
+                                        </div>
+                                    </td>
 
+                                    <td>
+                                        <div id="xiaoji_<?= $purchase_goods['id'] ?>" title="">
+                                            <?php echo $purchase_goods['number'] * $purchase_goods['purchase_price'] ?>
+                                        </div>
+                                    </td>
 
-<td>
-    <a class="delete_goods" data-id="<?= $purchase_goods['id'] ?>" action="delete-goods" href="javascript:void();">
-        <span class="glyphicon glyphicon-trash"></span>
-        删除 </a>
-</td>
-</tr>
-<?php
+                                    <td>
+                                        <a class="delete_goods" data-id="<?= $purchase_goods['id'] ?>" action="delete-goods" href="javascript:void();">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                            删除 </a>
+                                    </td>
+                                </tr>
+                        <?php
                             }
                         }
-?>
-</tbody>
-</table>
-</form>
+                        ?>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
 </div>
-</div>
-</div>-->
-<?= app\common\widgets\GoodsList::widget([
-    'model' => 'app\common\models\PurchaseGoods',
-    'order_id' => $purchase->id,
-    'model_name' => 'purchase',
-    'init_condition' => [['order_id' => $purchase->id]],
-    'title_arr' => [
-        'id' => ['sort_able' => 1, 'edit_able' => 0, 'width' => '4%'],
-        'goods_name' => ['sort_able' => 0, 'edit_able' => 0, 'width' => '15%'],
-        'goods_sn' => ['sort_able' => 0, 'edit_able' => 0, 'width' => '10%'],
-        'isbn' => ['sort_able' => 0, 'edit_able' => 0, 'width' => '10%'],
-        'market_price' => ['sort_able' => 0, 'edit_able' => 0, 'width' => '8%', 'sum' => 'market_price*number'],
-        'purchase_price' => ['sort_able' => 1, 'edit_able' => 1, 'width' => '8%'],
-        'number' => ['sort_able' => 1, 'edit_able' => 1, 'width' => '5%', 'total' => true],
-        'xiaoji' => ['sort_able' => 0, 'edit_able' => 0, 'width' => '5%', 'total' => true],
-        'pack_num' => ['sort_able' => 1, 'edit_able' => 1, 'width' => '5%', 'total' => false],
-    ],
-    'update_label_url' => Url::to(['purchase/update-goods-label']),
-    'opration' => [['lable_name' => '删除', 'type' => 'js', 'action' => 'delete-goods', 'icorn_name' => 'trash', 'confirm' => 1]],
-    'present_action' => 'view',
-])
-?>
+
 
 <?= app\common\widgets\OperateBar::widget([
     'create' => ['label_name' => '添加商品', 'id' => 'create_purchase_goods', 'type' => 'js', 'url' => Url::to(["purchase/create-goods", "order_id" => $purchase->id, "purchase_type" => $purchase->purchase_type, "OrderType" => 1])],

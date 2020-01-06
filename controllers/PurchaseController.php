@@ -100,6 +100,8 @@ class PurchaseController extends BaseController
       Message::result_json(2, '供货商不存在，请重新选择');
     } else {
       $Purchase->supplier_name = $supplier->supplier_name;
+      $Purchase->supplier_contact = $supplier->contact2;
+      $Purchase->supplier_tel = $supplier->tel2;
     }
     // 添加项目
 
@@ -131,6 +133,11 @@ class PurchaseController extends BaseController
             $Purchase->platform_name = $platform->plat_name;
         }*/
     $Purchase->order_sn = Common_fun::create_sn('app\common\models\Purchase', 5);
+    $Purchase->add_user_id = Yii::$app->session['manage_user']['add_user_id'];
+    $Purchase->add_user_name = Yii::$app->session['manage_user']['add_user_name'];
+    $Purchase->depart_id = Yii::$app->session['manage_user']['depart_id'];
+    $Purchase->depart_name = Yii::$app->session['manage_user']['depart_name'];
+    $Purchase->add_time = time();
 
     $Purchase->save(false);
     Message::result_json(1, '添加成功');
@@ -174,7 +181,7 @@ class PurchaseController extends BaseController
       $purchase_goods = Yii::$app->db->createCommand("select pg.id,pg.order_id,pg.platform_id,pg.platform_beizhu,g.goods_name,g.goods_sn,g.isbn,g.market_price,pg.purchase_price,pg.number,g.goods_id from purchase_goods as pg left join goods as g on g.goods_id=pg.goods_id where pg.order_id=" . $id)->queryAll();
       if (isset($purchase_goods)) {
         foreach ($purchase_goods as $k => $v) {
-          $sql = "select gp.startdate,gp.enddate,gp.daifa,p.plat_name,p.id from goods_platform as gp left join platform as p on p.id=gp.platform_id  where gp.goods_id=" . $v['goods_id'];
+          $sql = "select p.startdate,p.enddate,gp.daifa,p.plat_name,p.id from goods_platform as gp left join platform as p on p.id=gp.platform_id  where gp.goods_id=" . $v['goods_id'];
           $purchase_goods[$k]['platform'] = Yii::$app->db->createCommand($sql)->queryAll();
         }
       }
@@ -337,7 +344,7 @@ class PurchaseController extends BaseController
           default:
             break;
         }
-        $strContent1 = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"> </head><body><table style="font-size:14px;color:#333333;border-width:1px;border-color:#999999;border-collapse:collapse;line-height: 200%;" width="100%"><tr><td width="40%"><img src="/img/kewei.png" width="119px" height="54px"/></td><td style="font-size:30px;line-height: 200%;">' . $pype . '</td></tr><tr><td>订单日期:  ' . date("Y-m-d H:i", $Purchase['add_time']) . '</td><td>单号:  ' . $Purchase['order_sn'] . '</td></tr><tr><td colspan="5" style="font-size:20px;line-height: 200%;font-weight: bold;">下单公司信息:  </td></tr><tr><td>下单公司:  广州市客维商务服务有限公司</td><td>部门:  ' . $Purchase['depart_name'] . '</td><td>下单人:  ' . $Purchase['add_user_name'] . '</td></tr><tr><td colspan="5" >联系电话:  ' . $supplier['tel'] . '</td></tr><tr><td colspan="5" style="font-size:20px;line-height: 200%;font-weight: bold;">供应商信息:  </td></tr><tr><td>供货商名称:  ' . $supplier['supplier_name'] . '</td><td>联系人:  ' . $Purchase['supplier_contact'] . '</td><td>联系电话:  ' . $Purchase['supplier_tel'] . '</td></tr>';
+        $strContent1 = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"> </head><body><table style="font-size:14px;color:#333333;border-width:1px;border-color:#999999;border-collapse:collapse;line-height: 200%;" width="100%"><tr><td width="40%"><img src="/img/kewei.png" width="119px" height="54px"/></td><td style="font-size:30px;line-height: 200%;">' . $pype . '</td></tr><tr><td>订单日期:  ' . date("Y-m-d H:i", $Purchase['add_time']) . '</td><td>单号:  ' . $Purchase['order_sn'] . '</td><td>审核状态</td></tr><tr><td colspan="5" style="font-size:20px;line-height: 200%;font-weight: bold;">下单公司信息:  </td></tr><tr><td>下单公司:  广州市客维商务服务有限公司</td><td>部门:  ' . $Purchase['depart_name'] . '</td><td>下单人:  ' . $Purchase['add_user_name'] . '</td></tr><tr><td colspan="5" >联系电话:  ' . $supplier['tel'] . '</td></tr><tr><td colspan="5" style="font-size:20px;line-height: 200%;font-weight: bold;">供应商信息:  </td></tr><tr><td>供货商名称:  ' . $supplier['supplier_name'] . '</td><td>联系人:  ' . $Purchase['supplier_contact'] . '</td><td>联系电话:  ' . $Purchase['supplier_tel'] . '</td></tr>';
         $strContent2 = '<tr><td colspan="5" style="font-size:20px;line-height: 200%;font-weight: bold;">收货信息： </td></tr><tr><td>收货仓库:  ' . $Purchase['store_name'] . '</td><td>收货人:  ' . $Purchase['consignee'] . '</td><td>联系电话:  ' . $Purchase['consignee_tel'] . '</td></tr><tr><td colspan="5" >收货地址:  ' . $Purchase['address'] . '</td></tr>';
         $strContent3 = ' <tr><td colspan="5" style="font-size:20px;line-height: 200%;font-weight: bold;">收款信息： </td></tr><tr><td>收款银行:  ' . $supplier['bank_name'] . '</td><td>收款账号:  ' . $supplier['bank_code'] . '</td><td>收款人:  ' . $supplier['bank_payee'] . '</td></tr><tr><td>结算方式:  ' . $Purchase['pay_type'] . '</td></tr><tr><td >备注:  ' . $Purchase['remark'] . '</td></tr></table><div style="width: 100%;height: 60px;margin-top: 5%;margin-left: 40%;"><span style="font-size: 30px;">商品列表</span></div>';
         // 采购为1代发为2

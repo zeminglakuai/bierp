@@ -24,7 +24,7 @@ class Platform extends BaseModel
         return [
             [['add_user_id', 'depart_id', 'plat_status', 'is_delete', 'custom_id', 'status_done'], 'integer'],
             [['plat_info'], 'string'],
-            [['plat_name', 'add_time', 'add_user_name', 'depart_name', 'custom_name', 'remark', 'status_name', 'website_front', 'website_backend', 'login_user_name', 'login_pass', 'web_cate', 'contract_start_time', 'contract_end_time', 'contract_contact', 'contract_tel', 'theme_block', 'theme_contact', 'theme_contact_tel', 'theme_content', 'brand_open', 'brand_contact', 'brand_contact_tel', 'brand_remark', 'period', 'yongjin', 'period_contact', 'period_contact_tel', 'period_desc', 'period_gongdan', 'gongdan_contact', 'gongdan_contact_tel', 'hezuoxingshi', 'address'], 'string', 'max' => 255],
+            [['plat_name', 'add_time', 'add_user_name', 'depart_name', 'custom_name', 'remark', 'status_name', 'website_front', 'website_backend', 'login_user_name', 'log.in_pass', 'web_cate', 'contract_start_time', 'contract_end_time', 'contract_contact', 'contract_tel', 'theme_block', 'theme_contact', 'theme_contact_tel', 'theme_content', 'brand_open', 'brand_contact', 'brand_contact_tel', 'brand_remark', 'period', 'yongjin', 'period_contact', 'period_contact_tel', 'period_desc', 'period_gongdan', 'gongdan_contact', 'gongdan_contact_tel', 'hezuoxingshi', 'address', 'startdate', 'enddate'], 'string', 'max' => 255],
         ];
     }
 
@@ -35,7 +35,7 @@ class Platform extends BaseModel
     {
         return [
             'id' => 'ID',
-            'plat_name' => '平台名称',
+            'plat_name' => '项目名称',
             'add_time' => 'Add Time',
             'add_user_id' => 'Add User ID',
             'add_user_name' => 'Add User Name',
@@ -85,7 +85,7 @@ class Platform extends BaseModel
     {
         return [
             'id' => 'ID',
-            'plat_name' => '平台名称',
+            'plat_name' => '项目名称',
             'add_time' => 'Add Time',
             'add_user_id' => 'Add User ID',
             'add_user_name' => 'Add User Name',
@@ -129,7 +129,7 @@ class Platform extends BaseModel
         ];
     }
     public function getContactList()
-    {   
-        return $this->hasMany(Contact::className(), ['belong_id' => 'id'])->where(['model'=>'platform']);
+    {
+        return $this->hasMany(Contact::className(), ['belong_id' => 'id'])->where(['model' => 'platform']);
     }
 }

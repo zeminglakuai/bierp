@@ -39,6 +39,7 @@ class GoodsController extends BaseController
 
     public function actionIndex()
     {
+
         $sdata = Yii::$app->request->get();
 
         $goods_name  = trim(Yii::$app->request->get('goods_name'));
@@ -61,19 +62,28 @@ class GoodsController extends BaseController
         $export = is_numeric(Yii::$app->request->get('export')) ? Yii::$app->request->get('export') : 0;
 
         //得到商品库存
+
         $query = new \yii\db\Query();
-        $goods_list = $query->select('g.*,b.*,gs.supplier_price')
-            ->from('goods as g')
-            ->leftjoin('brand as b', 'b.id = g.brand_id')
-            ->leftjoin('goods_supplier as gs', 'gs.goods_id=g.goods_id')
-            ->where('g.goods_status=1 ');
+        if (empty($sdata)) {
+            $goods_list = $query->select('g.goods_id,g.cat_id,g.goods_sn,g.goods_name,g.brand_id,g.market_price,g.shop_price,g.warn_number,g.isbn,b.*')
+                ->from('goods as g')
+                ->leftjoin('brand as b', 'b.id = g.brand_id')
+                ->where('g.goods_status=1 ');
+        } else {
+            $goods_list = $query->select('g.goods_id,g.cat_id,g.goods_sn,g.goods_name,g.brand_id,g.market_price,g.shop_price,g.warn_number,g.isbn,b.*,gs.supplier_price')
+                ->from('goods as g')
+                ->leftjoin('brand as b', 'b.id = g.brand_id')
+                ->leftjoin('goods_supplier as gs', 'gs.goods_id=g.goods_id')
+                ->where('g.goods_status=1 ');
+        }
+
 
         /*获取滞销时间*/
 
         if ($goods_id) {
             $goods_list = $goods_list->andwhere(['g.goods_id' => $goods_id]);
         }
-        if ($type != 5) {
+        if ($type != 1) {
             $goods_list = $query->andwhere(['g.type' => $type]);
             $sdata['type'] = $type;
         }
@@ -141,23 +151,27 @@ class GoodsController extends BaseController
         $cat_list = Category::cat_list(0, $category);
         // /得到供货商列表
         //$su_list = Supplier::get_select_list();
-        if ($goods_list) {
-            foreach ($goods_list as $key => $val) {
-                $data = Yii::$app->db->createCommand("select s.goods_id,s.out_time,s.add_time,s.number,se.store_name from stock s left join store se on se.id=s.store_id where s.number>0 and goods_id=" . $val['goods_id'])->queryAll();
+        /* if ($type == 5) {
+            if ($goods_list) {
+                foreach ($goods_list as $key => $val) {
+                    $data = Yii::$app->db->createCommand("select s.goods_id,s.out_time,s.add_time,s.number,se.store_name from stock s left join store se on se.id=s.store_id where s.number>0 and goods_id=" . $val['goods_id'])->queryAll();
 
-                foreach ($data as $k => $v) {
-                    if ($v['out_time'] > 0) {
-                        $data[$k]['time'] = ceil((time() - $v['out_time']) / 86400);
-                    } else {
-                        $data[$k]['time'] = ceil((time() - $v['add_time']) / 86400);
+                    foreach ($data as $k => $v) {
+                        if ($v['out_time'] > 0) {
+                            $data[$k]['time'] = ceil((time() - $v['out_time']) / 86400);
+                        } else {
+                            $data[$k]['time'] = ceil((time() - $v['add_time']) / 86400);
+                        }
                     }
-                }
-                $goods_list[$key]['data'] = $data;
+                    $goods_list[$key]['data'] = $data;
 
-                $goods_list[$key]['goods_supplier'] = Yii::$app->db->createCommand("select gs.goods_supplier_id,s.supplier_name,s.tel,s.contact,gs.supplier_price from goods_supplier gs left join goods g on g.supplier_id=gs.supplier_id left join supplier s on s.id=gs.supplier_id where gs.goods_id=" . $val['goods_id'])->queryAll();
-                $goods_list[$key]['goods_platform'] = Yii::$app->db->createCommand("SELECT gp.goods_platform_id, gp.platform_id,gp.enddate,gp.startdate,gp.platform_price, p.plat_name,p.contract_start_time,p.contract_end_time,p.contract_contact, p.contract_tel FROM goods_platform as gp LEFT JOIN goods as g ON g.goods_id=gp.goods_id LEFT JOIN platform as p ON  p.id =gp.platform_id WHERE gp.goods_id =" . $val['goods_id'])->queryAll();
+                    $goods_list[$key]['goods_supplier'] = Yii::$app->db->createCommand("select gs.goods_supplier_id,s.supplier_name,s.tel,s.contact,gs.supplier_price from goods_supplier gs left join goods g on g.supplier_id=gs.supplier_id left join supplier s on s.id=gs.supplier_id where gs.goods_id=" . $val['goods_id'])->queryAll();
+                    $sql = "SELECT gp.goods_platform_id, gp.platform_id,gp.enddate,gp.startdate,gp.platform_price, p.plat_name,p.contract_start_time,p.contract_end_time,p.contract_contact, p.contract_tel FROM goods_platform as gp LEFT JOIN goods as g ON g.goods_id=gp.goods_id LEFT JOIN platform as p ON  p.id =gp.platform_id WHERE gp.goods_id =" . $val['goods_id'];
+                    $goods_list[$key]['goods_platform'] = Yii::$app->db->createCommand("SELECT gp.goods_platform_id, gp.platform_id,gp.enddate,gp.startdate,gp.platform_price, p.plat_name,p.contract_start_time,p.contract_end_time,p.contract_contact, p.contract_tel FROM goods_platform as gp LEFT JOIN goods as g ON g.goods_id=gp.goods_id LEFT JOIN platform as p ON  p.id =gp.platform_id WHERE gp.goods_id =" . $val['goods_id'])->queryAll();
+                }
             }
-        }
+        } */
+
 
 
         // /得到品牌列表
@@ -166,14 +180,14 @@ class GoodsController extends BaseController
             'goods_list' => $goods_list,
             'cat_list' => $cat_list,
             'brand_list' => $brand_list,
-            'su_list' => $su_list,
+            // 'su_list' => $su_list,
             'pages' => $pages,
             'goods_name' => $goods_name,
             'brand_id' => $brand_id,
             'brand' => $brand,
             'category' => $category,
             'supplier_name' => $supplier_name,
-            'supplier_info' => $supplier_info,
+            // 'supplier_info' => $supplier_info,
             'purchase_start' => $purchase_start,
             'purchase_end' => $purchase_end,
             'market_start' => $market_start,
@@ -210,7 +224,7 @@ class GoodsController extends BaseController
                 'goods' => $goods,
                 'supp_list' => $supp_list,
                 'platform' => $platform,
-                'supplier_price' => $supplier_price,
+                // 'supplier_price' => $supplier_price,
                 'goods_supplier' => $goods_list['goods_supplier'],
                 'goods_platform' => $goods_list['goods_platform'],
 
@@ -407,6 +421,7 @@ class GoodsController extends BaseController
         //分类列表
         //得到商品分类 并分级
         $cat_list = Category::cat_list(0, $category);
+        $platform = Yii::$app->db->createCommand("SELECT * FROM platform")->queryAll();
         //品牌列表
         $brand_list = Brand::get_select_list();
         //得到供货商列表
@@ -417,6 +432,7 @@ class GoodsController extends BaseController
             'brand_list' => $brand_list,
             'oparate' => 'insert',
             'type' => $type,
+            'platform' => $platform,
         ]);
     }
 
@@ -425,9 +441,10 @@ class GoodsController extends BaseController
     {
 
         $supplier       = Yii::$app->request->post('supplier');
-        $type       = Yii::$app->request->post('type');
-        $purchase_price = Yii::$app->request->post('purchase_price');
 
+        $type       = Yii::$app->request->post('type');
+        $platform = Yii::$app->request->post('platform');
+        $purchase_price = Yii::$app->request->post('purchase_price');
         $goods = new Goods();
         $goods->load(Yii::$app->request->post());
 
@@ -450,15 +467,17 @@ class GoodsController extends BaseController
         } else {
             $links = [['link_name' => '返回列表', 'link_url' => URL::to(['/goods', 'type' => $type])]];
         }
+        if (empty($platform)) {
+            Message::show_message('平台不能为空', [], 'error');
+        }
 
-
-        if (empty($goods->goods_sn)) {
-            Message::show_message('请填写商品型号', [], 'error');
+        if (empty($goods->isbn)) {
+            Message::show_message('请填写商品条形码', [], 'error');
         } else {
             //检查goods_sn是不是重复
-            $check_goods = Goods::find()->where(['goods_sn' => $goods->goods_sn])->one();
+            $check_goods = Goods::find()->where(['goods_sn' => $goods->isbn])->one();
             if (isset($check_goods->goods_id)) {
-                Message::show_message('商品货号重复', [], 'error');
+                Message::show_message('条形码重复', [], 'error');
             }
         }
 
@@ -496,6 +515,8 @@ class GoodsController extends BaseController
         $goods->add_time = time();
         $goods->add_user_id = Yii::$app->session['manage_user']['id'];
         $goods->add_user_name = Yii::$app->session['manage_user']['admin_name'];
+        $goods->depart_id = Yii::$app->session['manage_user']['depart_id'];
+        $goods->depart_name = Yii::$app->session['manage_user']['depart_name'];
         $goods->goods_status = 0;
 
 
@@ -511,6 +532,23 @@ class GoodsController extends BaseController
                     $FileInfo->file_desc = $value['file_desc'];
                     $FileInfo->model = 'goods';
                     $FileInfo->save(false);
+                }
+            }
+        }
+        $goods_id = $goods->goods_id;
+        foreach ($platform as $key => $val) {
+            if ($val['goods_platform_id'] != '') {
+                if ($val['platform_id'] != '') {
+                    $val['platform_price'] = $val['platform_price'] ? $val['platform_price'] : 0;
+                    Yii::$app->db->createCommand("update goods_platform set goods_id=" . $goods_id . " , platform_id=" . $val['platform_id'] . ", enddate='" . $val['enddate'] . "' , startdate='" . $val['startdate'] . "',platform_price=" . $val['platform_price'] . ", daifa=" . $val['daifa'] . " where goods_platform_id=" . $val['goods_platform_id'])->execute();
+                } else {
+                    Yii::$app->db->createCommand(" DELETE FROM goods_platform  where goods_platform_id=" . $val['goods_platform_id'])->execute();
+                }
+            } else {
+                if ($val['platform_id'] != '') {
+
+                    //                        Yii::$app->db->createCommand("insert into goods_supplier goods_id=".$goods_id." and supplier_id=".$val['supplier_id']." and supplier_price=".$val['supplier_price'])->execute();
+                    Yii::$app->db->createCommand("insert into goods_platform (goods_id,platform_id,startdate,enddate,daifa,platform_price) values ($goods_id," . $val['platform_id'] . ",'" . $val['startdate'] . "','" . $val['enddate'] . "'," . $val['daifa'] . "," . $val['platform_price'] . ")")->execute();
                 }
             }
         }
@@ -562,7 +600,6 @@ class GoodsController extends BaseController
         $supp_list = $query->select('id,supplier_name as name')
             ->from('supplier')
             ->where(['like', 'supplier_name', $q])
-            ->orwhere(['like', 'simple_name', $q])
             ->all();
         die(json_encode($supp_list));
     }

@@ -17,31 +17,32 @@ use app\common\config\sys_config;
       <div class="form-group">
         <label class="col-sm-2 control-label">项目：</label>
         <div class="col-sm-9">
-          <input type="text" id="custom" name="ExportOrder[custom_id]" class="form-control" value="<?= $export_order->custom_id?>">
+          <input type="text" id="custom" name="ExportOrder[custom_id]" class="form-control" value="<?= $export_order->custom_id ?>">
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-2 control-label">备注：</label>
         <div class="col-sm-9" id="role_list">
-          <input type="hidden" name="id" class="form-control" value="<?= $sell_order->id?>">
-          <input type="text" name="ExportOrder[remark]" class="form-control" value="<?= $export_order->remark?>">
+          <input type="hidden" name="id" class="form-control" value="<?= $sell_order->id ?>">
+          <input type="text" name="ExportOrder[remark]" class="form-control" value="<?= $export_order->remark ?>">
         </div>
       </div>
     </form>
   </div>
 </div>
 
-<?= app\common\widgets\Submit::widget(['model'=>$supplier,'model_name'=>"export-order",'form_name'=>'order_form']); ?>
+<?= app\common\widgets\Submit::widget(['model' => $supplier, 'model_name' => "export-order", 'form_name' => 'order_form']); ?>
 <script type="text/javascript">
-$("#custom").tokenInput("<?= Url::to(['/export-order/token-custom-search'])?>",
-  {
-    theme:'facebook', 
-    hintText:'请输入要搜索的关键字',
-    tokenLimit:1
-    <?php if($export_order->custom_id >= 1){ ?>,prePopulate:[{id:'<?= $export_order->custom_id?>',name:'<?= $export_order->custom_name?>'}],<?php }?>
-  }
-);
-  
+  $("#custom").tokenInput("<?= Url::to(['/export-order/token-custom-search']) ?>", {
+    theme: 'facebook',
+    hintText: '请输入要搜索的关键字',
+    tokenLimit: 1
+    <?php if ($export_order->custom_id >= 1) { ?>,
+      prePopulate: [{
+        id: '<?= $export_order->custom_id ?>',
+        name: '<?= $export_order->custom_name ?>'
+      }],
+    <?php } ?>
+  });
 </script>
- 

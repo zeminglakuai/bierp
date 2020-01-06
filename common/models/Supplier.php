@@ -10,6 +10,7 @@ use app\common\models\Admin;
 use app\common\models\Contact;
 use app\common\models\Address;
 use app\common\models\BaseModel;
+
 class Supplier extends BaseModel
 {
     /**
@@ -26,8 +27,8 @@ class Supplier extends BaseModel
     public function rules()
     {
         return [
-            [['is_daifa','supplier_status'], 'integer'],
-            [['supplier_name','title', 'tel','account_period','tax_code','address','store_address','position', 'contact', 'qq', 'remark', 'simple_name', 'depart', 'contact2', 'tel2', 'qq2', 'contact3', 'tel3', 'qq3', 'contact4', 'tel4', 'qq4', 'bank_name', 'bank_open', 'bank_code','alipay'], 'string', 'max' => 233],
+            [['is_daifa', 'supplier_status'], 'integer'],
+            [['supplier_name', 'bank_payee', 'title', 'tel', 'account_period', 'tax_code', 'address', 'store_address', 'position', 'contact', 'qq', 'remark', 'simple_name', 'depart', 'contact2', 'tel2', 'qq2', 'contact3', 'tel3', 'qq3', 'contact4', 'tel4', 'qq4', 'bank_name', 'bank_open', 'bank_code', 'alipay'], 'string', 'max' => 233],
             [['guhua'], 'string', 'max' => 213]
         ];
     }
@@ -108,49 +109,50 @@ class Supplier extends BaseModel
         ];
     }
     public function get_select_list()
-    {   
-    //填充第一条为 请选择供货商
-        $list_1 = [0=>['id'=>'0','simple_name'=>'选择供货商']];
-        $list  =  self::find()->orderby(['CONVERT( simple_name USING gbk ) COLLATE gbk_chinese_ci '=>SORT_ASC])->all();
+    {
+        //填充第一条为 请选择供货商
+        $list_1 = [0 => ['id' => '0', 'simple_name' => '选择供货商']];
+        $list  =  self::find()->orderby(['CONVERT( simple_name USING gbk ) COLLATE gbk_chinese_ci ' => SORT_ASC])->all();
         //处理每条数据前 加上首字母
         foreach ($list as $key => $value) {
-            $list[$key]['simple_name'] = Pinyin::encode($value['simple_name']).'-'.$value['simple_name'];
+            $list[$key]['simple_name'] = Pinyin::encode($value['simple_name']) . '-' . $value['simple_name'];
         }
-        $new_list = array_merge($list_1,$list);
+        $new_list = array_merge($list_1, $list);
         return $new_list;
     }
 
     //3证
     public function getSupplierThreez()
-    {   
-        return $this->hasMany(FileInfo::className(), ['belong_id' => 'id'])->where(['model'=>$this->tableName(),'type'=>'3z']);
+    {
+        return $this->hasMany(FileInfo::className(), ['belong_id' => 'id'])->where(['model' => $this->tableName(), 'type' => '3z']);
     }
 
     //廉洁协议
     public function getSupplierProtocol()
-    {   
-        return $this->hasMany(FileInfo::className(), ['belong_id' => 'id'])->where(['model'=>$this->tableName(),'type'=>'protocol']);
+    {
+        return $this->hasMany(FileInfo::className(), ['belong_id' => 'id'])->where(['model' => $this->tableName(), 'type' => 'protocol']);
     }
 
     //合同
     public function getSupplierContract()
-    {   
-        return $this->hasMany(FileInfo::className(), ['belong_id' => 'id'])->where(['model'=>$this->tableName(),'type'=>'contract']);
+    {
+        return $this->hasMany(FileInfo::className(), ['belong_id' => 'id'])->where(['model' => $this->tableName(), 'type' => 'contract']);
     }
 
     public function getContactList()
-    {   
-        return $this->hasMany(Contact::className(), ['belong_id' => 'id'])->where(['model'=>'supplier']);
+    {
+        return $this->hasMany(Contact::className(), ['belong_id' => 'id'])->where(['model' => 'supplier']);
     }
 
     public function getAddress()
-    {   
-        return $this->hasMany(Address::className(), ['belong_id' => 'id'])->where(['type'=>'supplier']);
+    {
+        return $this->hasMany(Address::className(), ['belong_id' => 'id'])->where(['type' => 'supplier']);
     }
-    
-    public function getDataOne($id){
+
+    public function getDataOne($id)
+    {
         $query = new \yii\db\Query();
-        $data= $query->select()->from('supplier')->where(['id'=>$id])->one();
+        $data = $query->select()->from('supplier')->where(['id' => $id])->one();
         return $data;
-    } 
+    }
 }

@@ -37,7 +37,7 @@ class ShippingMethodConfig extends BaseModel
         return [
             'id' => 'ID',
             'shipping_id' => 'Shipping ID',
-            'area_desc' => '区域描述',
+            'area_desc' => '描述',
             'basic_price' => '基础价格',
             'per_kg_price' => '每公斤加价',
             'shipping_name' => '快递名称',
@@ -75,7 +75,4 @@ class ShippingMethodConfig extends BaseModel
             'add_time' => 'Add Time',
         ];
     }
-
-
-
 }

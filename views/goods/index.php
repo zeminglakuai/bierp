@@ -157,12 +157,12 @@ $this->params['breadcrumbs'][] = $this->context->page_title;
                                                                 echo 'sorting';
                                                             } ?> user_sort" data-type="goods_id">ID</th>
 
-                    <th width="13%" align="center">品名</th>
-                    <th width="7%" align="center">品牌</th>
-                    <th width="5%" align="center">型号</th>
+                    <th width="18%" align="center">品名</th>
+                    <th width="13%" align="center">品牌</th>
+                    <th width="11%" align="center">型号</th>
 
 
-                    <th width="5%" align="center" class="<?php if ($sortby == 'shop_price') {
+                    <th width="11%" align="center" class="<?php if ($sortby == 'shop_price') {
                                                                 if ($order == 4) {
                                                                     echo 'sorting_asc';
                                                                 } else {
@@ -171,7 +171,7 @@ $this->params['breadcrumbs'][] = $this->context->page_title;
                                                             } else {
                                                                 echo 'sorting';
                                                             } ?> user_sort" data-type="shop_price">销售价</th>
-                    <th width="5%" align="center" class="<?php if ($sortby == 'market_price') {
+                    <th width="11%" align="center" class="<?php if ($sortby == 'market_price') {
                                                                 if ($order == 4) {
                                                                     echo 'sorting_asc';
                                                                 } else {
@@ -180,9 +180,9 @@ $this->params['breadcrumbs'][] = $this->context->page_title;
                                                             } else {
                                                                 echo 'sorting';
                                                             } ?> user_sort" data-type="market_price">市场价</th>
-                    <th width="10%" align="center">条码</th>
+                    <th width="16%" align="center">条码</th>
                     <?php
-                    if ($type == 1) {
+                    if ($type == 5) {
                     ?>
                         <th width="10%" align="center">供货商</th>
                         <th width="5%" align="center">采购价</th>
@@ -202,7 +202,7 @@ $this->params['breadcrumbs'][] = $this->context->page_title;
                         <tr>
                             <td><?= $vv['goods_id'] ?></td>
 
-                            <td><span title="<?= $vv['goods_name'] ?>" class="<?= $vv['is_active'] ? '' : 'unactive' ?>">
+                            <td><span title="<?= $vv['goods_name'] ?>">
                                     <?= strlen($vv['goods_name']) > 60 ? mb_substr($vv['goods_name'], 0, 20, 'utf-8') . '...' : $vv['goods_name'] ?>
                                 </span></td>
                             <td><?= $vv['brand_name'] ?></td>
@@ -212,7 +212,7 @@ $this->params['breadcrumbs'][] = $this->context->page_title;
                             <td><?= $vv['market_price'] ?></td>
                             <td><?= $vv['isbn'] ?></td>
                             <?php
-                            if ($type == 1) { ?>
+                            if ($type == 5) { ?>
                                 <td> <?php
 
                                         if ($vv['goods_supplier']) {

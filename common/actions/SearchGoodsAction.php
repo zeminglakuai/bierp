@@ -105,6 +105,7 @@ class SearchGoodsAction extends Action
             ->orderby([$search_data['sortby'] => $search_data['order']])
             ->groupBy(' g.goods_id')
             ->limit($pages->limit)
+            ->andwhere(['g.goods_status' => 1])
             ->all();
 
         //得到商品分类 并分级

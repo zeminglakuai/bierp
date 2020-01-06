@@ -83,11 +83,9 @@ use app\common\config\sys_config;
         var platformId = document.getElementById("platformId");
         var id = platformId.options[platformId.selectedIndex].value;
 
-
-
         $.get("/custom-order/getcontact?id=" + id, function(result) {
             if (result.error == 1) {
-                $('.contact').append(result.content);
+                $('.contact').html(result.content);
 
             } else {
                 console.log(result.content);

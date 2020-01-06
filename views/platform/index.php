@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->context->page_title;
 <?= app\common\widgets\PageSearch::widget([
   'url' => Url::to(['platform/index']),
   'condition' => [
-    ['type' => 'text', 'label' => 'supplier_name', 'label_name' => '平台名称'],
+    ['type' => 'text', 'label' => 'supplier_name', 'label_name' => '项目名称'],
     ['type' => 'token_input', 'table_name' => 'custom_id', 'name_name' => 'custom_id', 'label' => 'custom_id', 'label_name' => '客户', 'token_url' => Url::to(['platform/token-custom-order'])],
   ]
 ])
@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->context->page_title;
 ?>
 
 <?= app\common\widgets\OperateBar::widget([
-  'create' => ['label_name' => '添加平台', 'id' => 'create_plat', 'type' => 'js', 'url' => Url::to(["platform/create"])],
+  'create' => ['label_name' => '添加项目', 'id' => 'create_plat', 'type' => 'js', 'url' => Url::to(["platform/create"])],
   'refresh' => ['label_name' => '刷新', 'type' => 'js', 'id' => 'add_custom', 'icon' => 'plus'],
 ])
 ?>

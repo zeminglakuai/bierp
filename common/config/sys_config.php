@@ -48,8 +48,8 @@ class sys_config
         ],
         'base' => [
             'label' => 'barcode', 'name' => '商品管理', 'sub_list' => [
-                'goods' => ['label' => 'qrcode', 'name' => '商品分布', 'title' => 'Goods', 'is_approval' => true],
-                'goods?type=5' => ['label' => 'qrcode', 'name' => '商品列表', 'title' => 'Goods', 'is_approval' => true],
+                'goods' => ['label' => 'qrcode', 'name' => '商品列表', 'title' => 'Goods', 'is_approval' => true],
+                // 'goods?type=5' => ['label' => 'qrcode', 'name' => '商品分布', 'title' => 'Goods', 'is_approval' => true],
                 'goods?type=2' => ['label' => 'qrcode', 'name' => '样品管理', 'title' => 'Goods', 'is_approval' => true],
                 'goods?type=3' => ['label' => 'qrcode', 'name' => '商品整合', 'title' => 'Goods', 'is_approval' => true],
                 'supplier' => ['label' => 'sort-by-attributes', 'name' => '供货商管理', 'title' => 'Supplier', 'is_approval' => true],

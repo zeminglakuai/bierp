@@ -26,7 +26,8 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
     'model_name' => 'custom-order',
     'label_arr' => [
         'order_name' => '',
-        'custom&custom_name' => ['link' => true, 'id' => 'custom', 'url' => Url::to(["custom/view"])],
+        'platform_name' => 'platform_name',
+        'contact_name' => 'contact_name',
         'remark' => ''
     ],
     'status_label' => 'custom_order_status',
@@ -38,6 +39,7 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
         <div class="ibox-content" style="padding:10px 5px 5px 10px;">
             <a class="btn btn-primary btn-sm" id="create_goods">添加新商品</a>
             <a class="btn btn-primary btn-sm" id="create_val">添加新字段</a>
+            <a class="btn btn-primary btn-sm" id="create_fuze">项目转移</a>
             <form name="" id="goods_list_form">
                 <table class="table table-hover dataTable">
                     <thead id="goods_list_thead" style="width:2730px">
@@ -186,13 +188,13 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
                             <th align="center" class="" data-type="materiel_cost" width="80px" style="width:80px">
                                 物料消耗
                             </th>
-                            <th align="center" class="" data-type="platformFee" width="80px" style="width:80px">
+                            <!-- <th align="center" class="" data-type="platformFee" width="80px" style="width:80px">
                                 <span class="table_th_tips" data-toggle="tooltip" data-placement="top" data-original-title="填写比率，根据(售价*反点比率)得出结果"> 平台扣点 </span>
                             </th>
                             <th align="center" class="" data-type="tranformFee" width="80px" style="width:80px">
                                 <span class="table_th_tips" data-toggle="tooltip" data-placement="top" data-original-title="填写比率，根据(售价*反点比率)得出结果"> 物流反点 </span>
                             </th>
-                            <!--   <th align="center" class="" data-type="other_cost" width="60px" style="width:60px">
+                               <th align="center" class="" data-type="other_cost" width="60px" style="width:60px">
                             --其他成本
                         </th> -->
                             <th align="center" class="" data-type="shipping_place" width="60px" style="width:60px">
@@ -235,14 +237,13 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
 
                         ?>
                                 <tr id="goods_row_<?= $val['id'] ?>">
-
                                     <td>
                                         <div class="checkbox i-checks">
                                             <label>
                                                 <div class="icheckbox_square-green" style="position: relative;"><input type="checkbox" class="goods_ids" name="goods_id[]" value="7169" style="position: absolute; opacity: 0;">
                                                     <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
                                                 </div>
-                                                <?php $key + 1 ?>
+                                                <?= $val['id'] ?>
                                             </label>
                                         </div>
                                     </td>
@@ -254,7 +255,6 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
 
                                                 <img src="/<?= $val['goods_img'] ?>" width=30 />
                                             <?php
-
                                             }
                                             ?>
                                         </div>
@@ -282,7 +282,17 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
                                     </td>
                                     <td>
                                         <div id="goods_store_info_<?= $val['id'] ?>" title="">
-                                            <?= $val['store_num'] ?>
+                                            <select name="supplier_id" id=""><?php if (empty($val['store_num'])) { ?><option>无库存</option><?php
+
+                                                                                                                                        } else {
+                                                                                                                                            $snum = 0;
+                                                                                                                                            foreach ($val['store_num'] as $key => $value) {
+                                                                                                                                                $snum += $value['number'];
+                                                                                                                                            ?><option><?php echo $value['store_name'] . '：' . $value['number']; ?></option><?php
+                                                                                                                                                                                                                        } ?><option>总库存：<?= $snum ?></option><?php } ?>
+
+
+                                            </select>
                                         </div>
                                     </td>
                                     <td>
@@ -359,20 +369,17 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
         </td>
 
         <td>
-            <div id="finalCost_<?= $val['id'] ?>" title="">
-                <?= $val['finalCost'] ?>
+            <div id="finalCost_<?= $val['id'] ?>" title=""><?= $val['finalCost'] ?>
             </div>
         </td>
         <td>
-            <div id="finalCostTotal_<?= $val['id'] ?>" title="">
-                <?php echo $val['finalCostTotal'];
-                                $fc_total += $val['finalCostTotal']; ?>
+            <div id="finalCostTotal_<?= $val['id'] ?>" title=""><?php echo $val['finalCostTotal'];
+                                                                $fc_total += $val['finalCostTotal']; ?>
             </div>
         </td>
         <td>
-            <div id="faxPoint_<?= $val['id'] ?>" title="">
-                <?php echo $val['faxPoint'];
-                                $fp_total += $val['faxPoint']; ?>
+            <div id="faxPoint_<?= $val['id'] ?>" title=""><?php echo $val['faxPoint'];
+                                                            $fp_total += $val['faxPoint']; ?>
             </div>
         </td>
         <td>
@@ -382,23 +389,19 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
         </td>
 
         <td>
-            <div id="profit_<?= $val['id'] ?>" title="">
-                <?= $val['profit'] ?>
+            <div id="profit_<?= $val['id'] ?>" title=""><?= $val['profit'] ?>
             </div>
         </td>
         <td>
-            <div id="profitRate_<?= $val['id'] ?>" title="">
-                <?= $val['profitRate']; ?>
+            <div id="profitRate_<?= $val['id'] ?>" title=""><?= $val['profitRate']; ?>
             </div>
         </td>
         <td>
-            <div id="profitTotal_<?= $val['id'] ?>" title="">
-                <?= $val['profitTotal']; ?>
+            <div id="profitTotal_<?= $val['id'] ?>" title=""><?= $val['profitTotal']; ?>
             </div>
         </td>
         <td>
-            <div id="saleTotal_<?= $val['id'] ?>" title="">
-                <?= $val['saleTotal']; ?>
+            <div id="saleTotal_<?= $val['id'] ?>" title=""><?= $val['saleTotal']; ?>
             </div>
         </td>
         <td>
@@ -411,7 +414,7 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
                 <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="materiel_cost"><?= $val['materiel_cost'] ?></div>
             </div>
         </td>
-        <td>
+        <!--   <td>
             <div id="platformFee_<?= $val['id'] ?>" title="填写比率，根据(售价*反点比率)得出结果">
                 <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="platform_rate"><?= $val['platformFee'] ?></div>
             </div>
@@ -421,7 +424,7 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
                 <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="tranform_rate"><?= $val['tranformFee'] ?></div>
             </div>
         </td>
-        <!--   <td>
+         <td>
                                     <div id="other_cost_<?= $val['id'] ?>" title="">
                                         <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="other_cost"><?= $val['other_cost'] ?></div>
                                     </div>
@@ -438,22 +441,22 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
         </td>
         <td>
             <div id="is_priced_<?= $val['id'] ?>" title="">
-                <input type="checkbox" class="js-switch" data-url="" data-type="is_priced" data-id="<?= $val['id'] ?>" id="is_priced_<?= $val['id'] ?>" data-switchery="true" style="display: none;"><span class="switchery" id="is_priced_<?= $val['id'] ?>" style="box-shadow: rgb(223, 223, 223) 0px 0px 0px 0px inset; border-color: rgb(223, 223, 223); transition: border 0.4s ease 0s, box-shadow 0.4s ease 0s;"><small style="left: 0px; transition: left 0.2s ease 0s;">
-
-                    </small></span>
+                <input type="checkbox" class="js-switch" data-url="" data-type="is_priced" data-id="<?= $val['id'] ?>" id="is_priced_<?= $val['id'] ?>" data-switchery="true" style="display: none;" <?php if ($val['is_priced'] == 1) {
+                                                                                                                                                                                                            echo 'checked';
+                                                                                                                                                                                                        } ?>>
             </div>
         </td>
         <td>
             <div id="shipping_to_place_<?= $val['id'] ?>" title="">
-                <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="shipping_to_place">
-
-                    <?= $val['shipping_to_place'] ?>
+                <div class="lable_edit" data-id="<?= $val['id'] ?>" data-type="shipping_to_place"><?= $val['shipping_to_place'] ?>
                 </div>
             </div>
         </td>
         <td>
             <div id="is_need_temp_<?= $val['id'] ?>" title="">
-                <input type="checkbox" class="js-switch" data-url="" data-type="is_need_temp" data-id="<?= $val['id'] ?>" id="is_need_temp_<?= $val['id'] ?>" data-switchery="true" style="display: none;"><span class="switchery" id="is_need_temp_<?= $val['id'] ?>" style="box-shadow: rgb(223, 223, 223) 0px 0px 0px 0px inset; border-color: rgb(223, 223, 223); transition: border 0.4s ease 0s, box-shadow 0.4s ease 0s;"><small style="left: 0px; transition: left 0.2s ease 0s;"></small></span>
+                <input type="checkbox" class="js-switch" data-url="" data-type="is_need_temp" data-id="<?= $val['id'] ?>" id="is_need_temp_<?= $val['id'] ?>" data-switchery="true" style="display: none;" <?php if ($val['is_need_temp'] == 1) {
+                                                                                                                                                                                                                echo 'checked';
+                                                                                                                                                                                                            } ?>>
             </div>
         </td>
         <td>
@@ -672,6 +675,7 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
 </div>
 </div>
 
+<?= Html::jsFile('@web/js/plugins/switchery/switchery.js') ?>
 <?= app\common\widgets\OperateBar::widget([
     'create' => ['label_name' => '添加商品', 'id' => 'create_custom_order_goods', 'type' => 'js', 'url' => Url::to(["custom-order/create-goods", "order_id" => $custom_order->id])],
     // 'export'=>['label_name'=>'导出','module_name'=>'custom-order','type'=>'detail','id'=>$custom_order->id],
@@ -686,7 +690,34 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
     'backup' => ['label_name' => '返回', 'url' => Url::to(['/custom-order/']),],
 ])
 ?>
+<script type="text/javascript">
+    var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+    elems.forEach(function(html) {
+        var switchery = new Switchery(html, {
+            color: 'rgb(26, 179, 148)'
+        });
+    });
 
+    $(".js-switch").change(function() {
+        var value = $(this).prop('checked') ? 1 : 0;
+        var url = 'update-goods-label';
+        var data_id = $(this).attr('data-id');
+        var id = '<?= Yii::$app->request->get("id") ?>';
+        var data_type = $(this).attr('data-type');
+        var this_checkbox = $(this);
+        $.get(url, {
+            value: value,
+            id: id,
+            data_id: data_id,
+            data_type: data_type
+        }, function(result) {
+            if (result.error == 1) {} else {
+                this_checkbox.prop('checked', 'false');
+                layer.msg(result.message);
+            }
+        }, 'json')
+    })
+</script>
 <script type="text/javascript">
     $("#check_all").on('ifChecked', function(event) {
         $(".goods_ids").iCheck('check');
@@ -962,13 +993,13 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
         $("[data-toggle='tooltip']").tooltip();
     });
 
-    $(document).ready(function() {
+    // $(document).ready(function() {
 
-        $(".i-checks").iCheck({
-            checkboxClass: "icheckbox_square-green",
-            radioClass: "iradio_square-green",
-        })
-    });
+    //     $(".i-checks").iCheck({
+    //         checkboxClass: "icheckbox_square-green",
+    //         radioClass: "iradio_square-green",
+    //     })
+    // });
 </script>
 
 <script type="text/javascript">
@@ -1134,7 +1165,21 @@ $this->params['breadcrumbs'][] = $custom_order->order_name . '-' . $custom_order
         });
     });
 
-
+    // 转移负责人
+    $("#create_fuze").click(function() {
+        //页面层
+        layer.open({
+            type: 2,
+            title: '项目转移',
+            //skin: 'layui-layer-rim', //加上边框
+            area: ['80%', '80%'], //宽高
+            maxmin: true,
+            content: '/custom-order/create-fuze?id=<?= $custom_order->id; ?>',
+            end: function() {
+                // location.reload();
+            }
+        });
+    });
     // 创建主题
     $("#create_val").click(function() {
         //页面层

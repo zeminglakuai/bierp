@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->context->page_title;
 <?= app\common\widgets\DataList::widget([
   'model' => 'app\common\models\ShippingMethodConfig',
   'model_name' => 'shipping-method',
-  'title_arr' => ['id' => 1, 'shipping_name' => 1, 'area_desc' => 0, 'basic_price' => 1, 'per_kg_price' => 1, 'add_user_name' => 0, 'add_time' => 0],
+  'title_arr' => ['id' => 1, 'shipping_name' => 1, 'area_desc' => 0, 'add_user_name' => 0, 'add_time' => 0],
   'search_allowed' => ['shipping_name' => 2, 'area_desc' => 2,],
   'opration' => [
     'edit' => ['lable_name' => '编辑', 'type' => 'js', 'action' => 'edit', 'icorn_name' => 'edit', 'confirm' => 0],

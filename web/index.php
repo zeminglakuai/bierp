@@ -4,9 +4,10 @@ $mem_before = memory_get_usage();
 
 // comment out the following two lines when deployed to production
 defined('YII_DEBUG') or define('YII_DEBUG', true);
-defined('YII_ENV') or define('YII_ENV', 'dev');
+//defined('YII_ENV') or define('YII_ENV', 'dev');
+defined('YII_ENV') or define('YII_ENV', 'prod');
 
-error_reporting(0);
+error_reporting(E_ERROR);
 require(__DIR__ . '/../vendor/autoload.php');
 require(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
 

@@ -175,7 +175,7 @@ $this->params['breadcrumbs'][] = $oparate == 'insert' ? '添加商品' : '编辑
                                     <?php
                                     if (isset($goods_supplier)) {
                                         foreach ($goods_supplier as $key => $val) {
-                                            ?>
+                                    ?>
 
                                             <div style="margin-bottom:10px;">
 
@@ -297,30 +297,30 @@ $this->params['breadcrumbs'][] = $oparate == 'insert' ? '添加商品' : '编辑
                             <?php
                             if (isset($goods_platform)) {
                                 foreach ($goods_platform as $key => $val) {
-                                    ?>
+                            ?>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">上线平台</label>
+                                        <label class="col-sm-2 control-label"><span class="red">*</span>上线平台</label>
                                         <div class="col-sm-3">
                                             <select name="platform[<?= $key ?>][platform_id]">
                                                 <?php
-                                                        foreach ($platform as $k => $v) {
-                                                            ?>
+                                                foreach ($platform as $k => $v) {
+                                                ?>
                                                     <option value="<?= $v['id']; ?>" <?php if ($val['platform_id'] == $v['id']) {
-                                                                                                    echo "selected";
-                                                                                                }; ?>><?= $v['plat_name'] ?></option>
+                                                                                            echo "selected";
+                                                                                        }; ?>><?= $v['plat_name'] ?></option>
 
                                                 <?php
-                                                        }
-                                                        ?>
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                         <label class="col-sm-2 control-label">是否代发</label>
                                         <label><input name="platform[<?= $key ?>][daifa]" type="radio" value="0" <?php if ($val['daifa'] == 0) {
-                                                                                                                            echo "checked";
-                                                                                                                        }; ?> />是 </label>
+                                                                                                                        echo "checked";
+                                                                                                                    }; ?> />是 </label>
                                         <label><input name="platform[<?= $key ?>][daifa]" type="radio" value="1" <?php if ($val['daifa'] == 1) {
-                                                                                                                            echo "checked";
-                                                                                                                        }; ?> />否 </label>
+                                                                                                                        echo "checked";
+                                                                                                                    }; ?> />否 </label>
                                         <input name="platform[<?= $key ?>][goods_platform_id]" type="hidden" value="<?= $val['goods_platform_id']; ?>" />
                                     </div>
                                     <div class="form-group">
@@ -329,53 +329,54 @@ $this->params['breadcrumbs'][] = $oparate == 'insert' ? '添加商品' : '编辑
                                             <input type="text" name="platform[<?= $key ?>][platform_price]" spaceholder="平台价格" class="form-control" value="<?= $val['platform_price'] ?>" />
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label"> 开始日期</label>
-                                        <div class="col-sm-9">
-                                            <div class="input-group date form_date11" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                                <input class="form-control" name="platform[<?= $key ?>][startdate]" size="16" value="<?= $val['startdate'] ?>" type="text" readonly="" placeholder="开始时间">
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                </span>
+                                    <div style="display: none">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"> 开始日期</label>
+                                            <div class="col-sm-9">
+                                                <div class="input-group date form_date11" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                                    <input class="form-control" name="platform[<?= $key ?>][startdate]" size="16" value="<?= $val['startdate'] ?>" type="text" readonly="" placeholder="开始时间">
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <script>
-                                        $('.form_date11').datetimepicker({
-                                            language: 'zh-CN',
-                                            weekStart: 1,
-                                            todayBtn: 1,
-                                            autoclose: 1,
-                                            todayHighlight: 1,
-                                            startView: 2,
-                                            minView: 2,
-                                            forceParse: 0
-                                        });
-                                    </script>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">结束日期</label>
-                                        <div class="col-sm-9">
-                                            <div class="input-group date form_date12" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                                <input class="form-control" name="platform[<?= $key ?>][enddate]" size="16" value="<?= $val['enddate'] ?>" type="text" readonly="" placeholder="结束日期">
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                </span>
+                                        <script>
+                                            $('.form_date11').datetimepicker({
+                                                language: 'zh-CN',
+                                                weekStart: 1,
+                                                todayBtn: 1,
+                                                autoclose: 1,
+                                                todayHighlight: 1,
+                                                startView: 2,
+                                                minView: 2,
+                                                forceParse: 0
+                                            });
+                                        </script>
+                                        <div class="form-group" style="display: none">
+                                            <label class="col-sm-2 control-label">结束日期</label>
+                                            <div class="col-sm-9">
+                                                <div class="input-group date form_date12" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                                    <input class="form-control" name="platform[<?= $key ?>][enddate]" size="16" value="<?= $val['enddate'] ?>" type="text" readonly="" placeholder="结束日期">
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
+                                        <script>
+                                            $('.form_date12').datetimepicker({
+                                                language: 'zh-CN',
+                                                weekStart: 1,
+                                                todayBtn: 1,
+                                                autoclose: 1,
+                                                todayHighlight: 1,
+                                                startView: 2,
+                                                minView: 2,
+                                                forceParse: 0
+                                            });
+                                        </script>
                                     </div>
-                                    <script>
-                                        $('.form_date12').datetimepicker({
-                                            language: 'zh-CN',
-                                            weekStart: 1,
-                                            todayBtn: 1,
-                                            autoclose: 1,
-                                            todayHighlight: 1,
-                                            startView: 2,
-                                            minView: 2,
-                                            forceParse: 0
-                                        });
-                                    </script>
-
 
                             <?php
                                 }
@@ -389,7 +390,7 @@ $this->params['breadcrumbs'][] = $oparate == 'insert' ? '添加商品' : '编辑
                                         <option value="" selected>选择上线平台</option>
                                         <?php
                                         foreach ($platform as $k => $v) {
-                                            ?>
+                                        ?>
                                             <option value="<?= $v['id']; ?>"><?= $v['plat_name'] ?></option>
 
                                         <?php
@@ -407,52 +408,7 @@ $this->params['breadcrumbs'][] = $oparate == 'insert' ? '添加商品' : '编辑
                                     <input type="text" name="platform[11][platform_price]" spaceholder="平台价格" class="form-control" value="" />
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label"> 开始日期</label>
-                                <div class="col-sm-9">
-                                    <div class="input-group date form_date11" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                        <input class="form-control" name="platform[11][startdate]" size="16" value="" type="text" readonly="" placeholder="开始时间">
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <script>
-                                $('.form_date11').datetimepicker({
-                                    language: 'zh-CN',
-                                    weekStart: 1,
-                                    todayBtn: 1,
-                                    autoclose: 1,
-                                    todayHighlight: 1,
-                                    startView: 2,
-                                    minView: 2,
-                                    forceParse: 0
-                                });
-                            </script>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">结束日期</label>
-                                <div class="col-sm-9">
-                                    <div class="input-group date form_date12" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                        <input class="form-control" name="platform[11][enddate]" size="16" value="" type="text" readonly="" placeholder="结束日期">
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <script>
-                                $('.form_date12').datetimepicker({
-                                    language: 'zh-CN',
-                                    weekStart: 1,
-                                    todayBtn: 1,
-                                    autoclose: 1,
-                                    todayHighlight: 1,
-                                    startView: 2,
-                                    minView: 2,
-                                    forceParse: 0
-                                });
-                            </script>
+
 
 
                             <div class="form-group">
@@ -463,7 +419,7 @@ $this->params['breadcrumbs'][] = $oparate == 'insert' ? '添加商品' : '编辑
                                         <option value="" selected>选择上线平台</option>
                                         <?php
                                         foreach ($platform as $k => $v) {
-                                            ?>
+                                        ?>
                                             <option value="<?= $v['id']; ?>"><?= $v['plat_name'] ?></option>
 
                                         <?php
@@ -482,40 +438,7 @@ $this->params['breadcrumbs'][] = $oparate == 'insert' ? '添加商品' : '编辑
                                     <input type="text" name="platform[12][platform_price]" spaceholder="平台价格" class="form-control" value="" />
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label"> 开始日期</label>
-                                <div class="col-sm-9">
-                                    <div class="input-group date form_date13" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                        <input class="form-control" name="platform[12][startdate]" size="16" value="" type="text" readonly="" placeholder="开始时间">
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <script>
-                                $('.form_date13').datetimepicker({
-                                    language: 'zh-CN',
-                                    weekStart: 1,
-                                    todayBtn: 1,
-                                    autoclose: 1,
-                                    todayHighlight: 1,
-                                    startView: 2,
-                                    minView: 2,
-                                    forceParse: 0
-                                });
-                            </script>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">结束日期</label>
-                                <div class="col-sm-9">
-                                    <div class="input-group date form_date14" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                        <input class="form-control" name="platform[12][enddate]" size="16" value="" type="text" readonly="" placeholder="结束日期">
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
+
                             <script>
                                 $('.form_date14').datetimepicker({
                                     language: 'zh-CN',
@@ -536,7 +459,7 @@ $this->params['breadcrumbs'][] = $oparate == 'insert' ? '添加商品' : '编辑
                                         <option value="" selected>选择上线平台</option>
                                         <?php
                                         foreach ($platform as $k => $v) {
-                                            ?>
+                                        ?>
                                             <option value="<?= $v['id']; ?>"><?= $v['plat_name'] ?></option>
 
                                         <?php
@@ -554,54 +477,12 @@ $this->params['breadcrumbs'][] = $oparate == 'insert' ? '添加商品' : '编辑
                                     <input type="text" name="platform[13][platform_price]" spaceholder="平台价格" class="form-control" value="" />
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label"> 开始日期</label>
-                                <div class="col-sm-9">
-                                    <div class="input-group date form_date15" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                        <input class="form-control" name="platform[13][startdate]" size="16" value="" type="text" readonly="" placeholder="开始时间">
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <script>
-                                $('.form_date15').datetimepicker({
-                                    language: 'zh-CN',
-                                    weekStart: 1,
-                                    todayBtn: 1,
-                                    autoclose: 1,
-                                    todayHighlight: 1,
-                                    startView: 2,
-                                    minView: 2,
-                                    forceParse: 0
-                                });
-                            </script>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">结束日期</label>
-                                <div class="col-sm-9">
-                                    <div class="input-group date form_date16" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                        <input class="form-control" name="platform[13][enddate]" size="16" value="" type="text" readonly="" placeholder="结束日期">
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <script>
-                                $('.form_date16').datetimepicker({
-                                    language: 'zh-CN',
-                                    weekStart: 1,
-                                    todayBtn: 1,
-                                    autoclose: 1,
-                                    todayHighlight: 1,
-                                    startView: 2,
-                                    minView: 2,
-                                    forceParse: 0
-                                });
-                            </script>
+
                             <?= app\common\widgets\Radio::widget(['label_name' => '<span class="red">*</span>含税', 'name' => "Goods[is_clude_tax]", 'value' => $goods->is_clude_tax ? $goods->is_clude_tax : 1, 'init_value' => [['label_name' => 是, 'value' => '1'], ['label_name' => 否, 'value' => '0']]]); ?>
-                            <?= app\common\widgets\Input::widget(['label_name' => '<span class="red">*</span>含运费', 'name' => "Goods[clude_shipping_fee]", 'value' => $goods->clude_shipping_fee]); ?>
+
+                            <?= app\common\widgets\Radio::widget(['label_name' => '<span class="red">*</span>含运费', 'name' => "Goods[clude_shipping_fee]", 'value' => $goods->clude_shipping_fee ? $goods->clude_shipping_fee : 1, 'init_value' => [['label_name' => 是, 'value' => '1'], ['label_name' => 否, 'value' => '0']]]); ?>
+
+
                             <?= app\common\widgets\Radio::widget(['label_name' => '<span class="red">*</span>商品有效', 'name' => "Goods[is_active]", 'value' => $goods->is_active ? $goods->is_active : 1, 'init_value' => [['label_name' => 是, 'value' => '1'], ['label_name' => 否, 'value' => '0']], 'tips' => 'asdas']); ?>
 
 
