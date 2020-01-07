@@ -32,8 +32,8 @@ $this->params['breadcrumbs'][] = $oparate == 'insert' ? '添加商品' : '编辑
 
 
 
-
-<form action="<?= $oparate == 'insert' ? Url::to(['/goods/insert']) : Url::to(['/goods/update']) ?>" method="post" class="form-horizontal" enctype="multipart/form-data">
+<form method="post" class="form-horizontal" id="order_form" enctype="multipart/form-data">
+    <!-- <form action="" method="post" class="form-horizontal" enctype="multipart/form-data"> -->
     <div class="tabs-container">
         <ul class="nav nav-tabs">
             <li class="active"> <a data-toggle="tab" href="#activity_name">基本信息</a></li>
@@ -76,7 +76,7 @@ $this->params['breadcrumbs'][] = $oparate == 'insert' ? '添加商品' : '编辑
                         <div class="col-xs-9">
                             <?= app\common\widgets\Input::widget(['label_name' => '商品名称', 'name' => "Goods[goods_name]", 'value' => $goods->goods_name, 'tips' => '', 'inneed' => true]); ?>
                             <?= app\common\widgets\Input::widget(['label_name' => '商品型号', 'name' => "Goods[goods_sn]", 'value' => $goods->goods_sn, 'tips' => '', 'inneed' => true]); ?>
-                            <?= app\common\widgets\Input::widget(['label_name' => '条形码', 'name' => "Goods[isbn]", 'value' => $goods->isbn, 'tips' => '']); ?>
+                            <?= app\common\widgets\Input::widget(['label_name' => '条形码', 'name' => "Goods[isbn]", 'value' => $goods->isbn, 'tips' => '', 'inneed' => true]); ?>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label"><span class="red">*</span>商品分类</label>
@@ -169,7 +169,7 @@ $this->params['breadcrumbs'][] = $oparate == 'insert' ? '添加商品' : '编辑
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">供货商价格</label>
+                                <label class="col-sm-2 control-label"><span class="red">*</span>供货商价格</label>
                                 <div class="col-sm-10" id="supplier_choise">
 
                                     <?php
@@ -324,7 +324,7 @@ $this->params['breadcrumbs'][] = $oparate == 'insert' ? '添加商品' : '编辑
                                         <input name="platform[<?= $key ?>][goods_platform_id]" type="hidden" value="<?= $val['goods_platform_id']; ?>" />
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">平台价格</label>
+                                        <label class="col-sm-2 control-label"><span class="red">*</span>平台价格</label>
                                         <div class="col-sm-9">
                                             <input type="text" name="platform[<?= $key ?>][platform_price]" spaceholder="平台价格" class="form-control" value="<?= $val['platform_price'] ?>" />
                                         </div>
@@ -384,7 +384,7 @@ $this->params['breadcrumbs'][] = $oparate == 'insert' ? '添加商品' : '编辑
                             ?>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">上线平台</label>
+                                <label class="col-sm-2 control-label"><span class="red">*</span>上线平台</label>
                                 <div class="col-sm-3">
                                     <select name="platform[11][platform_id]">
                                         <option value="" selected>选择上线平台</option>
@@ -398,12 +398,12 @@ $this->params['breadcrumbs'][] = $oparate == 'insert' ? '添加商品' : '编辑
                                         ?>
                                     </select>
                                 </div>
-                                <label class="col-sm-2 control-label">是否代发</label>
+                                <label class="col-sm-2 control-label"><span class="red">*</span>是否代发</label>
                                 <label><input name="platform[11][daifa]" type="radio" value="0" checked />是 </label>
                                 <label><input name="platform[11][daifa]" type="radio" value="1" />否 </label>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">平台价格</label>
+                                <label class="col-sm-2 control-label"><span class="red">*</span>平台价格</label>
                                 <div class="col-sm-9">
                                     <input type="text" name="platform[11][platform_price]" spaceholder="平台价格" class="form-control" value="" />
                                 </div>
@@ -534,7 +534,8 @@ $this->params['breadcrumbs'][] = $oparate == 'insert' ? '添加商品' : '编辑
         <div class="" style="padding:1em;margin-bottom:10em;">
             <label class="col-sm-2 control-label"></label>
             <label class="col-sm-2 control-label">
-                <button type="submit" class="btn btn-danger">提交</button>
+                <a class="btn btn-danger" id="update">提交</i></a>
+                <!--  <button type="submit" class="btn btn-danger">提交</button> -->
             </label>
             <input type="hidden" name="goods_id" value="<?= $goods->goods_id ?>" />
 
@@ -549,7 +550,38 @@ $this->params['breadcrumbs'][] = $oparate == 'insert' ? '添加商品' : '编辑
 ])
 ?>
 
-<script>
+<script type="text/javascript">
+    $("#update").click(function() {
+        var index = parent.layer.getFrameIndex(window.name);
+        var formData = new FormData($("#order_form")[0]);
+        <?php if (isset($goods->id)) { ?>
+            var update_url = create_url('/goods/update') + "id=<?= $platform->id ?>";
+        <?php } else { ?>
+            var update_url = create_url('/goods/insert');
+        <?php    } ?>
+        $.ajax({
+            url: update_url,
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(result) {
+                if (result.error == 1) {
+
+                    location.href = '/goods/index';
+
+                } else {
+                    layer.msg(result.message);
+                }
+            },
+            error: function(result) {
+                layer.msg('发生错误');
+            }
+        });
+    });
     $(document).ready(function() {
         $(".i-checks").iCheck({
             checkboxClass: "icheckbox_square-green",

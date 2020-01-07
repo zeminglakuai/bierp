@@ -3,15 +3,6 @@
 $vendorDir = dirname(__DIR__);
 
 return array (
-  'yiisoft/yii2-codeception' => 
-  array (
-    'name' => 'yiisoft/yii2-codeception',
-    'version' => '2.0.6.0',
-    'alias' => 
-    array (
-      '@yii/codeception' => $vendorDir . '/yiisoft/yii2-codeception',
-    ),
-  ),
   'yiisoft/yii2-imagine' => 
   array (
     'name' => 'yiisoft/yii2-imagine',
@@ -59,16 +50,34 @@ return array (
   'yiisoft/yii2-debug' => 
   array (
     'name' => 'yiisoft/yii2-debug',
-    'version' => '2.1.11.0',
+    'version' => '2.1.12.0',
     'alias' => 
     array (
       '@yii/debug' => $vendorDir . '/yiisoft/yii2-debug/src',
     ),
   ),
+  '2amigos/yii2-qrcode-helper' => 
+  array (
+    'name' => '2amigos/yii2-qrcode-helper',
+    'version' => '1.1.2.0',
+    'alias' => 
+    array (
+      '@Da/QrCode' => $vendorDir . '/2amigos/yii2-qrcode-helper/src',
+    ),
+  ),
+  'yiisoft/yii2-codeception' => 
+  array (
+    'name' => 'yiisoft/yii2-codeception',
+    'version' => '2.0.6.0',
+    'alias' => 
+    array (
+      '@yii/codeception' => $vendorDir . '/yiisoft/yii2-codeception',
+    ),
+  ),
   'yiisoft/yii2-gii' => 
   array (
     'name' => 'yiisoft/yii2-gii',
-    'version' => '2.1.2.0',
+    'version' => '2.1.3.0',
     'alias' => 
     array (
       '@yii/gii' => $vendorDir . '/yiisoft/yii2-gii/src',
@@ -81,15 +90,6 @@ return array (
     'alias' => 
     array (
       '@yii/faker' => $vendorDir . '/yiisoft/yii2-faker',
-    ),
-  ),
-  '2amigos/yii2-qrcode-helper' => 
-  array (
-    'name' => '2amigos/yii2-qrcode-helper',
-    'version' => '1.1.2.0',
-    'alias' => 
-    array (
-      '@Da/QrCode' => $vendorDir . '/2amigos/yii2-qrcode-helper/src',
     ),
   ),
 );

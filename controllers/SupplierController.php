@@ -82,6 +82,7 @@ class SupplierController extends BaseController
       Message::result_json(2, '财务信息不能为空');
     }
     if (strlen($supplier->supplier_name) > 2) {
+      
       $supplier->status_done = 0;
 
       $supplier->add_user_id = Yii::$app->session['manage_user']['add_user_id'];

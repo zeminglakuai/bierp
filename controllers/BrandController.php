@@ -52,7 +52,7 @@ class BrandController extends BaseController
         $Brand = new Brand();
         $Brand->load(Yii::$app->request->post());
         
-        if (strlen($Brand->brand_name) > 2) {
+        if (strlen($Brand->brand_name) > 1) {
           //检查品牌名称是否重复
           $if_excited = Brand::find()->where(['brand_name'=>$Brand->brand_name])->one();
           if ($if_excited) {

@@ -37,10 +37,10 @@ $this->params['breadcrumbs'][] = $oparate == 'insert' ? '添加供货商' : '编
         <div class="tab-content">
           <div id="tab-1" class="tab-pane active">
             <div class="panel-body">
-              <?= app\common\widgets\Input::widget(['label_name' => '供货商名称', 'name' => "Supplier[supplier_name]", 'value' => $supplier->supplier_name, 'tips' => '']); ?>
-              <?= app\common\widgets\Input::widget(['label_name' => '联系人', 'name' => "Supplier[contact]", 'value' => $supplier->contact, 'tips' => '']); ?>
-              <?= app\common\widgets\Input::widget(['label_name' => '职位', 'name' => "Supplier[position]", 'value' => $supplier->position, 'tips' => '']); ?>
-              <?= app\common\widgets\Input::widget(['label_name' => '手机', 'name' => "Supplier[tel]", 'value' => $supplier->tel, 'tips' => '']); ?>
+              <?= app\common\widgets\Input::widget(['label_name' => '供货商名称', 'name' => "Supplier[supplier_name]", 'value' => $supplier->supplier_name, 'tips' => '', 'inneed' => true]); ?>
+              <?= app\common\widgets\Input::widget(['label_name' => '联系人', 'name' => "Supplier[contact]", 'value' => $supplier->contact, 'tips' => '', 'inneed' => true]); ?>
+              <?= app\common\widgets\Input::widget(['label_name' => '职位', 'name' => "Supplier[position]", 'value' => $supplier->position, 'tips' => '', 'inneed' => true]); ?>
+              <?= app\common\widgets\Input::widget(['label_name' => '手机', 'name' => "Supplier[tel]", 'value' => $supplier->tel, 'tips' => '', 'inneed' => true]); ?>
               <?= app\common\widgets\Input::widget(['label_name' => '固话', 'name' => "Supplier[guhua]", 'value' => $supplier->guhua, 'tips' => '']); ?>
               <?= app\common\widgets\Input::widget(['label_name' => 'QQ', 'name' => "Supplier[qq]", 'value' => $supplier->qq, 'tips' => '']); ?>
               <?= app\common\widgets\Radio::widget(

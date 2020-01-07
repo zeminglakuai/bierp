@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\data\Pagination;
 use yii\db\Query;
 use app\common\models\Platform;
+use app\common\models\PlatformGoods;
 use app\common\models\Custom;
 use app\common\models\WebOrder;
 use app\common\models\Goods;
@@ -34,7 +35,7 @@ class PlatformController extends BaseController
     {
         parent::beforeAction($action);
         //检查当前单据用户是不是有操作权限
-        $admit_allow_arr = ['edit', 'update', 'delete', 'insert', 'create-contact', 'create-contract', 'insert-contact', 'insert-contract', 'insert-theme', 'insert-goods', 'create-theme', 'edit-contract', 'edit-contact', 'update-goods-label', 'edit-theme'];
+        $admit_allow_arr = ['edit', 'update', 'delete', 'insert', 'create-contact', 'create-contract', 'insert-contact', 'insert-contract', 'insert-theme', 'insert-goods', 'delete-goods', 'create-theme', 'edit-contract', 'edit-contact', 'update-goods-label', 'edit-theme'];
         $need_privi_arr = ['edit', 'update', 'delete', 'insert', 'create-contact'];
         $scope_model = 'app\common\models\Platform';
         $status_label = 'plat_status';
@@ -406,6 +407,19 @@ class PlatformController extends BaseController
         $Contact = Contact::find()->where(['id' => $contact_id, 'belong_id' => $id])->one();
         if ($Contact) {
             $Contact->delete();
+            message::result_json(1, '删除成功');
+        } else {
+            message::result_json(2, '数据不存在');
+        }
+    }
+    public function actionDeleteGoods($id, $contact_id)
+    {
+        echo $id;
+        echo $contact_id;
+        exit;
+        $PlatformGoods = PlatformGoods::find()->where(['platform_id' => $contact_id, 'goods_id' => $id])->one();
+        if ($PlatformGoods) {
+            $PlatformGoods->delete();
             message::result_json(1, '删除成功');
         } else {
             message::result_json(2, '数据不存在');

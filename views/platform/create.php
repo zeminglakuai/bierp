@@ -41,7 +41,7 @@ use app\common\config\sys_config;
         <div class="tab-content">
             <div id="activity_name" class="tab-pane active">
                 <div class="panel-body">
-                    <?= app\common\widgets\Input::widget(['label_name' => '项目名称', 'name' => "Platform[plat_name]", 'value' => $platform->plat_name, 'tips' => '']); ?>
+                    <?= app\common\widgets\Input::widget(['label_name' => '项目名称', 'name' => "Platform[plat_name]", 'value' => $platform->plat_name, 'tips' => '', 'inneed' => true]); ?>
 
                     <?= app\common\widgets\Radio::widget(
                         [
@@ -154,7 +154,7 @@ use app\common\config\sys_config;
                                                                         } else {
                                                                             echo 'sorting data_sort';
                                                                         }
-                                                                    } ?>" data-type="id" width="4%" style="width:4%">
+                                                                    } ?>" data-type="id" width="5%">
                                             ID </th>
                                         <th align="center" class="<?
                                                                     if ($vv['sort_able']) {
@@ -167,7 +167,7 @@ use app\common\config\sys_config;
                                                                         } else {
                                                                             echo 'sorting data_sort';
                                                                         }
-                                                                    } ?>" data-type="goods_name" width="15%" style="width:15%">
+                                                                    } ?>" data-type="goods_name" width="35%">
                                             商品名称 </th>
                                         <th align="center" class="<?
                                                                     if ($vv['sort_able']) {
@@ -180,7 +180,7 @@ use app\common\config\sys_config;
                                                                         } else {
                                                                             echo 'sorting data_sort';
                                                                         }
-                                                                    } ?>" data-type="goods_sn" width="10%" style="width:10%">
+                                                                    } ?>" data-type="goods_sn" width="20%">
                                             商品型号 </th>
                                         <th align="center" class="<?
                                                                     if ($vv['sort_able']) {
@@ -193,7 +193,7 @@ use app\common\config\sys_config;
                                                                         } else {
                                                                             echo 'sorting data_sort';
                                                                         }
-                                                                    } ?>" data-type="isbn" width="10%" style="width:10%">
+                                                                    } ?>" data-type="isbn" width="20%">
                                             条形码 </th>
                                         <th align="center" class="<?
                                                                     if ($vv['sort_able']) {
@@ -206,11 +206,11 @@ use app\common\config\sys_config;
                                                                         } else {
                                                                             echo 'sorting data_sort';
                                                                         }
-                                                                    } ?>" data-type="platform_price" width="8%" style="width:8%">
+                                                                    } ?>" data-type="platform_price" width="16%">
                                             项目价 </th>
 
 
-                                        <th align="center">操作</th>
+                                        <!--  <th align="center">操作</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -242,8 +242,8 @@ use app\common\config\sys_config;
                                                     </div>
                                                 </td>
 
-                                                <td><a class="delete_goods" data-id="<?= $value['goods_id'] ?>" action="delete-goods" href="javascript:void();">
-                                                        <span class="glyphicon glyphicon-trash"></span> 删除</a></td>
+                                                <!--  <td><a class="delete_goods" data-id="<?= $platform->id ?>" id="<?= $value['goods_id'] ?>" action="delete-goods" href="javascript:void();">
+                                                        <span class="glyphicon glyphicon-trash"></span> 删除</a></td> -->
                                             </tr>
 
                                     <?php     }
@@ -667,6 +667,23 @@ use app\common\config\sys_config;
         var id = $(this).attr('origin-id');
         if (confirm("确认删除？")) {
             $.get('/platform/delete-contact', {
+                id: id,
+                contact_id: data_id
+            }, function(result) {
+                if (result.error == 1) {
+                    // window.location.reload();
+                } else {
+                    layer.msg(result.message);
+                };
+            }, 'json');
+        };
+    });
+
+    $(".delete_goods").click(function() {
+        var data_id = $(this).attr('data-id');
+        var id = $(this).attr('id');
+        if (confirm("确认删除？")) {
+            $.get('/platform/delete-goods', {
                 id: id,
                 contact_id: data_id
             }, function(result) {

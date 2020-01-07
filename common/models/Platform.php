@@ -8,6 +8,7 @@ use app\common\models\BaseModel;
 class Platform extends BaseModel
 {
     public $ppt_file = '';
+    public $goods_platform_id = '';
     /**
      * @inheritdoc
      */

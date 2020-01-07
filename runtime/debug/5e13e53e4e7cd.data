@@ -1,0 +1,281 @@
+a:13:{s:6:"config";s:3011:"a:5:{s:10:"phpVersion";s:6:"5.6.32";s:10:"yiiVersion";s:6:"2.0.31";s:11:"application";a:8:{s:3:"yii";s:6:"2.0.31";s:4:"name";s:14:"My Application";s:7:"version";s:3:"1.0";s:8:"language";s:5:"en-US";s:14:"sourceLanguage";s:5:"en-US";s:7:"charset";s:5:"UTF-8";s:3:"env";s:3:"dev";s:5:"debug";b:1;}s:3:"php";a:5:{s:7:"version";s:6:"5.6.32";s:6:"xdebug";b:1;s:3:"apc";b:0;s:8:"memcache";b:0;s:9:"memcached";b:0;}s:10:"extensions";a:9:{s:20:"yiisoft/yii2-imagine";a:3:{s:4:"name";s:20:"yiisoft/yii2-imagine";s:7:"version";s:7:"2.0.4.0";s:5:"alias";a:1:{s:12:"@yii/imagine";s:48:"C:\laragon\www\bierp\vendor/yiisoft/yii2-imagine";}}s:22:"yiisoft/yii2-bootstrap";a:3:{s:4:"name";s:22:"yiisoft/yii2-bootstrap";s:7:"version";s:8:"2.0.10.0";s:5:"alias";a:1:{s:14:"@yii/bootstrap";s:54:"C:\laragon\www\bierp\vendor/yiisoft/yii2-bootstrap/src";}}s:24:"yiisoft/yii2-swiftmailer";a:3:{s:4:"name";s:24:"yiisoft/yii2-swiftmailer";s:7:"version";s:7:"2.1.2.0";s:5:"alias";a:1:{s:16:"@yii/swiftmailer";s:56:"C:\laragon\www\bierp\vendor/yiisoft/yii2-swiftmailer/src";}}s:18:"yiisoft/yii2-queue";a:3:{s:4:"name";s:18:"yiisoft/yii2-queue";s:7:"version";s:7:"2.0.2.0";s:5:"alias";a:9:{s:10:"@yii/queue";s:50:"C:\laragon\www\bierp\vendor/yiisoft/yii2-queue/src";s:15:"@yii/queue/amqp";s:63:"C:\laragon\www\bierp\vendor/yiisoft/yii2-queue/src/drivers/amqp";s:23:"@yii/queue/amqp_interop";s:71:"C:\laragon\www\bierp\vendor/yiisoft/yii2-queue/src/drivers/amqp_interop";s:20:"@yii/queue/beanstalk";s:68:"C:\laragon\www\bierp\vendor/yiisoft/yii2-queue/src/drivers/beanstalk";s:13:"@yii/queue/db";s:61:"C:\laragon\www\bierp\vendor/yiisoft/yii2-queue/src/drivers/db";s:15:"@yii/queue/file";s:63:"C:\laragon\www\bierp\vendor/yiisoft/yii2-queue/src/drivers/file";s:18:"@yii/queue/gearman";s:66:"C:\laragon\www\bierp\vendor/yiisoft/yii2-queue/src/drivers/gearman";s:16:"@yii/queue/redis";s:64:"C:\laragon\www\bierp\vendor/yiisoft/yii2-queue/src/drivers/redis";s:15:"@yii/queue/sync";s:63:"C:\laragon\www\bierp\vendor/yiisoft/yii2-queue/src/drivers/sync";}}s:18:"yiisoft/yii2-debug";a:3:{s:4:"name";s:18:"yiisoft/yii2-debug";s:7:"version";s:8:"2.1.12.0";s:5:"alias";a:1:{s:10:"@yii/debug";s:50:"C:\laragon\www\bierp\vendor/yiisoft/yii2-debug/src";}}s:26:"2amigos/yii2-qrcode-helper";a:3:{s:4:"name";s:26:"2amigos/yii2-qrcode-helper";s:7:"version";s:7:"1.1.2.0";s:5:"alias";a:1:{s:10:"@Da/QrCode";s:58:"C:\laragon\www\bierp\vendor/2amigos/yii2-qrcode-helper/src";}}s:24:"yiisoft/yii2-codeception";a:3:{s:4:"name";s:24:"yiisoft/yii2-codeception";s:7:"version";s:7:"2.0.6.0";s:5:"alias";a:1:{s:16:"@yii/codeception";s:52:"C:\laragon\www\bierp\vendor/yiisoft/yii2-codeception";}}s:16:"yiisoft/yii2-gii";a:3:{s:4:"name";s:16:"yiisoft/yii2-gii";s:7:"version";s:7:"2.1.3.0";s:5:"alias";a:1:{s:8:"@yii/gii";s:48:"C:\laragon\www\bierp\vendor/yiisoft/yii2-gii/src";}}s:18:"yiisoft/yii2-faker";a:3:{s:4:"name";s:18:"yiisoft/yii2-faker";s:7:"version";s:7:"2.0.4.0";s:5:"alias";a:1:{s:10:"@yii/faker";s:46:"C:\laragon\www\bierp\vendor/yiisoft/yii2-faker";}}}}";s:7:"request";s:7738:"a:15:{s:7:"flashes";a:0:{}s:10:"statusCode";i:200;s:14:"requestHeaders";a:12:{s:6:"cookie";s:210:"PHPSESSID=3atmht3th1th8p9t4nt98jbn02; _csrf=255e15ac53723bcb97544bf1a30f2b03b6a5afd51ff794adcb8dfef2fa67954ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22zK8uuomIp1U2XpogA0GWspttdOVTZlYy%22%3B%7D";s:15:"accept-language";s:33:"zh-CN,zh;q=0.9,und;q=0.8,en;q=0.7";s:15:"accept-encoding";s:13:"gzip, deflate";s:7:"referer";s:33:"http://bierp.test/supplier/create";s:12:"content-type";s:68:"multipart/form-data; boundary=----WebKitFormBoundary04A55FlXaaCTn5kG";s:10:"user-agent";s:114:"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36";s:16:"x-requested-with";s:14:"XMLHttpRequest";s:6:"origin";s:17:"http://bierp.test";s:6:"accept";s:46:"application/json, text/javascript, */*; q=0.01";s:14:"content-length";s:4:"2220";s:10:"connection";s:5:"close";s:4:"host";s:10:"bierp.test";}s:15:"responseHeaders";a:4:{s:12:"X-Powered-By";s:10:"PHP/5.6.32";s:7:"Expires";s:29:"Thu, 19 Nov 1981 08:52:00 GMT";s:13:"Cache-Control";s:62:"no-store, no-cache, must-revalidate, post-check=0, pre-check=0";s:6:"Pragma";s:8:"no-cache";}s:5:"route";s:15:"supplier/insert";s:6:"action";s:50:"app\controllers\SupplierController::actionInsert()";s:12:"actionParams";a:0:{}s:7:"general";a:5:{s:6:"method";s:4:"POST";s:6:"isAjax";b:1;s:6:"isPjax";b:0;s:7:"isFlash";b:0;s:18:"isSecureConnection";b:0;}s:11:"requestBody";a:0:{}s:6:"SERVER";a:49:{s:4:"PATH";s:1853:"C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Git\cmd;C:\laragon\bin\php\php-7.2.11-Win32-VC15-x86;C:\Program Files\TortoiseGit\bin;C:\Program Files\VisualSVN Server\bin;C:\Program Files\TortoiseSVN\bin;C:\Program Files\nodejs\;C:\composer;C:\Program Files (x86)\MySQL\MySQL Utilities 1.6\;C:\Windows\system32\config\systemprofile\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Windows\System32\OpenSSH\;C:\laragon\bin;C:\laragon\bin\apache\httpd-2.4.35-win32-VC15\bin;C:\laragon\bin\composer;C:\laragon\bin\git\bin;C:\laragon\bin\git\cmd;C:\laragon\bin\git\mingw32\bin;C:\laragon\bin\git\usr\bin;C:\laragon\bin\laragon\utils;C:\laragon\bin\mysql\mysql-5.7.24-win32\bin;C:\laragon\bin\nginx\nginx-1.14.0;C:\laragon\bin\ngrok;C:\laragon\bin\nodejs\node-v10;C:\laragon\bin\notepad++;C:\laragon\bin\php\php-5.6.32-nts-Win32-VC11-x86;C:\laragon\bin\putty;C:\laragon\bin\redis\redis-2.6.12;C:\laragon\bin\telnet;C:\laragon\bin\yarn\bin;C:\laragon\usr\bin;C:\Users\10035\AppData\Local\Yarn\config\global\node_modules\.bin;C:\Users\10035\AppData\Roaming\Composer\vendor\bin;C:\Users\10035\AppData\Roaming\npm;C:\Users\10035\AppData\Local\Programs\Python\Python37\Scripts\;C:\Users\10035\AppData\Local\Programs\Python\Python37\;C:\Users\10035\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Docker Toolbox;C:\Users\10035\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Git\etc\ssh;C:\Users\10035\Downloads\netcat-win32-1.12;";s:10:"SYSTEMROOT";s:10:"C:/Windows";s:7:"COMSPEC";s:27:"C:\Windows\system32\cmd.exe";s:7:"PATHEXT";s:53:".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC";s:6:"WINDIR";s:10:"C:\Windows";s:11:"SYSTEMDRIVE";s:2:"C:";s:4:"TEMP";s:15:"C:/Windows/Temp";s:3:"TMP";s:15:"C:/Windows/Temp";s:5:"PHPRC";s:48:"C:/laragon/bin/php/php-5.6.32-nts-Win32-VC11-x86";s:21:"PHP_FCGI_MAX_REQUESTS";s:1:"0";s:21:"_FCGI_SHUTDOWN_EVENT_";s:4:"1348";s:11:"SCRIPT_NAME";s:10:"/index.php";s:11:"REQUEST_URI";s:16:"/supplier/insert";s:12:"QUERY_STRING";s:0:"";s:14:"REQUEST_METHOD";s:4:"POST";s:15:"SERVER_PROTOCOL";s:8:"HTTP/1.1";s:17:"GATEWAY_INTERFACE";s:7:"CGI/1.1";s:12:"REDIRECT_URL";s:16:"/supplier/insert";s:11:"REMOTE_PORT";s:5:"56071";s:15:"SCRIPT_FILENAME";s:34:"C:/laragon/www/bierp/web/index.php";s:12:"SERVER_ADMIN";s:17:"admin@example.com";s:21:"CONTEXT_DOCUMENT_ROOT";s:25:"C:/laragon/www/bierp/web/";s:14:"CONTEXT_PREFIX";s:0:"";s:14:"REQUEST_SCHEME";s:4:"http";s:13:"DOCUMENT_ROOT";s:25:"C:/laragon/www/bierp/web/";s:11:"REMOTE_ADDR";s:9:"127.0.0.1";s:11:"SERVER_PORT";s:2:"80";s:11:"SERVER_ADDR";s:9:"127.0.0.1";s:11:"SERVER_NAME";s:10:"bierp.test";s:15:"SERVER_SOFTWARE";s:52:"Apache/2.4.35 (Win32) OpenSSL/1.1.0i mod_fcgid/2.3.9";s:16:"SERVER_SIGNATURE";s:0:"";s:10:"SystemRoot";s:10:"C:\Windows";s:11:"HTTP_COOKIE";s:210:"PHPSESSID=3atmht3th1th8p9t4nt98jbn02; _csrf=255e15ac53723bcb97544bf1a30f2b03b6a5afd51ff794adcb8dfef2fa67954ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22zK8uuomIp1U2XpogA0GWspttdOVTZlYy%22%3B%7D";s:20:"HTTP_ACCEPT_LANGUAGE";s:33:"zh-CN,zh;q=0.9,und;q=0.8,en;q=0.7";s:20:"HTTP_ACCEPT_ENCODING";s:13:"gzip, deflate";s:12:"HTTP_REFERER";s:33:"http://bierp.test/supplier/create";s:12:"CONTENT_TYPE";s:68:"multipart/form-data; boundary=----WebKitFormBoundary04A55FlXaaCTn5kG";s:15:"HTTP_USER_AGENT";s:114:"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36";s:21:"HTTP_X_REQUESTED_WITH";s:14:"XMLHttpRequest";s:11:"HTTP_ORIGIN";s:17:"http://bierp.test";s:11:"HTTP_ACCEPT";s:46:"application/json, text/javascript, */*; q=0.01";s:14:"CONTENT_LENGTH";s:4:"2220";s:15:"HTTP_CONNECTION";s:5:"close";s:9:"HTTP_HOST";s:10:"bierp.test";s:15:"REDIRECT_STATUS";s:3:"200";s:9:"FCGI_ROLE";s:9:"RESPONDER";s:8:"PHP_SELF";s:10:"/index.php";s:18:"REQUEST_TIME_FLOAT";d:1578362174.070168;s:12:"REQUEST_TIME";i:1578362174;}s:3:"GET";a:0:{}s:4:"POST";a:1:{s:8:"Supplier";a:20:{s:13:"supplier_name";s:18:"爱茉莉供应商";s:7:"contact";s:7:"passion";s:8:"position";s:3:"COO";s:3:"tel";s:11:"15626218527";s:5:"guhua";s:0:"";s:2:"qq";s:0:"";s:8:"contact2";s:6:"采购";s:4:"tel2";s:11:"15626218528";s:3:"qq2";s:0:"";s:7:"address";s:0:"";s:13:"store_address";s:0:"";s:6:"remark";s:0:"";s:9:"bank_name";s:6:"央行";s:9:"bank_open";s:6:"央行";s:9:"bank_code";s:16:"6214830209586235";s:10:"bank_payee";s:3:"888";s:8:"tax_code";s:0:"";s:5:"title";s:0:"";s:14:"account_period";s:0:"";s:6:"alipay";s:0:"";}}s:6:"COOKIE";a:2:{s:9:"PHPSESSID";s:26:"3atmht3th1th8p9t4nt98jbn02";s:5:"_csrf";s:130:"255e15ac53723bcb97544bf1a30f2b03b6a5afd51ff794adcb8dfef2fa67954ca:2:{i:0;s:5:"_csrf";i:1;s:32:"zK8uuomIp1U2XpogA0GWspttdOVTZlYy";}";}s:5:"FILES";a:0:{}s:7:"SESSION";a:2:{s:7:"__flash";a:0:{}s:11:"manage_user";a:10:{s:2:"id";i:1;s:10:"admin_name";s:5:"admin";s:4:"type";i:1;s:9:"depart_id";i:1;s:11:"depart_name";s:18:"广州客维总部";s:8:"store_id";N;s:11:"depart_type";i:1;s:4:"role";O:22:"app\common\models\Role":10:{s:36:" yii\db\BaseActiveRecord _attributes";a:8:{s:2:"id";i:1;s:9:"role_name";s:15:"系统管理员";s:9:"role_desc";N;s:9:"depart_id";i:0;s:6:"action";s:3:"all";s:8:"priv_arr";s:3:"all";s:9:"role_type";i:99;s:11:"status_done";i:0;}s:39:" yii\db\BaseActiveRecord _oldAttributes";a:8:{s:2:"id";i:1;s:9:"role_name";s:15:"系统管理员";s:9:"role_desc";N;s:9:"depart_id";i:0;s:6:"action";s:3:"all";s:8:"priv_arr";s:3:"all";s:9:"role_type";i:99;s:11:"status_done";i:0;}s:33:" yii\db\BaseActiveRecord _related";a:0:{}s:47:" yii\db\BaseActiveRecord _relationsDependencies";a:0:{}s:23:" yii\base\Model _errors";N;s:27:" yii\base\Model _validators";N;s:25:" yii\base\Model _scenario";s:7:"default";s:27:" yii\base\Component _events";a:0:{}s:35:" yii\base\Component _eventWildcards";a:0:{}s:30:" yii\base\Component _behaviors";a:0:{}}s:6:"action";s:3:"all";s:9:"privi_arr";s:3:"all";}}}";s:6:"router";s:1264:"a:3:{s:8:"messages";a:6:{i:5;a:6:{i:0;a:3:{s:4:"rule";s:5:"debug";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1578362174.3294749;i:4;a:0:{}i:5;i:3290352;}i:6;a:6:{i:0;a:3:{s:4:"rule";s:43:"debug/<controller:[\w\-]+>/<action:[\w\-]+>";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1578362174.329505;i:4;a:0:{}i:5;i:3291432;}i:7;a:6:{i:0;a:3:{s:4:"rule";s:3:"gii";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1578362174.329531;i:4;a:0:{}i:5;i:3292472;}i:8;a:6:{i:0;a:3:{s:4:"rule";s:12:"gii/<id:\w+>";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1578362174.329555;i:4;a:0:{}i:5;i:3293520;}i:9;a:6:{i:0;a:3:{s:4:"rule";s:41:"gii/<controller:[\w\-]+>/<action:[\w\-]+>";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1578362174.329582;i:4;a:0:{}i:5;i:3294632;}i:10;a:6:{i:0;s:55:"No matching URL rules. Using default URL parsing logic.";i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1578362174.329592;i:4;a:0:{}i:5;i:3295328;}}s:5:"route";s:15:"supplier/insert";s:6:"action";s:50:"app\controllers\SupplierController::actionInsert()";}";s:3:"log";s:7400:"a:1:{s:8:"messages";a:24:{i:0;a:6:{i:0;s:33:"Bootstrap with yii\log\Dispatcher";i:1;i:8;i:2;s:31:"yii\base\Application::bootstrap";i:3;d:1578362174.2952249;i:4;a:0:{}i:5;i:1600896;}i:1;a:6:{i:0;s:19:"Loading module: gii";i:1;i:8;i:2;s:26:"yii\base\Module::getModule";i:3;d:1578362174.295254;i:4;a:0:{}i:5;i:1602016;}i:2;a:6:{i:0;s:42:"Bootstrap with yii\gii\Module::bootstrap()";i:1;i:8;i:2;s:31:"yii\base\Application::bootstrap";i:3;d:1578362174.2968631;i:4;a:0:{}i:5;i:1660368;}i:3;a:6:{i:0;s:21:"Loading module: debug";i:1;i:8;i:2;s:26:"yii\base\Module::getModule";i:3;d:1578362174.3012309;i:4;a:0:{}i:5;i:1962720;}i:4;a:6:{i:0;s:44:"Bootstrap with yii\debug\Module::bootstrap()";i:1;i:8;i:2;s:31:"yii\base\Application::bootstrap";i:3;d:1578362174.320262;i:4;a:0:{}i:5;i:2960728;}i:11;a:6:{i:0;s:34:"Route requested: 'supplier/insert'";i:1;i:8;i:2;s:34:"yii\web\Application::handleRequest";i:3;d:1578362174.3296111;i:4;a:0:{}i:5;i:3296152;}i:12;a:6:{i:0;s:29:"Route to run: supplier/insert";i:1;i:8;i:2;s:30:"yii\base\Controller::runAction";i:3;d:1578362174.3340549;i:4;a:0:{}i:5;i:3581288;}i:13;a:6:{i:0;s:54:"Opening DB connection: mysql:host=localhost;dbname=erp";i:1;i:4;i:2;s:23:"yii\db\Connection::open";i:3;d:1578362174.349602;i:4;a:0:{}i:5;i:5047104;}i:16;a:6:{i:0;s:42:"SELECT * FROM `config` WHERE `parent_id`=1";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.4240611;i:4;a:0:{}i:5;i:5326912;}i:19;a:6:{i:0;s:62:"SELECT * FROM `approval_process` WHERE `label_name`='supplier'";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.4433391;i:4;a:0:{}i:5;i:5371144;}i:22;a:6:{i:0;s:41:"SHOW FULL COLUMNS FROM `approval_process`";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.4445701;i:4;a:0:{}i:5;i:5387104;}i:25;a:6:{i:0;s:619:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'approval_process' AND kcu.table_name = 'approval_process'";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.446646;i:4;a:0:{}i:5;i:5425664;}i:28;a:6:{i:0;s:45:"SELECT * FROM `config` WHERE `key`='supplier'";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.4476819;i:4;a:0:{}i:5;i:5427608;}i:31;a:6:{i:0;s:15:"Session started";i:1;i:4;i:2;s:21:"yii\web\Session::open";i:3;d:1578362174.4499841;i:4;a:0:{}i:5;i:5586584;}i:32;a:6:{i:0;s:34:"SHOW FULL COLUMNS FROM `admin_log`";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.4524341;i:4;a:0:{}i:5;i:5879224;}i:35;a:6:{i:0;s:605:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'admin_log' AND kcu.table_name = 'admin_log'";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.4541309;i:4;a:0:{}i:5;i:5891056;}i:38;a:6:{i:0;s:774:"INSERT INTO `admin_log` (`model`, `action`, `ano_id`, `admin_id`, `param`, `add_time`) VALUES ('supplier', 'insert', 0, 1, 'a:1:{s:8:\"Supplier\";a:20:{s:13:\"supplier_name\";s:18:\"爱茉莉供应商\";s:7:\"contact\";s:7:\"passion\";s:8:\"position\";s:3:\"COO\";s:3:\"tel\";s:11:\"15626218527\";s:5:\"guhua\";s:0:\"\";s:2:\"qq\";s:0:\"\";s:8:\"contact2\";s:6:\"采购\";s:4:\"tel2\";s:11:\"15626218528\";s:3:\"qq2\";s:0:\"\";s:7:\"address\";s:0:\"\";s:13:\"store_address\";s:0:\"\";s:6:\"remark\";s:0:\"\";s:9:\"bank_name\";s:6:\"央行\";s:9:\"bank_open\";s:6:\"央行\";s:9:\"bank_code\";s:16:\"6214830209586235\";s:10:\"bank_payee\";s:3:\"888\";s:8:\"tax_code\";s:0:\"\";s:5:\"title\";s:0:\"\";s:14:\"account_period\";s:0:\"\";s:6:\"alipay\";s:0:\"\";}}', '1578362174')";i:1;i:4;i:2;s:23:"yii\db\Command::execute";i:3;d:1578362174.4558139;i:4;a:0:{}i:5;i:5905304;}i:41;a:6:{i:0;s:66:"Running action: app\controllers\SupplierController::actionInsert()";i:1;i:8;i:2;s:36:"yii\base\InlineAction::runWithParams";i:3;d:1578362174.4660499;i:4;a:0:{}i:5;i:5903176;}i:42;a:6:{i:0;s:33:"SHOW FULL COLUMNS FROM `supplier`";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.467746;i:4;a:0:{}i:5;i:6002800;}i:45;a:6:{i:0;s:603:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'supplier' AND kcu.table_name = 'supplier'";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.5343881;i:4;a:0:{}i:5;i:6032144;}i:48;a:6:{i:0;s:568:"INSERT INTO `supplier` (`add_user_id`, `add_user_name`, `depart_id`, `depart_name`, `add_time`, `supplier_name`, `contact`, `position`, `tel`, `guhua`, `qq`, `contact2`, `tel2`, `qq2`, `address`, `store_address`, `remark`, `bank_name`, `bank_open`, `bank_code`, `bank_payee`, `tax_code`, `title`, `account_period`, `alipay`, `status_done`) VALUES (NULL, NULL, 1, '广州客维总部', '1578362174', '爱茉莉供应商', 'passion', 'COO', '15626218527', '', '', '采购', '15626218528', '', '', '', '', '央行', '央行', '6214830209586235', '888', '', '', '', '', 0)";i:1;i:4;i:2;s:23:"yii\db\Command::execute";i:3;d:1578362174.541975;i:4;a:0:{}i:5;i:6323568;}i:51;a:6:{i:0;s:32:"SHOW FULL COLUMNS FROM `contact`";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.590925;i:4;a:0:{}i:5;i:6395408;}i:54;a:6:{i:0;s:601:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'contact' AND kcu.table_name = 'contact'";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.5928259;i:4;a:0:{}i:5;i:6407656;}i:57;a:6:{i:0;s:164:"INSERT INTO `contact` (`name`, `tel`, `is_active`, `belong_id`, `belong_name`, `model`) VALUES ('passion', '15626218527', 1, 2580, '爱茉莉供应商', 'supplier')";i:1;i:4;i:2;s:23:"yii\db\Command::execute";i:3;d:1578362174.5940969;i:4;a:0:{}i:5;i:6412840;}}}";s:9:"profiling";s:12073:"a:3:{s:6:"memory";i:6595912;s:4:"time";d:0.44556713104248047;s:8:"messages";a:30:{i:14;a:6:{i:0;s:54:"Opening DB connection: mysql:host=localhost;dbname=erp";i:1;i:80;i:2;s:23:"yii\db\Connection::open";i:3;d:1578362174.3496161;i:4;a:0:{}i:5;i:5047800;}i:15;a:6:{i:0;s:54:"Opening DB connection: mysql:host=localhost;dbname=erp";i:1;i:96;i:2;s:23:"yii\db\Connection::open";i:3;d:1578362174.4194;i:4;a:0:{}i:5;i:5056248;}i:17;a:6:{i:0;s:42:"SELECT * FROM `config` WHERE `parent_id`=1";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.4241121;i:4;a:0:{}i:5;i:5328592;}i:18;a:6:{i:0;s:42:"SELECT * FROM `config` WHERE `parent_id`=1";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.441195;i:4;a:0:{}i:5;i:5331440;}i:20;a:6:{i:0;s:62:"SELECT * FROM `approval_process` WHERE `label_name`='supplier'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.443382;i:4;a:0:{}i:5;i:5372336;}i:21;a:6:{i:0;s:62:"SELECT * FROM `approval_process` WHERE `label_name`='supplier'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.4438119;i:4;a:0:{}i:5;i:5374288;}i:23;a:6:{i:0;s:41:"SHOW FULL COLUMNS FROM `approval_process`";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.444612;i:4;a:0:{}i:5;i:5388280;}i:24;a:6:{i:0;s:41:"SHOW FULL COLUMNS FROM `approval_process`";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.445215;i:4;a:0:{}i:5;i:5394064;}i:26;a:6:{i:0;s:619:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'approval_process' AND kcu.table_name = 'approval_process'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.4466901;i:4;a:0:{}i:5;i:5427904;}i:27;a:6:{i:0;s:619:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'approval_process' AND kcu.table_name = 'approval_process'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.4471409;i:4;a:0:{}i:5;i:5428864;}i:29;a:6:{i:0;s:45:"SELECT * FROM `config` WHERE `key`='supplier'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.447722;i:4;a:0:{}i:5;i:5428752;}i:30;a:6:{i:0;s:45:"SELECT * FROM `config` WHERE `key`='supplier'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.4479921;i:4;a:0:{}i:5;i:5429976;}i:33;a:6:{i:0;s:34:"SHOW FULL COLUMNS FROM `admin_log`";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.4524789;i:4;a:0:{}i:5;i:5880520;}i:34;a:6:{i:0;s:34:"SHOW FULL COLUMNS FROM `admin_log`";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.453244;i:4;a:0:{}i:5;i:5895576;}i:36;a:6:{i:0;s:605:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'admin_log' AND kcu.table_name = 'admin_log'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.454175;i:4;a:0:{}i:5;i:5893280;}i:37;a:6:{i:0;s:605:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'admin_log' AND kcu.table_name = 'admin_log'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.4545751;i:4;a:0:{}i:5;i:5894240;}i:39;a:6:{i:0;s:774:"INSERT INTO `admin_log` (`model`, `action`, `ano_id`, `admin_id`, `param`, `add_time`) VALUES ('supplier', 'insert', 0, 1, 'a:1:{s:8:\"Supplier\";a:20:{s:13:\"supplier_name\";s:18:\"爱茉莉供应商\";s:7:\"contact\";s:7:\"passion\";s:8:\"position\";s:3:\"COO\";s:3:\"tel\";s:11:\"15626218527\";s:5:\"guhua\";s:0:\"\";s:2:\"qq\";s:0:\"\";s:8:\"contact2\";s:6:\"采购\";s:4:\"tel2\";s:11:\"15626218528\";s:3:\"qq2\";s:0:\"\";s:7:\"address\";s:0:\"\";s:13:\"store_address\";s:0:\"\";s:6:\"remark\";s:0:\"\";s:9:\"bank_name\";s:6:\"央行\";s:9:\"bank_open\";s:6:\"央行\";s:9:\"bank_code\";s:16:\"6214830209586235\";s:10:\"bank_payee\";s:3:\"888\";s:8:\"tax_code\";s:0:\"\";s:5:\"title\";s:0:\"\";s:14:\"account_period\";s:0:\"\";s:6:\"alipay\";s:0:\"\";}}', '1578362174')";i:1;i:80;i:2;s:23:"yii\db\Command::execute";i:3;d:1578362174.4558539;i:4;a:0:{}i:5;i:5906576;}i:40;a:6:{i:0;s:774:"INSERT INTO `admin_log` (`model`, `action`, `ano_id`, `admin_id`, `param`, `add_time`) VALUES ('supplier', 'insert', 0, 1, 'a:1:{s:8:\"Supplier\";a:20:{s:13:\"supplier_name\";s:18:\"爱茉莉供应商\";s:7:\"contact\";s:7:\"passion\";s:8:\"position\";s:3:\"COO\";s:3:\"tel\";s:11:\"15626218527\";s:5:\"guhua\";s:0:\"\";s:2:\"qq\";s:0:\"\";s:8:\"contact2\";s:6:\"采购\";s:4:\"tel2\";s:11:\"15626218528\";s:3:\"qq2\";s:0:\"\";s:7:\"address\";s:0:\"\";s:13:\"store_address\";s:0:\"\";s:6:\"remark\";s:0:\"\";s:9:\"bank_name\";s:6:\"央行\";s:9:\"bank_open\";s:6:\"央行\";s:9:\"bank_code\";s:16:\"6214830209586235\";s:10:\"bank_payee\";s:3:\"888\";s:8:\"tax_code\";s:0:\"\";s:5:\"title\";s:0:\"\";s:14:\"account_period\";s:0:\"\";s:6:\"alipay\";s:0:\"\";}}', '1578362174')";i:1;i:96;i:2;s:23:"yii\db\Command::execute";i:3;d:1578362174.4653311;i:4;a:0:{}i:5;i:5907288;}i:43;a:6:{i:0;s:33:"SHOW FULL COLUMNS FROM `supplier`";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.467787;i:4;a:0:{}i:5;i:6003968;}i:44;a:6:{i:0;s:33:"SHOW FULL COLUMNS FROM `supplier`";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.5319481;i:4;a:0:{}i:5;i:6054960;}i:46;a:6:{i:0;s:603:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'supplier' AND kcu.table_name = 'supplier'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.534431;i:4;a:0:{}i:5;i:6034368;}i:47;a:6:{i:0;s:603:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'supplier' AND kcu.table_name = 'supplier'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.534833;i:4;a:0:{}i:5;i:6035328;}i:49;a:6:{i:0;s:568:"INSERT INTO `supplier` (`add_user_id`, `add_user_name`, `depart_id`, `depart_name`, `add_time`, `supplier_name`, `contact`, `position`, `tel`, `guhua`, `qq`, `contact2`, `tel2`, `qq2`, `address`, `store_address`, `remark`, `bank_name`, `bank_open`, `bank_code`, `bank_payee`, `tax_code`, `title`, `account_period`, `alipay`, `status_done`) VALUES (NULL, NULL, 1, '广州客维总部', '1578362174', '爱茉莉供应商', 'passion', 'COO', '15626218527', '', '', '采购', '15626218528', '', '', '', '', '央行', '央行', '6214830209586235', '888', '', '', '', '', 0)";i:1;i:80;i:2;s:23:"yii\db\Command::execute";i:3;d:1578362174.5420499;i:4;a:0:{}i:5;i:6322768;}i:50;a:6:{i:0;s:568:"INSERT INTO `supplier` (`add_user_id`, `add_user_name`, `depart_id`, `depart_name`, `add_time`, `supplier_name`, `contact`, `position`, `tel`, `guhua`, `qq`, `contact2`, `tel2`, `qq2`, `address`, `store_address`, `remark`, `bank_name`, `bank_open`, `bank_code`, `bank_payee`, `tax_code`, `title`, `account_period`, `alipay`, `status_done`) VALUES (NULL, NULL, 1, '广州客维总部', '1578362174', '爱茉莉供应商', 'passion', 'COO', '15626218527', '', '', '采购', '15626218528', '', '', '', '', '央行', '央行', '6214830209586235', '888', '', '', '', '', 0)";i:1;i:96;i:2;s:23:"yii\db\Command::execute";i:3;d:1578362174.573386;i:4;a:0:{}i:5;i:6323480;}i:52;a:6:{i:0;s:32:"SHOW FULL COLUMNS FROM `contact`";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.5909691;i:4;a:0:{}i:5;i:6396576;}i:53;a:6:{i:0;s:32:"SHOW FULL COLUMNS FROM `contact`";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.591841;i:4;a:0:{}i:5;i:6412776;}i:55;a:6:{i:0;s:601:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'contact' AND kcu.table_name = 'contact'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.5928769;i:4;a:0:{}i:5;i:6409864;}i:56;a:6:{i:0;s:601:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'contact' AND kcu.table_name = 'contact'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.5933599;i:4;a:0:{}i:5;i:6410824;}i:58;a:6:{i:0;s:164:"INSERT INTO `contact` (`name`, `tel`, `is_active`, `belong_id`, `belong_name`, `model`) VALUES ('passion', '15626218527', 1, 2580, '爱茉莉供应商', 'supplier')";i:1;i:80;i:2;s:23:"yii\db\Command::execute";i:3;d:1578362174.5941379;i:4;a:0:{}i:5;i:6413552;}i:59;a:6:{i:0;s:164:"INSERT INTO `contact` (`name`, `tel`, `is_active`, `belong_id`, `belong_name`, `model`) VALUES ('passion', '15626218527', 1, 2580, '爱茉莉供应商', 'supplier')";i:1;i:96;i:2;s:23:"yii\db\Command::execute";i:3;d:1578362174.7170801;i:4;a:0:{}i:5;i:6414264;}}}";s:2:"db";s:11680:"a:1:{s:8:"messages";a:28:{i:17;a:6:{i:0;s:42:"SELECT * FROM `config` WHERE `parent_id`=1";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.4241121;i:4;a:0:{}i:5;i:5328592;}i:18;a:6:{i:0;s:42:"SELECT * FROM `config` WHERE `parent_id`=1";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.441195;i:4;a:0:{}i:5;i:5331440;}i:20;a:6:{i:0;s:62:"SELECT * FROM `approval_process` WHERE `label_name`='supplier'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.443382;i:4;a:0:{}i:5;i:5372336;}i:21;a:6:{i:0;s:62:"SELECT * FROM `approval_process` WHERE `label_name`='supplier'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.4438119;i:4;a:0:{}i:5;i:5374288;}i:23;a:6:{i:0;s:41:"SHOW FULL COLUMNS FROM `approval_process`";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.444612;i:4;a:0:{}i:5;i:5388280;}i:24;a:6:{i:0;s:41:"SHOW FULL COLUMNS FROM `approval_process`";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.445215;i:4;a:0:{}i:5;i:5394064;}i:26;a:6:{i:0;s:619:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'approval_process' AND kcu.table_name = 'approval_process'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.4466901;i:4;a:0:{}i:5;i:5427904;}i:27;a:6:{i:0;s:619:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'approval_process' AND kcu.table_name = 'approval_process'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.4471409;i:4;a:0:{}i:5;i:5428864;}i:29;a:6:{i:0;s:45:"SELECT * FROM `config` WHERE `key`='supplier'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.447722;i:4;a:0:{}i:5;i:5428752;}i:30;a:6:{i:0;s:45:"SELECT * FROM `config` WHERE `key`='supplier'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.4479921;i:4;a:0:{}i:5;i:5429976;}i:33;a:6:{i:0;s:34:"SHOW FULL COLUMNS FROM `admin_log`";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.4524789;i:4;a:0:{}i:5;i:5880520;}i:34;a:6:{i:0;s:34:"SHOW FULL COLUMNS FROM `admin_log`";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.453244;i:4;a:0:{}i:5;i:5895576;}i:36;a:6:{i:0;s:605:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'admin_log' AND kcu.table_name = 'admin_log'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.454175;i:4;a:0:{}i:5;i:5893280;}i:37;a:6:{i:0;s:605:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'admin_log' AND kcu.table_name = 'admin_log'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.4545751;i:4;a:0:{}i:5;i:5894240;}i:39;a:6:{i:0;s:774:"INSERT INTO `admin_log` (`model`, `action`, `ano_id`, `admin_id`, `param`, `add_time`) VALUES ('supplier', 'insert', 0, 1, 'a:1:{s:8:\"Supplier\";a:20:{s:13:\"supplier_name\";s:18:\"爱茉莉供应商\";s:7:\"contact\";s:7:\"passion\";s:8:\"position\";s:3:\"COO\";s:3:\"tel\";s:11:\"15626218527\";s:5:\"guhua\";s:0:\"\";s:2:\"qq\";s:0:\"\";s:8:\"contact2\";s:6:\"采购\";s:4:\"tel2\";s:11:\"15626218528\";s:3:\"qq2\";s:0:\"\";s:7:\"address\";s:0:\"\";s:13:\"store_address\";s:0:\"\";s:6:\"remark\";s:0:\"\";s:9:\"bank_name\";s:6:\"央行\";s:9:\"bank_open\";s:6:\"央行\";s:9:\"bank_code\";s:16:\"6214830209586235\";s:10:\"bank_payee\";s:3:\"888\";s:8:\"tax_code\";s:0:\"\";s:5:\"title\";s:0:\"\";s:14:\"account_period\";s:0:\"\";s:6:\"alipay\";s:0:\"\";}}', '1578362174')";i:1;i:80;i:2;s:23:"yii\db\Command::execute";i:3;d:1578362174.4558539;i:4;a:0:{}i:5;i:5906576;}i:40;a:6:{i:0;s:774:"INSERT INTO `admin_log` (`model`, `action`, `ano_id`, `admin_id`, `param`, `add_time`) VALUES ('supplier', 'insert', 0, 1, 'a:1:{s:8:\"Supplier\";a:20:{s:13:\"supplier_name\";s:18:\"爱茉莉供应商\";s:7:\"contact\";s:7:\"passion\";s:8:\"position\";s:3:\"COO\";s:3:\"tel\";s:11:\"15626218527\";s:5:\"guhua\";s:0:\"\";s:2:\"qq\";s:0:\"\";s:8:\"contact2\";s:6:\"采购\";s:4:\"tel2\";s:11:\"15626218528\";s:3:\"qq2\";s:0:\"\";s:7:\"address\";s:0:\"\";s:13:\"store_address\";s:0:\"\";s:6:\"remark\";s:0:\"\";s:9:\"bank_name\";s:6:\"央行\";s:9:\"bank_open\";s:6:\"央行\";s:9:\"bank_code\";s:16:\"6214830209586235\";s:10:\"bank_payee\";s:3:\"888\";s:8:\"tax_code\";s:0:\"\";s:5:\"title\";s:0:\"\";s:14:\"account_period\";s:0:\"\";s:6:\"alipay\";s:0:\"\";}}', '1578362174')";i:1;i:96;i:2;s:23:"yii\db\Command::execute";i:3;d:1578362174.4653311;i:4;a:0:{}i:5;i:5907288;}i:43;a:6:{i:0;s:33:"SHOW FULL COLUMNS FROM `supplier`";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.467787;i:4;a:0:{}i:5;i:6003968;}i:44;a:6:{i:0;s:33:"SHOW FULL COLUMNS FROM `supplier`";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.5319481;i:4;a:0:{}i:5;i:6054960;}i:46;a:6:{i:0;s:603:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'supplier' AND kcu.table_name = 'supplier'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.534431;i:4;a:0:{}i:5;i:6034368;}i:47;a:6:{i:0;s:603:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'supplier' AND kcu.table_name = 'supplier'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.534833;i:4;a:0:{}i:5;i:6035328;}i:49;a:6:{i:0;s:568:"INSERT INTO `supplier` (`add_user_id`, `add_user_name`, `depart_id`, `depart_name`, `add_time`, `supplier_name`, `contact`, `position`, `tel`, `guhua`, `qq`, `contact2`, `tel2`, `qq2`, `address`, `store_address`, `remark`, `bank_name`, `bank_open`, `bank_code`, `bank_payee`, `tax_code`, `title`, `account_period`, `alipay`, `status_done`) VALUES (NULL, NULL, 1, '广州客维总部', '1578362174', '爱茉莉供应商', 'passion', 'COO', '15626218527', '', '', '采购', '15626218528', '', '', '', '', '央行', '央行', '6214830209586235', '888', '', '', '', '', 0)";i:1;i:80;i:2;s:23:"yii\db\Command::execute";i:3;d:1578362174.5420499;i:4;a:0:{}i:5;i:6322768;}i:50;a:6:{i:0;s:568:"INSERT INTO `supplier` (`add_user_id`, `add_user_name`, `depart_id`, `depart_name`, `add_time`, `supplier_name`, `contact`, `position`, `tel`, `guhua`, `qq`, `contact2`, `tel2`, `qq2`, `address`, `store_address`, `remark`, `bank_name`, `bank_open`, `bank_code`, `bank_payee`, `tax_code`, `title`, `account_period`, `alipay`, `status_done`) VALUES (NULL, NULL, 1, '广州客维总部', '1578362174', '爱茉莉供应商', 'passion', 'COO', '15626218527', '', '', '采购', '15626218528', '', '', '', '', '央行', '央行', '6214830209586235', '888', '', '', '', '', 0)";i:1;i:96;i:2;s:23:"yii\db\Command::execute";i:3;d:1578362174.573386;i:4;a:0:{}i:5;i:6323480;}i:52;a:6:{i:0;s:32:"SHOW FULL COLUMNS FROM `contact`";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.5909691;i:4;a:0:{}i:5;i:6396576;}i:53;a:6:{i:0;s:32:"SHOW FULL COLUMNS FROM `contact`";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.591841;i:4;a:0:{}i:5;i:6412776;}i:55;a:6:{i:0;s:601:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'contact' AND kcu.table_name = 'contact'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.5928769;i:4;a:0:{}i:5;i:6409864;}i:56;a:6:{i:0;s:601:"SELECT
+    kcu.constraint_name,
+    kcu.column_name,
+    kcu.referenced_table_name,
+    kcu.referenced_column_name
+FROM information_schema.referential_constraints AS rc
+JOIN information_schema.key_column_usage AS kcu ON
+    (
+        kcu.constraint_catalog = rc.constraint_catalog OR
+        (kcu.constraint_catalog IS NULL AND rc.constraint_catalog IS NULL)
+    ) AND
+    kcu.constraint_schema = rc.constraint_schema AND
+    kcu.constraint_name = rc.constraint_name
+WHERE rc.constraint_schema = database() AND kcu.table_schema = database()
+AND rc.table_name = 'contact' AND kcu.table_name = 'contact'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1578362174.5933599;i:4;a:0:{}i:5;i:6410824;}i:58;a:6:{i:0;s:164:"INSERT INTO `contact` (`name`, `tel`, `is_active`, `belong_id`, `belong_name`, `model`) VALUES ('passion', '15626218527', 1, 2580, '爱茉莉供应商', 'supplier')";i:1;i:80;i:2;s:23:"yii\db\Command::execute";i:3;d:1578362174.5941379;i:4;a:0:{}i:5;i:6413552;}i:59;a:6:{i:0;s:164:"INSERT INTO `contact` (`name`, `tel`, `is_active`, `belong_id`, `belong_name`, `model`) VALUES ('passion', '15626218527', 1, 2580, '爱茉莉供应商', 'supplier')";i:1;i:96;i:2;s:23:"yii\db\Command::execute";i:3;d:1578362174.7170801;i:4;a:0:{}i:5;i:6414264;}}}";s:5:"event";s:3053:"a:17:{i:0;a:5:{s:4:"time";d:1578362174.3288519;s:4:"name";s:13:"beforeRequest";s:5:"class";s:14:"yii\base\Event";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:19:"yii\web\Application";}i:1;a:5:{s:4:"time";d:1578362174.334491;s:4:"name";s:12:"beforeAction";s:5:"class";s:20:"yii\base\ActionEvent";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:19:"yii\web\Application";}i:2;a:5:{s:4:"time";d:1578362174.3450029;s:4:"name";s:4:"init";s:5:"class";s:14:"yii\base\Event";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:18:"yii\db\ActiveQuery";}i:3;a:5:{s:4:"time";d:1578362174.419373;s:4:"name";s:9:"afterOpen";s:5:"class";s:14:"yii\base\Event";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:17:"yii\db\Connection";}i:4;a:5:{s:4:"time";d:1578362174.442512;s:4:"name";s:4:"init";s:5:"class";s:14:"yii\base\Event";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:18:"yii\db\ActiveQuery";}i:5;a:5:{s:4:"time";d:1578362174.4439039;s:4:"name";s:4:"init";s:5:"class";s:14:"yii\base\Event";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:33:"app\common\models\ApprovalProcess";}i:6;a:5:{s:4:"time";d:1578362174.4473031;s:4:"name";s:9:"afterFind";s:5:"class";s:14:"yii\base\Event";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:33:"app\common\models\ApprovalProcess";}i:7;a:5:{s:4:"time";d:1578362174.4474061;s:4:"name";s:4:"init";s:5:"class";s:14:"yii\base\Event";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:18:"yii\db\ActiveQuery";}i:8;a:5:{s:4:"time";d:1578362174.452261;s:4:"name";s:4:"init";s:5:"class";s:14:"yii\base\Event";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:26:"app\common\models\AdminLog";}i:9;a:5:{s:4:"time";d:1578362174.4553471;s:4:"name";s:12:"beforeInsert";s:5:"class";s:19:"yii\base\ModelEvent";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:26:"app\common\models\AdminLog";}i:10;a:5:{s:4:"time";d:1578362174.4659641;s:4:"name";s:11:"afterInsert";s:5:"class";s:21:"yii\db\AfterSaveEvent";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:26:"app\common\models\AdminLog";}i:11;a:5:{s:4:"time";d:1578362174.5351329;s:4:"name";s:4:"init";s:5:"class";s:14:"yii\base\Event";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:26:"app\common\models\Supplier";}i:12;a:5:{s:4:"time";d:1578362174.540674;s:4:"name";s:12:"beforeInsert";s:5:"class";s:19:"yii\base\ModelEvent";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:26:"app\common\models\Supplier";}i:13;a:5:{s:4:"time";d:1578362174.5736079;s:4:"name";s:11:"afterInsert";s:5:"class";s:21:"yii\db\AfterSaveEvent";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:26:"app\common\models\Supplier";}i:14;a:5:{s:4:"time";d:1578362174.5907359;s:4:"name";s:4:"init";s:5:"class";s:14:"yii\base\Event";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:25:"app\common\models\Contact";}i:15;a:5:{s:4:"time";d:1578362174.5936351;s:4:"name";s:12:"beforeInsert";s:5:"class";s:19:"yii\base\ModelEvent";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:25:"app\common\models\Contact";}i:16;a:5:{s:4:"time";d:1578362174.7172899;s:4:"name";s:11:"afterInsert";s:5:"class";s:21:"yii\db\AfterSaveEvent";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:25:"app\common\models\Contact";}}";s:6:"assets";s:6:"a:0:{}";s:4:"mail";s:6:"a:0:{}";s:8:"timeline";s:92:"a:3:{s:5:"start";d:1578362174.283062;s:3:"end";d:1578362174.7310641;s:6:"memory";i:6623984;}";s:4:"dump";s:6:"a:0:{}";s:7:"summary";a:12:{s:3:"tag";s:13:"5e13e53e4e7cd";s:3:"url";s:33:"http://bierp.test/supplier/insert";s:4:"ajax";i:1;s:6:"method";s:4:"POST";s:2:"ip";s:9:"127.0.0.1";s:4:"time";d:1578362174.070168;s:10:"statusCode";i:200;s:8:"sqlCount";i:14;s:9:"mailCount";i:0;s:9:"mailFiles";a:0:{}s:10:"peakMemory";i:6595912;s:14:"processingTime";d:0.44556713104248047;}s:10:"exceptions";a:0:{}}

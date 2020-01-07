@@ -407,7 +407,7 @@ class Connection extends Component
      * @since 2.0.12
      * @see enableProfiling
      */
-    public $enableLogging = false;
+    public $enableLogging = true;
     /**
      * @var bool whether to enable profiling of opening database connection and database queries. Defaults to true.
      * You may want to disable this option in a production environment to gain performance
@@ -415,7 +415,7 @@ class Connection extends Component
      * @since 2.0.12
      * @see enableLogging
      */
-    public $enableProfiling = false;
+    public $enableProfiling = true;
 
     /**
      * @var Transaction the currently active transaction

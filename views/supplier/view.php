@@ -37,14 +37,14 @@ $this->params['breadcrumbs'][] = !isset($supplier->id) ? '添加供货商' : '�
         <div class="tab-content">
           <div id="tab-1" class="tab-pane <?= !$present_panel ? 'active' : '' ?>">
             <div class="panel-body">
-              <?= app\common\widgets\Input::widget(['label_name' => '供货商名称', 'name' => "Supplier[supplier_name]", 'value' => $supplier->supplier_name, 'tips' => '']); ?>
-              <?= app\common\widgets\Input::widget(['label_name' => '业务联系人', 'name' => "Supplier[contact]", 'value' => $supplier->contact, 'tips' => '']); ?>
-              <?= app\common\widgets\Input::widget(['label_name' => '业务联系人职位', 'name' => "Supplier[position]", 'value' => $supplier->position, 'tips' => '']); ?>
-              <?= app\common\widgets\Input::widget(['label_name' => '业务联系人手机', 'name' => "Supplier[tel]", 'value' => $supplier->tel, 'tips' => '']); ?>
+              <?= app\common\widgets\Input::widget(['label_name' => '供货商名称', 'name' => "Supplier[supplier_name]", 'value' => $supplier->supplier_name, 'tips' => '', 'inneed' => true]); ?>
+              <?= app\common\widgets\Input::widget(['label_name' => '业务联系人', 'name' => "Supplier[contact]", 'value' => $supplier->contact, 'tips' => '', 'inneed' => true]); ?>
+              <?= app\common\widgets\Input::widget(['label_name' => '业务联系人职位', 'name' => "Supplier[position]", 'value' => $supplier->position, 'tips' => '', 'inneed' => true]); ?>
+              <?= app\common\widgets\Input::widget(['label_name' => '业务联系人手机', 'name' => "Supplier[tel]", 'value' => $supplier->tel, 'tips' => '', 'inneed' => true]); ?>
               <?= app\common\widgets\Input::widget(['label_name' => '业务联系人固话', 'name' => "Supplier[guhua]", 'value' => $supplier->guhua, 'tips' => '']); ?>
               <?= app\common\widgets\Input::widget(['label_name' => '业务联系人QQ', 'name' => "Supplier[qq]", 'value' => $supplier->qq, 'tips' => '']); ?>
-              <?= app\common\widgets\Input::widget(['label_name' => '采购联系人', 'name' => "Supplier[contact2]", 'value' => $supplier->contact2, 'tips' => '']); ?>
-              <?= app\common\widgets\Input::widget(['label_name' => '采购联系人手机', 'name' => "Supplier[tel2]", 'value' => $supplier->tel2, 'tips' => '']); ?>
+              <?= app\common\widgets\Input::widget(['label_name' => '采购联系人', 'name' => "Supplier[contact2]", 'value' => $supplier->contact2, 'tips' => '', 'inneed' => true]); ?>
+              <?= app\common\widgets\Input::widget(['label_name' => '采购联系人手机', 'name' => "Supplier[tel2]", 'value' => $supplier->tel2, 'tips' => '', 'inneed' => true]); ?>
               <?= app\common\widgets\Input::widget(['label_name' => '采购联系人QQ', 'name' => "Supplier[qq2]", 'value' => $supplier->qq2, 'tips' => '']); ?>
               <?= app\common\widgets\Input::widget(['label_name' => '公司地址', 'name' => "Supplier[address]", 'value' => $supplier->address, 'tips' => '']); ?>
               <?= app\common\widgets\Input::widget(['label_name' => '仓库地址', 'name' => "Supplier[store_address]", 'value' => $supplier->store_address, 'tips' => '']); ?>
@@ -82,10 +82,10 @@ $this->params['breadcrumbs'][] = !isset($supplier->id) ? '添加供货商' : '�
 
           <div id="tab-3" class="tab-pane">
             <div class="panel-body">
-              <?= app\common\widgets\Input::widget(['label_name' => '开户名称', 'name' => "Supplier[bank_name]", 'value' => $supplier->bank_name, 'tips' => '']); ?>
-              <?= app\common\widgets\Input::widget(['label_name' => '开户行', 'name' => "Supplier[bank_open]", 'value' => $supplier->bank_open, 'tips' => '']); ?>
-              <?= app\common\widgets\Input::widget(['label_name' => '银行账号', 'name' => "Supplier[bank_code]", 'value' => $supplier->bank_code, 'tips' => '']); ?>
-              <?= app\common\widgets\Input::widget(['label_name' => '收款人', 'name' => "Supplier[bank_payee]", 'value' => $supplier->bank_payee, 'tips' => '']); ?>
+              <?= app\common\widgets\Input::widget(['label_name' => '开户名称', 'name' => "Supplier[bank_name]", 'value' => $supplier->bank_name, 'tips' => '', 'inneed' => true]); ?>
+              <?= app\common\widgets\Input::widget(['label_name' => '开户行', 'name' => "Supplier[bank_open]", 'value' => $supplier->bank_open, 'tips' => '', 'inneed' => true]); ?>
+              <?= app\common\widgets\Input::widget(['label_name' => '银行账号', 'name' => "Supplier[bank_code]", 'value' => $supplier->bank_code, 'tips' => '', 'inneed' => true]); ?>
+              <?= app\common\widgets\Input::widget(['label_name' => '收款人', 'name' => "Supplier[bank_payee]", 'value' => $supplier->bank_payee, 'tips' => '', 'inneed' => true]); ?>
               <?= app\common\widgets\Input::widget(['label_name' => '税号', 'name' => "Supplier[tax_code]", 'value' => $supplier->tax_code, 'tips' => '']); ?>
               <?= app\common\widgets\Input::widget(['label_name' => '抬头', 'name' => "Supplier[title]", 'value' => $supplier->title, 'tips' => '']); ?>
               <?= app\common\widgets\Input::widget(['label_name' => '账期', 'name' => "Supplier[account_period]", 'value' => $supplier->account_period, 'tips' => '']); ?>

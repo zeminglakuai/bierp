@@ -310,29 +310,29 @@ class GoodsController extends BaseController
             }
 
             if (empty($goods->goods_name)) {
-                Message::show_message('请填写商品名称', [], 'error');
+                Message::result_json(2, '请填写商品名称');
             }
 
 
-            if (empty($goods->goods_sn)) {
-                Message::show_message('请填写商品序号', [], 'error');
+            if (empty($goods->isbn)) {
+                Message::result_json(2, '请填写商品条形码');
             } else {
                 //检查goods_sn是不是重复
-                $check_goods = Goods::find()->where(['goods_sn' => $goods->goods_sn])->one();
-                if (isset($check_goods->goods_id) && $check_goods->goods_id <> $goods->goods_id) {
-                    Message::show_message('商品货号重复', [], 'error');
+                $check_goods = Goods::find()->where(['goods_sn' => $goods->isbn])->one();
+                if (isset($check_goods->goods_id)) {
+                    Message::result_json(2, '条形码重复');
                 }
             }
 
             if (empty($goods->cat_id)) {
-                Message::show_message('请选择商品分类', [], 'error');
+                Message::result_json(2, '请选择商品分类');
             }
 
             if (empty($goods->brand_id)) {
-                Message::show_message('请选择商品品牌', [], 'error');
+                Message::result_json(2, '请选择商品品牌');
             }
             if (empty($goods->market_price)) {
-                Message::show_message('请填写市场价格', [], 'error');
+                Message::result_json(2, '请填写市场价格');
             }
             $goods->goods_py = Pinyin::encode($goods->goods_name, 'head', 'utf8');
             $goods->shop_price = is_numeric($goods->shop_price) ? $goods->shop_price : 0;
@@ -345,7 +345,7 @@ class GoodsController extends BaseController
             //如果是自营产品 则必须填写售价
             if ($goods->is_self_sell > 0) {
                 if ($goods->is_self_sell <= 0) {
-                    Message::show_message('自营产品必须填写售价', [], 'error');
+                    Message::result_json(2, '自营产品必须填写售价');
                 }
             }
             $transaction = Yii::$app->db->beginTransaction();
@@ -387,7 +387,7 @@ class GoodsController extends BaseController
                 }
                 $transaction->commit();
             } catch (Exception $e) {
-                message::show_message('商品不存在', [], 'error');
+                Message::result_json(2, '商品不存在');
                 $transaction->rollBack();
             }
 
@@ -406,10 +406,9 @@ class GoodsController extends BaseController
                     }
                 }
             }
-
-            message::show_message('更新成功', []);
+            Message::result_json(1, '更新成功');
         } else {
-            message::show_message('商品不存在', [], 'error');
+            Message::result_json(2, '商品不存在');
         }
     }
 
@@ -458,7 +457,7 @@ class GoodsController extends BaseController
         }
         $goods->type = $type;
         if (empty($goods->goods_name)) {
-            Message::show_message('请填写商品名称', [], 'error');
+            Message::result_json(2, '请填写商品名称');
         }
 
         if (empty($goods->type)) {
@@ -468,30 +467,30 @@ class GoodsController extends BaseController
             $links = [['link_name' => '返回列表', 'link_url' => URL::to(['/goods', 'type' => $type])]];
         }
         if (empty($platform)) {
-            Message::show_message('平台不能为空', [], 'error');
+            Message::result_json(2, '平台不能为空');
         }
 
         if (empty($goods->isbn)) {
-            Message::show_message('请填写商品条形码', [], 'error');
+            Message::result_json(2, '请填写商品条形码');
         } else {
             //检查goods_sn是不是重复
             $check_goods = Goods::find()->where(['goods_sn' => $goods->isbn])->one();
             if (isset($check_goods->goods_id)) {
-                Message::show_message('条形码重复', [], 'error');
+                Message::result_json(2, '条形码重复');
             }
         }
 
         if (empty($goods->cat_id)) {
-            Message::show_message('请选择商品分类', [], 'error');
+            Message::result_json(2, '请选择商品分类');
         }
 
         if (empty($goods->brand_id)) {
-            Message::show_message('请选择商品品牌', [], 'error');
+            Message::result_json(2, '请选择商品品牌');
         }
 
 
         if (empty($goods->market_price)) {
-            Message::show_message('请填写市场价格', [], 'error');
+            Message::result_json(2, '请填写市场价格');
         }
         $goods->default_supplier_id = '';
         $goods->default_supplier_name = '';
@@ -505,7 +504,7 @@ class GoodsController extends BaseController
         //如果是自营产品 则必须填写售价
         if ($goods->is_self_sell > 0) {
             if ($goods->is_self_sell <= 0) {
-                Message::show_message('自营产品必须填写售价', [], 'error');
+                Message::result_json(2, '自营产品必须填写售价');
             }
         }
 
@@ -518,41 +517,62 @@ class GoodsController extends BaseController
         $goods->depart_id = Yii::$app->session['manage_user']['depart_id'];
         $goods->depart_name = Yii::$app->session['manage_user']['depart_name'];
         $goods->goods_status = 0;
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            $goods->save(false);
 
-
-        $goods->save(false);
-
-        $upload_result = UploadForm::upload_files();
-        if ($upload_result && is_array($upload_result)) {
-            if (count($upload_result['file']) > 0) {
-                foreach ($upload_result['file'] as $key => $value) {
-                    $FileInfo = new FileInfo();
-                    $FileInfo->belong_id = $goods->goods_id;
-                    $FileInfo->file_path = $value['file_name'];
-                    $FileInfo->file_desc = $value['file_desc'];
-                    $FileInfo->model = 'goods';
-                    $FileInfo->save(false);
+            $upload_result = UploadForm::upload_files();
+            if ($upload_result && is_array($upload_result)) {
+                if (count($upload_result['file']) > 0) {
+                    foreach ($upload_result['file'] as $key => $value) {
+                        $FileInfo = new FileInfo();
+                        $FileInfo->belong_id = $goods->goods_id;
+                        $FileInfo->file_path = $value['file_name'];
+                        $FileInfo->file_desc = $value['file_desc'];
+                        $FileInfo->model = 'goods';
+                        $FileInfo->save(false);
+                    }
                 }
             }
-        }
-        $goods_id = $goods->goods_id;
-        foreach ($platform as $key => $val) {
-            if ($val['goods_platform_id'] != '') {
-                if ($val['platform_id'] != '') {
-                    $val['platform_price'] = $val['platform_price'] ? $val['platform_price'] : 0;
-                    Yii::$app->db->createCommand("update goods_platform set goods_id=" . $goods_id . " , platform_id=" . $val['platform_id'] . ", enddate='" . $val['enddate'] . "' , startdate='" . $val['startdate'] . "',platform_price=" . $val['platform_price'] . ", daifa=" . $val['daifa'] . " where goods_platform_id=" . $val['goods_platform_id'])->execute();
+            $goods_id = $goods->goods_id;
+            foreach ($platform as $key => $val) {
+                if ($val['goods_platform_id'] != '') {
+                    if ($val['platform_id'] != '') {
+                        $val['platform_price'] = $val['platform_price'] ? $val['platform_price'] : 0;
+                        Yii::$app->db->createCommand("update goods_platform set goods_id=" . $goods_id . " , platform_id=" . $val['platform_id'] . ", enddate='" . $val['enddate'] . "' , startdate='" . $val['startdate'] . "',platform_price=" . $val['platform_price'] . ", daifa=" . $val['daifa'] . " where goods_platform_id=" . $val['goods_platform_id'])->execute();
+                    } else {
+                        Yii::$app->db->createCommand(" DELETE FROM goods_platform  where goods_platform_id=" . $val['goods_platform_id'])->execute();
+                    }
                 } else {
-                    Yii::$app->db->createCommand(" DELETE FROM goods_platform  where goods_platform_id=" . $val['goods_platform_id'])->execute();
-                }
-            } else {
-                if ($val['platform_id'] != '') {
+                    if ($val['platform_id'] != '') {
 
-                    //                        Yii::$app->db->createCommand("insert into goods_supplier goods_id=".$goods_id." and supplier_id=".$val['supplier_id']." and supplier_price=".$val['supplier_price'])->execute();
-                    Yii::$app->db->createCommand("insert into goods_platform (goods_id,platform_id,startdate,enddate,daifa,platform_price) values ($goods_id," . $val['platform_id'] . ",'" . $val['startdate'] . "','" . $val['enddate'] . "'," . $val['daifa'] . "," . $val['platform_price'] . ")")->execute();
+                        //                        Yii::$app->db->createCommand("insert into goods_supplier goods_id=".$goods_id." and supplier_id=".$val['supplier_id']." and supplier_price=".$val['supplier_price'])->execute();
+                        Yii::$app->db->createCommand("insert into goods_platform (goods_id,platform_id,startdate,enddate,daifa,platform_price) values ($goods_id," . $val['platform_id'] . ",'" . $val['startdate'] . "','" . $val['enddate'] . "'," . $val['daifa'] . "," . $val['platform_price'] . ")")->execute();
+                    }
                 }
             }
+            foreach ($supplier as $k => $v) {
+                if ($v['goods_supplier_id'] != '') {
+                    if ($v['supplier_id'] != '' && $v['supplier_price'] != '') {
+                        Yii::$app->db->createCommand("update goods_supplier set goods_id=" . $goods_id . " , supplier_id=" . $v['supplier_id'] . " , supplier_price=" . $v['supplier_price'] . " where goods_supplier_id=" . $v['goods_supplier_id'])->execute();
+                    } else {
+                        Yii::$app->db->createCommand(" DELETE FROM goods_supplier  where goods_supplier_id=" . $v['goods_supplier_id'])->execute();
+                    }
+                } else {
+                    if ($v['supplier_id'] != '' && $v['supplier_price'] != '') {
+
+                        //                        Yii::$app->db->createCommand("insert into goods_supplier goods_id=".$goods_id." and supplier_id=".$val['supplier_id']." and supplier_price=".$val['supplier_price'])->execute();
+                        Yii::$app->db->createCommand("insert into goods_supplier (goods_id,supplier_id,supplier_price) values ($goods_id," . $v['supplier_id'] . "," . $v['supplier_price'] . ")")->execute();
+                    }
+                }
+            }
+            $transaction->commit();
+        } catch (Exception $e) {
+            Message::result_json(2, '商品不存在');
+            $transaction->rollBack();
         }
-        Message::show_message('添加成功', $links);
+
+        message::result_json(1, '添加成功');
     }
 
     public function actionDelete()

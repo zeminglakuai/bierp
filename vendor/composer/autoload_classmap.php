@@ -11,7 +11,6 @@ return array(
     'FilterASCII85' => $vendorDir . '/setasign/fpdi/filters/FilterASCII85.php',
     'FilterASCIIHexDecode' => $vendorDir . '/setasign/fpdi/filters/FilterASCIIHexDecode.php',
     'FilterLZW' => $vendorDir . '/setasign/fpdi/filters/FilterLZW.php',
-    'JsonException' => $vendorDir . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
     'PclZip' => $vendorDir . '/pclzip/pclzip/pclzip.lib.php',
     'fpdi_pdf_parser' => $vendorDir . '/setasign/fpdi/fpdi_pdf_parser.php',
     'pdf_context' => $vendorDir . '/setasign/fpdi/pdf_context.php',

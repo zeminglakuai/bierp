@@ -4,8 +4,8 @@ $mem_before = memory_get_usage();
 
 // comment out the following two lines when deployed to production
 defined('YII_DEBUG') or define('YII_DEBUG', true);
-//defined('YII_ENV') or define('YII_ENV', 'dev');
-defined('YII_ENV') or define('YII_ENV', 'prod');
+defined('YII_ENV') or define('YII_ENV_DEV', 'true');
+defined('YII_ENV') or define('YII_ENV', 'dev');
 
 error_reporting(E_ERROR);
 require(__DIR__ . '/../vendor/autoload.php');

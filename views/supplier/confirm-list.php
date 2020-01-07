@@ -11,8 +11,8 @@ use app\common\models\DictionaryValue;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 
-$this->params['breadcrumbs'][] = ['label'=>'样品资料','url'=>['index']];
-$this->params['breadcrumbs'][] = '待审核样品';
+$this->params['breadcrumbs'][] = ['label'=>'供应商管理','url'=>['index']];
+$this->params['breadcrumbs'][] = '待审核供应商';
 ?>
 
 

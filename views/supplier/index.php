@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = '供货商管理';
                                             'export'=>['label_name'=>'导出','module_name'=>'supplier','type'=>'title'],
                                             'refresh'=>['label_name'=>'刷新','type'=>'js','id'=>'add_custom','icon'=>'plus'],
     'other_btn'=>[
-        ['label_name'=>'待审核商品','type'=>'link','icon'=>'plus','url'=>Url::to(["/supplier/admit-list"])],]
+        ['label_name'=>'待审核供应商','type'=>'link','icon'=>'plus','url'=>Url::to(["/supplier/admit-list"])],]
                                             ])
 ?> 
 <script>
